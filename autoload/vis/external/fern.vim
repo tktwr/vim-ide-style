@@ -2,26 +2,26 @@
 " fern
 "======================================================
 
-func MyFernDrawerOpen()
-  call TtGotoWinnr(1)
+func vis#external#fern#MyFernDrawerOpen()
+  call vis#window#TtGotoWinnr(1)
 
   if exists('w:my_fern_init_buf') && &filetype != 'fern'
     exec w:my_fern_init_buf.'b'
   endif
 endfunc
 
-func MyFern(dir, drawer='', toggle='')
+func vis#external#fern#MyFern(dir, drawer='', toggle='')
   let dir = expand(a:dir)
   let dir = substitute(dir, ' ', '\\ ', 'g')
   let drawer = a:drawer
   let toggle = a:toggle
 
-  if (TtInSideBar() && winnr() == 1)
+  if (vis#sidebar#TtInSideBar() && winnr() == 1)
     let drawer = '-drawer'
   endif
 
   if drawer == '-drawer'
-    call MyFernDrawerOpen()
+    call vis#external#fern#MyFernDrawerOpen()
   endif
 
   let cmd = printf('Fern %s -reveal=%% %s %s', dir, drawer, toggle)
@@ -32,12 +32,12 @@ func MyFern(dir, drawer='', toggle='')
   endif
 endfunc
 
-func MyFernDrawerToggle()
-  call MyFern('.', '-drawer', '-toggle')
+func vis#external#fern#MyFernDrawerToggle()
+  call vis#external#fern#MyFern('.', '-drawer', '-toggle')
 endfunc
 
-func MyFernDrawer(dir)
-  call MyFern(a:dir, '-drawer', '')
+func vis#external#fern#MyFernDrawer(dir)
+  call vis#external#fern#MyFern(a:dir, '-drawer', '')
 endfunc
 
 "------------------------------------------------------

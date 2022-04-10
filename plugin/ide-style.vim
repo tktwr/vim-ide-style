@@ -6,12 +6,12 @@ let g:my_tab_info = ""
 
 set laststatus=2
 set statusline=%!MyStatusline()
-set tabline=%!MyTabLine()
+set tabline=%!vis#tabline#MyTabLine()
 
 "------------------------------------------------------
 " command for ide
 "------------------------------------------------------
-command                         MyIDE            call MyIDE()
+command                         MyIDE            call vis#MyIDE()
 command                         MyWinInitSize    call MyWinInitSize()
 
 "------------------------------------------------------
@@ -43,21 +43,25 @@ command -nargs=+ -complete=dir  MyIDESendCdT2T   call MyIDESendCdT2T(<f-args>)
 "------------------------------------------------------
 " command for tabline
 "------------------------------------------------------
-command -nargs=1                MyTabLineSetLabel call MyTabLine_SetLabel(<f-args>)
-command -nargs=1                MyTabLineSetInfo  call MyTabLine_SetInfo(<f-args>)
+command -nargs=1                MyTabLineSetLabel call vis#tabline#MyTabLine_SetLabel(<f-args>)
+command -nargs=1                MyTabLineSetInfo  call vis#tabline#MyTabLine_SetInfo(<f-args>)
 
 "------------------------------------------------------
 " command for term
 "------------------------------------------------------
-command -nargs=?                MyTerm             call MyTerm(<f-args>)
-command -nargs=0                MyTermV            call MyTermV()
+command -nargs=?                MyTerm             call vis#term#MyTerm(<f-args>)
+command -nargs=0                MyTermV            call vis#term#MyTermV()
 
 "------------------------------------------------------
 " command for fern
 "------------------------------------------------------
-command                         MyFernDrawerToggle call MyFernDrawerToggle()
-command -nargs=1 -complete=dir  MyFernDrawer       call MyFernDrawer(<f-args>)
-command -nargs=1 -complete=dir  MyFern             call MyFern(<f-args>)
+command                         MyFernDrawerToggle call vis#external#fern#MyFernDrawerToggle()
+command -nargs=1 -complete=dir  MyFernDrawer       call vis#external#fern#MyFernDrawer(<f-args>)
+command -nargs=1 -complete=dir  MyFern             call vis#external#fern#MyFern(<f-args>)
+
+func MyFern(dir, drawer='', toggle='')
+  call vis#external#fern#MyFern(a:dir, a:drawer, a:toggle)
+endfunc
 
 "------------------------------------------------------
 " command for nerdtree
@@ -115,7 +119,7 @@ command                         MyLcdHere          exec "lcd" expand("%:p:h")
 "------------------------------------------------------
 augroup ag_ide_map
   autocmd!
-  autocmd WinEnter        *      call MyBufferMap()
+  autocmd WinEnter        *      call vis#map#MyBufferMap()
   autocmd QuickFixCmdPost *grep* below cwindow
   autocmd QuickFixCmdPost *make* below cwindow
 augroup END
@@ -131,13 +135,13 @@ augroup END
 
 augroup ag_ide_bmk
   autocmd!
-  autocmd FileType bmk           call TtSetStatuslineForSideBar()
+  autocmd FileType bmk           call vis#statusline#TtSetStatuslineForSideBar()
 augroup END
 
 augroup ag_ide_fern
   autocmd!
   autocmd FileType fern          call glyph_palette#apply()
-  autocmd FileType fern          call TtSetStatuslineForSideBar()
+  autocmd FileType fern          call vis#statusline#TtSetStatuslineForSideBar()
   autocmd FileType fern          call MyFernMap()
   autocmd User     FernSyntax    call MyFernSyntax()
   autocmd User     FernHighlight call MyFernHighlight()

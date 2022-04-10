@@ -1,9 +1,9 @@
 "======================================================
 " MyIDE
 "======================================================
-func MyIDE()
-  let l:is_fullscreen = TtIsFullscreen()
-  call MyMakeSideBar()
+func vis#MyIDE()
+  let l:is_fullscreen = vis#window#TtIsFullscreen()
+  call vis#sidebar#MyMakeSideBar()
   wincmd w
   if l:is_fullscreen
     vsp

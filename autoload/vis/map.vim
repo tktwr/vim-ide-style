@@ -1,4 +1,4 @@
-func MyBufferMap()
+func vis#map#MyBufferMap()
   if &diff == 1
     nnoremap <buffer> <C-P>   [c
     nnoremap <buffer> <C-N>   ]c

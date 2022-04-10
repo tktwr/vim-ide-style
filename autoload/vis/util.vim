@@ -17,7 +17,7 @@ func MyExpandDir(url)
   return dir
 endfunc
 
-func MyUnexpand(dir)
+func vis#util#MyUnexpand(dir)
   let dir = a:dir
   let dir = substitute(dir, '^'.expand("$MY_PAPERS"), '$MY_PAPERS', "")
   let dir = substitute(dir, '^'.expand("$MY_GIT"), '$MY_GIT', "")
@@ -42,7 +42,7 @@ func MyUnexpand(dir)
   return dir
 endfunc
 
-func MyCWD()
+func vis#util#MyCWD()
   if haslocaldir() == 1
     let l:type = "local"
     let l:cwd = getcwd()
@@ -53,7 +53,7 @@ func MyCWD()
     let l:type = "global"
     let l:cwd = getcwd(-1)
   endif
-  let l:cwd = MyUnexpand(l:cwd)
+  let l:cwd = vis#util#MyUnexpand(l:cwd)
   return "[".l:type.":".l:cwd."]"
 endfunc
 

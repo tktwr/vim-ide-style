@@ -88,7 +88,7 @@ func TtStatuslineForSideBar()
   return stat
 endfunc
 
-func TtSetStatuslineForSideBar()
+func vis#statusline#TtSetStatuslineForSideBar()
   setl statusline=%!TtStatuslineForSideBar()
 endfunc
 
@@ -99,7 +99,7 @@ func MyStatuslineForTerm()
   let stat = "%{TtStatuslineWinNr()}"
   let stat.= "terminal:%n"
   let stat.= TtStatuslineSeparator()
-  let stat.= "%{MyCWD()}"
+  let stat.= "%{vis#util#MyCWD()}"
   return stat
 endfunc
 

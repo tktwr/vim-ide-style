@@ -4,7 +4,7 @@
 "------------------------------------------------------
 " query
 "------------------------------------------------------
-func TtIsFullscreen()
+func vis#window#TtIsFullscreen()
   if &columns > 150
     return 1
   else
@@ -15,7 +15,7 @@ endfunc
 "------------------------------------------------------
 " move
 "------------------------------------------------------
-func TtGotoWinnr(winnr)
+func vis#window#TtGotoWinnr(winnr)
   if a:winnr > 0
     exec a:winnr."wincmd w"
   endif
@@ -95,15 +95,15 @@ func TtFindFirstTerm(begin_winnr=1)
   let last_winnr = winnr('$')
   let i = a:begin_winnr
   while i <= last_winnr
-    call TtGotoWinnr(i)
+    call vis#window#TtGotoWinnr(i)
     if &buftype == 'terminal'
-      call TtGotoWinnr(curr_winnr)
+      call vis#window#TtGotoWinnr(curr_winnr)
       return i
     endif
     let i += 1
   endwhile
 
-  call TtGotoWinnr(curr_winnr)
+  call vis#window#TtGotoWinnr(curr_winnr)
   return -1
 endfunc
 
@@ -115,15 +115,15 @@ func TtFindFirstEditor(begin_winnr=1)
   let last_winnr = winnr('$')
   let i = a:begin_winnr
   while i <= last_winnr
-    call TtGotoWinnr(i)
-    if !TtInSideBar() && &buftype != 'terminal'
-      call TtGotoWinnr(curr_winnr)
+    call vis#window#TtGotoWinnr(i)
+    if !vis#sidebar#TtInSideBar() && &buftype != 'terminal'
+      call vis#window#TtGotoWinnr(curr_winnr)
       return i
     endif
     let i += 1
   endwhile
 
-  call TtGotoWinnr(curr_winnr)
+  call vis#window#TtGotoWinnr(curr_winnr)
   return -1
 endfunc
 
@@ -134,15 +134,15 @@ func TtFindLastEditor()
   let curr_winnr = winnr()
   let i = curr_winnr
   while i > 0
-    call TtGotoWinnr(i)
-    if !TtInSideBar() && &buftype != 'terminal'
-      call TtGotoWinnr(curr_winnr)
+    call vis#window#TtGotoWinnr(i)
+    if !vis#sidebar#TtInSideBar() && &buftype != 'terminal'
+      call vis#window#TtGotoWinnr(curr_winnr)
       return i
     endif
     let i -= 1
   endwhile
 
-  call TtGotoWinnr(curr_winnr)
+  call vis#window#TtGotoWinnr(curr_winnr)
   return -1
 endfunc
 
