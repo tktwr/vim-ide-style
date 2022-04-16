@@ -1,7 +1,7 @@
 "------------------------------------------------------
 " buffer
 "------------------------------------------------------
-func MyBufDelete()
+func vis#buffer#MyBufDelete()
   let nr = bufnr('%')
   enew
   exec "bdelete" nr
@@ -10,8 +10,8 @@ endfunc
 "------------------------------------------------------
 " buffer exchange
 "------------------------------------------------------
-func MyWinBufExchange(winnr)
-  let winnr = MyPrompt("Winnr? ", a:winnr)
+func vis#buffer#MyWinBufExchange(winnr)
+  let winnr = vis#util#MyPrompt("Winnr? ", a:winnr)
   if winnr == ""
     return
   endif
@@ -24,8 +24,8 @@ func MyWinBufExchange(winnr)
   exec dst_bufnr."b"
 endfunc
 
-func MyWinBufCopy(winnr)
-  let winnr = MyPrompt("Winnr? ", a:winnr)
+func vis#buffer#MyWinBufCopy(winnr)
+  let winnr = vis#util#MyPrompt("Winnr? ", a:winnr)
   if winnr == ""
     return
   endif

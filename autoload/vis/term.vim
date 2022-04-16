@@ -37,21 +37,21 @@ endfunc
 "------------------------------------------------------
 " terminal to editor
 "------------------------------------------------------
-func Tapi_Exec(bufnr, cmdline)
+func vis#term#Tapi_Exec(bufnr, cmdline)
   exec a:cmdline
 endfunc
 
-func Tapi_ExecInPrevWin(bufnr, cmdline)
+func vis#term#Tapi_ExecInPrevWin(bufnr, cmdline)
   wincmd p
   exec a:cmdline
 endfunc
 
-func Tapi_ExecInAboveWin(bufnr, cmdline)
+func vis#term#Tapi_ExecInAboveWin(bufnr, cmdline)
   wincmd k
   exec a:cmdline
 endfunc
 
-func Tapi_ExecInNewTab(bufnr, cmdline)
+func vis#term#Tapi_ExecInNewTab(bufnr, cmdline)
   tabedit
   exec a:cmdline
 endfunc

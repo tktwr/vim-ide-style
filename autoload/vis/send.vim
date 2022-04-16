@@ -2,10 +2,10 @@
 " editor to terminal
 "------------------------------------------------------
 " send a cmd to a terminal
-func MyIDESendCmdE2T(cmd)
+func vis#send#MyIDESendCmdE2T(cmd)
   let cmd = a:cmd
   if (cmd == "")
-    let cmd = TtRemoveBeginEndSpaces(getline('.'))
+    let cmd = util#TtRemoveBeginEndSpaces(getline('.'))
   endif
   wincmd j
   let bufnr = winbufnr(0)
@@ -13,26 +13,26 @@ func MyIDESendCmdE2T(cmd)
 endfunc
 
 " send 'cd dir' to a terminal
-func MyIDESendCdE2T()
+func vis#send#MyIDESendCdE2T()
   let dir = expand('%:p:h')
   wincmd j
   let winnr = winnr()
-  call BmkEditDir(dir, winnr)
+  call bmk#BmkEditDir(dir, winnr)
 endfunc
 
 "------------------------------------------------------
 " terminal to terminal
 "------------------------------------------------------
 " send 'cd dir' to a terminal
-func MyIDESendCdT2T(dir, winnr)
-  let dir = MyExpandDir(a:dir)
-  call BmkEditDir(dir, a:winnr)
+func vis#send#MyIDESendCdT2T(dir, winnr)
+  let dir = vis#util#MyExpandDir(a:dir)
+  call bmk#BmkEditDir(dir, a:winnr)
 endfunc
 
 "------------------------------------------------------
 " terminal to editor
 "------------------------------------------------------
-func MyIDEVResizeT2E(width)
+func vis#send#MyIDEVResizeT2E(width)
   exec "vertical resize" a:width
   let w:orig_width = a:width
 endfunc

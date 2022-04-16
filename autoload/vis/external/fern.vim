@@ -10,6 +10,9 @@ func vis#external#fern#MyFernDrawerOpen()
   endif
 endfunc
 
+" options:
+"   drawer: '-drawer'
+"   toggle: '-toggle'
 func vis#external#fern#MyFern(dir, drawer='', toggle='')
   let dir = expand(a:dir)
   let dir = substitute(dir, ' ', '\\ ', 'g')
@@ -41,52 +44,52 @@ func vis#external#fern#MyFernDrawer(dir)
 endfunc
 
 "------------------------------------------------------
-func MyFernRoot()
+func s:MyFernRoot()
   let helper = fern#helper#new()
   let node = helper.sync.get_root_node()
   return node._path
 endfunc
 
-func MyFernSelected()
+func s:MyFernSelected()
   let helper = fern#helper#new()
   let node = helper.sync.get_cursor_node()
   return node._path
 endfunc
 
-func MyFernEditItem(winnr)
-  let selected = MyFernSelected()
+func s:MyFernEditItem(winnr)
+  let selected = s:MyFernSelected()
   if (selected == "")
     return
   endif
 
-  call BmkEdit(selected, a:winnr)
+  call bmk#BmkEdit(selected, a:winnr)
 endfunc
 
-func MyFernPreviewItem(winnr)
-  let selected = MyFernSelected()
+func s:MyFernPreviewItem(winnr)
+  let selected = s:MyFernSelected()
   if (isdirectory(selected))
     exec "normal \<Plug>(fern-action-expand)"
   elseif selected != ""
     let prev_winnr = winnr()
-    call BmkEdit(selected, a:winnr)
+    call bmk#BmkEdit(selected, a:winnr)
     exec prev_winnr."wincmd w"
   endif
 endfunc
 
 "------------------------------------------------------
-func MyFernOpenItem()
-  let selected = MyFernSelected()
-  call BmkOpen(selected, 0)
+func vis#external#fern#MyFernOpenItem()
+  let selected = s:MyFernSelected()
+  call bmk#BmkOpen(selected, 0)
 endfunc
 
-func MyFernViewItem()
-  let selected = MyFernSelected()
-  call BmkView(selected, 0)
+func vis#external#fern#MyFernViewItem()
+  let selected = s:MyFernSelected()
+  call bmk#BmkView(selected, 0)
 endfunc
 
 "------------------------------------------------------
-func MyFernPrintItem()
-  let key = MyFernSelected()
+func s:MyFernPrintItem()
+  let key = s:MyFernSelected()
   if (len(key) > g:fern#drawer_width / 2)
     echo key
   else
@@ -94,18 +97,18 @@ func MyFernPrintItem()
   endif
 endfunc
 
-func MyFernPrevItem()
+func s:MyFernPrevItem()
   normal -
-  call MyFernPrintItem()
+  call s:MyFernPrintItem()
 endfunc
 
-func MyFernNextItem()
+func s:MyFernNextItem()
   normal +
-  call MyFernPrintItem()
+  call s:MyFernPrintItem()
 endfunc
 
 "------------------------------------------------------
-function! MyFernMap() abort
+function! vis#external#fern#MyFernMap() abort
   nmap <buffer><expr>
         \ <Plug>(my-fern-select-expand-collapse)
         \ fern#smart#leaf(
@@ -116,8 +119,8 @@ function! MyFernMap() abort
 
   nmap <buffer> <2-LeftMouse> <Plug>(my-fern-select-expand-collapse)
   nmap <buffer> <CR>          <Plug>(my-fern-select-expand-collapse)
-  nmap <buffer> <C-CR>        :call MyFernViewItem()<CR>
-  nmap <buffer> <S-CR>        :call MyFernOpenItem()<CR>
+  nmap <buffer> <C-CR>        :call vis#external#fern#MyFernViewItem()<CR>
+  nmap <buffer> <S-CR>        :call vis#external#fern#MyFernOpenItem()<CR>
 
   nmap <buffer> N     <Plug>(fern-action-new-path)
   nmap <buffer> D     <Plug>(fern-action-remove)
@@ -132,18 +135,18 @@ function! MyFernMap() abort
   nmap <buffer> v     <Plug>(fern-action-open:vsplit)
 
   nmap <buffer> h     <Plug>(fern-action-collapse)
-  nmap <buffer> l     :call MyFernPreviewItem(-2)<CR>
-  nmap <buffer> j     :call MyFernNextItem()<CR>
-  nmap <buffer> k     :call MyFernPrevItem()<CR>
+  nmap <buffer> l     :call <SID>MyFernPreviewItem(-2)<CR>
+  nmap <buffer> j     :call <SID>MyFernNextItem()<CR>
+  nmap <buffer> k     :call <SID>MyFernPrevItem()<CR>
 
-  nmap <buffer> 2     :call MyFernEditItem(2)<CR>
-  nmap <buffer> 3     :call MyFernEditItem(3)<CR>
-  nmap <buffer> 4     :call MyFernEditItem(4)<CR>
-  nmap <buffer> 5     :call MyFernEditItem(5)<CR>
-  nmap <buffer> 6     :call MyFernEditItem(6)<CR>
-  nmap <buffer> 7     :call MyFernEditItem(7)<CR>
-  nmap <buffer> 8     :call MyFernEditItem(8)<CR>
-  nmap <buffer> 9     :call MyFernEditItem(9)<CR>
+  nmap <buffer> 2     :call <SID>MyFernEditItem(2)<CR>
+  nmap <buffer> 3     :call <SID>MyFernEditItem(3)<CR>
+  nmap <buffer> 4     :call <SID>MyFernEditItem(4)<CR>
+  nmap <buffer> 5     :call <SID>MyFernEditItem(5)<CR>
+  nmap <buffer> 6     :call <SID>MyFernEditItem(6)<CR>
+  nmap <buffer> 7     :call <SID>MyFernEditItem(7)<CR>
+  nmap <buffer> 8     :call <SID>MyFernEditItem(8)<CR>
+  nmap <buffer> 9     :call <SID>MyFernEditItem(9)<CR>
 
   nmap <silent> <buffer> <Space> :CpmOpen<CR>
 
@@ -151,7 +154,7 @@ function! MyFernMap() abort
   nmap <buffer><nowait> > <Plug>(fern-action-enter)
 endfunction
 
-function! MyFernSyntax() abort
+function! vis#external#fern#MyFernSyntax() abort
   syn match  fernCPP          ".*.cpp\ze.*$"
   syn match  fernC            ".*.c\ze.*$"
   syn match  fernH            ".*.h\ze.*$"
@@ -177,7 +180,7 @@ function! MyFernSyntax() abort
   hi link fernMakeSH     MyOrange
 endfunction
 
-function! MyFernHighlight() abort
+function! vis#external#fern#MyFernHighlight() abort
   hi link FernRootSymbol     MyRed
   hi link FernRootText       MyRed
   hi link FernBranchSymbol   MyRed

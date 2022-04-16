@@ -1,5 +1,5 @@
-func MyGgrep(word)
-  let word = MyPrompt("Word? ", a:word)
+func vis#external#fugitive#MyGgrep(word)
+  let word = vis#util#MyPrompt("Word? ", a:word)
   if word == ""
     return
   endif
@@ -7,7 +7,7 @@ func MyGgrep(word)
   exec "Ggrep -I" word "-- ':!tags*'"
 endfunc
 
-func MyGstatusToggle()
+func vis#external#fugitive#MyGstatusToggle()
   if (&filetype == "fugitive")
     normal q
   else
@@ -16,7 +16,7 @@ func MyGstatusToggle()
   endif
 endfunc
 
-func MyFugitiveMap()
+func vis#external#fugitive#MyFugitiveMap()
   nmap <buffer> D       dd
 endfunc
 

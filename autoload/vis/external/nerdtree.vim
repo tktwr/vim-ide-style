@@ -9,24 +9,24 @@ endif
 
 "------------------------------------------------------
 
-func MyNERDTreeToggle()
+func vis#external#nerdtree#MyNERDTreeToggle()
   if (&filetype == "nerdtree")
     NERDTreeToggle
   elseif (&filetype == "")
     NERDTree
   else
-    MyNERDTreeFind("%:p:h")
+    vis#external#nerdtree#MyNERDTreeFind("%:p:h")
   endif
 endfunc
 
-func MyNERDTreeFind(dir)
+func vis#external#nerdtree#MyNERDTreeFind(dir)
   let dir = expand(a:dir)
   call WblFind('NERD_tree', 1)
   exec "NERDTreeFind" dir
 endfunc
 
 "------------------------------------------------------
-func MyNERDTreeSelected()
+func s:MyNERDTreeSelected()
   let n = g:NERDTreeFileNode.GetSelected()
   if n != {}
     return n.path.str()
@@ -34,24 +34,24 @@ func MyNERDTreeSelected()
   return ""
 endfunc
 
-func MyNERDTreeEditItem(winnr)
-  let selected = MyNERDTreeSelected()
+func s:MyNERDTreeEditItem(winnr)
+  let selected = s:MyNERDTreeSelected()
   if (selected == "")
     return
   endif
 
-  call BmkEdit(selected, a:winnr)
+  call bmk#BmkEdit(selected, a:winnr)
 endfunc
 
-func MyNERDTreePreviewItem(winnr)
+func s:MyNERDTreePreviewItem(winnr)
   let prev_winnr = winnr()
-  call MyNERDTreeEditItem(a:winnr)
+  call s:MyNERDTreeEditItem(a:winnr)
   exec prev_winnr."wincmd w"
 endfunc
 
 "------------------------------------------------------
-func MyNERDTreePrintItem()
-  let key = MyNERDTreeSelected()
+func s:MyNERDTreePrintItem()
+  let key = s:MyNERDTreeSelected()
   if (len(key) > s:bmk_winwidth / 2)
     echo key
   else
@@ -59,31 +59,31 @@ func MyNERDTreePrintItem()
   endif
 endfunc
 
-func MyNERDTreePrevItem()
+func s:MyNERDTreePrevItem()
   normal -
-  call MyNERDTreePrintItem()
+  call s:MyNERDTreePrintItem()
 endfunc
 
-func MyNERDTreeNextItem()
+func s:MyNERDTreeNextItem()
   normal +
-  call MyNERDTreePrintItem()
+  call s:MyNERDTreePrintItem()
 endfunc
 
 "------------------------------------------------------
-func MyNERDTreeMap()
+func vis#external#nerdtree#MyNERDTreeMap()
   nmap <buffer> h       u
-  nmap <buffer> l       :call MyNERDTreePreviewItem(-2)<CR>
-  nmap <buffer> j       :call MyNERDTreeNextItem()<CR>
-  nmap <buffer> k       :call MyNERDTreePrevItem()<CR>
+  nmap <buffer> l       :call <SID>MyNERDTreePreviewItem(-2)<CR>
+  nmap <buffer> j       :call <SID>MyNERDTreeNextItem()<CR>
+  nmap <buffer> k       :call <SID>MyNERDTreePrevItem()<CR>
 
-  nmap <buffer> 2       :call MyNERDTreeEditItem(2)<CR>
-  nmap <buffer> 3       :call MyNERDTreeEditItem(3)<CR>
-  nmap <buffer> 4       :call MyNERDTreeEditItem(4)<CR>
-  nmap <buffer> 5       :call MyNERDTreeEditItem(5)<CR>
-  nmap <buffer> 6       :call MyNERDTreeEditItem(6)<CR>
-  nmap <buffer> 7       :call MyNERDTreeEditItem(7)<CR>
-  nmap <buffer> 8       :call MyNERDTreeEditItem(8)<CR>
-  nmap <buffer> 9       :call MyNERDTreeEditItem(9)<CR>
+  nmap <buffer> 2       :call <SID>MyNERDTreeEditItem(2)<CR>
+  nmap <buffer> 3       :call <SID>MyNERDTreeEditItem(3)<CR>
+  nmap <buffer> 4       :call <SID>MyNERDTreeEditItem(4)<CR>
+  nmap <buffer> 5       :call <SID>MyNERDTreeEditItem(5)<CR>
+  nmap <buffer> 6       :call <SID>MyNERDTreeEditItem(6)<CR>
+  nmap <buffer> 7       :call <SID>MyNERDTreeEditItem(7)<CR>
+  nmap <buffer> 8       :call <SID>MyNERDTreeEditItem(8)<CR>
+  nmap <buffer> 9       :call <SID>MyNERDTreeEditItem(9)<CR>
 
   nmap <buffer> B       :Bookmark<CR>
   nmap <buffer> E       :EditBookmarks<CR>

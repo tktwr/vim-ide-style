@@ -1,5 +1,5 @@
-func MyQuickhl(word)
-  let word = MyPrompt("Word? ", a:word)
+func vis#external#quickhl#MyQuickhl(word)
+  let word = vis#util#MyPrompt("Word? ", a:word)
   if word == ""
     return
   endif

@@ -24,7 +24,7 @@ endfunc
 "------------------------------------------------------
 " maximize window
 "------------------------------------------------------
-func MyWinMaximizeXToggle(max_width)
+func vis#window#MyWinMaximizeXToggle(max_width)
   let w = winwidth(0)
   if !exists('w:orig_width')
     let w:orig_width = w
@@ -37,7 +37,7 @@ func MyWinMaximizeXToggle(max_width)
   exec "vertical resize" w
 endfunc
 
-func MyWinMaximizeYToggle(max_height)
+func vis#window#MyWinMaximizeYToggle(max_height)
   let h = winheight(0)
   if !exists('w:orig_height')
     let w:orig_height = h
@@ -50,20 +50,20 @@ func MyWinMaximizeYToggle(max_height)
   exec "resize" h
 endfunc
 
-func MyWinMaximizeXYToggle(max_width, max_height)
-  call MyWinMaximizeXToggle(a:max_width)
-  call MyWinMaximizeYToggle(a:max_height)
+func vis#window#MyWinMaximizeXYToggle(max_width, max_height)
+  call vis#window#MyWinMaximizeXToggle(a:max_width)
+  call vis#window#MyWinMaximizeYToggle(a:max_height)
 endfunc
 
 "------------------------------------------------------
 " resize window
 "------------------------------------------------------
-func MyWinResize(height)
+func vis#window#MyWinResize(height)
   exec "resize" a:height
   let w:orig_height = a:height
 endfunc
 
-func MyWinVResize(width)
+func vis#window#MyWinVResize(width)
   exec "vertical resize" a:width
   let w:orig_width = a:width
 endfunc
@@ -71,14 +71,14 @@ endfunc
 "------------------------------------------------------
 " place window
 "------------------------------------------------------
-func MyWinPlace(place)
+func vis#window#MyWinPlace(place)
   exec "wincmd " a:place
 endfunc
 
 "------------------------------------------------------
 " close window
 "------------------------------------------------------
-func MyClosePrevWin()
+func vis#window#MyClosePrevWin()
   let curr_winnr = winnr()
   wincmd p
   call WblCopy()
@@ -90,7 +90,7 @@ endfunc
 "------------------------------------------------------
 " find the first terminal window
 "------------------------------------------------------
-func TtFindFirstTerm(begin_winnr=1)
+func vis#window#TtFindFirstTerm(begin_winnr=1)
   let curr_winnr = winnr()
   let last_winnr = winnr('$')
   let i = a:begin_winnr
@@ -110,7 +110,7 @@ endfunc
 "------------------------------------------------------
 " find the first editor window
 "------------------------------------------------------
-func TtFindFirstEditor(begin_winnr=1)
+func vis#window#TtFindFirstEditor(begin_winnr=1)
   let curr_winnr = winnr()
   let last_winnr = winnr('$')
   let i = a:begin_winnr
@@ -130,7 +130,7 @@ endfunc
 "------------------------------------------------------
 " find the last editor window from the current window
 "------------------------------------------------------
-func TtFindLastEditor()
+func vis#window#TtFindLastEditor()
   let curr_winnr = winnr()
   let i = curr_winnr
   while i > 0
@@ -153,12 +153,12 @@ endfunc
 " winnr == -1: the last editor window
 " winnr ==  0: the current window
 " winnr >=  1: the specified window
-func TtFindEditor(winnr)
+func vis#window#TtFindEditor(winnr)
   let winnr = a:winnr
   if winnr == -2
-    let winnr = TtFindFirstEditor()
+    let winnr = vis#window#TtFindFirstEditor()
   elseif winnr == -1
-    let winnr = TtFindLastEditor()
+    let winnr = vis#window#TtFindLastEditor()
   endif
   return winnr
 endfunc

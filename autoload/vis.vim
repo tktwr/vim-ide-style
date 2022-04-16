@@ -24,7 +24,7 @@ func s:MyWinInitSizeForEachWin()
   endif
 endfunc
 
-func MyWinInitSize()
+func vis#MyWinInitSize()
   1wincmd w
   exec "normal \<C-W>="
   exec "vertical resize" g:my_left_winwidth
@@ -34,7 +34,7 @@ endfunc
 "------------------------------------------------------
 " redraw
 "------------------------------------------------------
-func MyRedraw()
+func vis#MyRedraw()
   redraw!
   set invnumber
   set invlist

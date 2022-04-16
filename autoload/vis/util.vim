@@ -1,4 +1,4 @@
-func MyExpand(url)
+func vis#util#MyExpand(url)
   let url = a:url
   if (url == "")
     let url = expand("<cfile>")
@@ -6,9 +6,9 @@ func MyExpand(url)
   return expand(url)
 endfunc
 
-func MyExpandDir(url)
-  let url = MyExpand(a:url)
-  let dir = BmkGetDirName(url)
+func vis#util#MyExpandDir(url)
+  let url = vis#util#MyExpand(a:url)
+  let dir = bmk#BmkGetDirName(url)
 
   if (dir == "")
     let dir = expand("%:p:h")
@@ -57,12 +57,12 @@ func vis#util#MyCWD()
   return "[".l:type.":".l:cwd."]"
 endfunc
 
-func MyPrompt(prompt, word)
+func vis#util#MyPrompt(prompt, word)
   let word = a:word
   if word == "?"
     let word = input(a:prompt)
   elseif word == "??"
-    let text = expand('<cword>')
+    let text = expand('<cfile>')
     let word = input(a:prompt, text)
   endif
   if word == ""
@@ -71,17 +71,17 @@ func MyPrompt(prompt, word)
   return word
 endfunc
 
-func MySetTab(nr)
+func vis#util#MySetTab(nr)
   let &tabstop=a:nr
   let &shiftwidth=a:nr
 endfunc
 
-func MyLineNumberToggle()
+func vis#util#MyLineNumberToggle()
   set invnumber
   set invlist
 endfunc
 
-func MyCheckEnv()
+func vis#util#MyCheckEnv()
   echom "version: ".v:version
   echom "unix: ".has("unix")
   echom "win32unix: ".has("win32unix")
@@ -104,7 +104,7 @@ func MyCheckEnv()
   pwd
 endfunc
 
-func MyWinInfo()
+func vis#util#MyWinInfo()
   echom "columns               : &columns      : ".&columns
   echom "lines                 : &lines        : ".&lines
   echom "current win's width   : winwidth(0)   : ".winwidth(0)
