@@ -4,7 +4,8 @@ func vis#external#fugitive#MyGgrep(word)
     return
   endif
 
-  exec "Ggrep -I" word "-- ':!tags*'"
+  let cmd = printf("Ggrep -I '%s' -- ':!tags*'", word)
+  exec cmd
 endfunc
 
 func vis#external#fugitive#MyGstatusToggle()
