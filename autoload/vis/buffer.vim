@@ -1,5 +1,5 @@
 "------------------------------------------------------
-" buffer
+" buffer delete
 "------------------------------------------------------
 func vis#buffer#MyBufDelete()
   let nr = bufnr('%')
@@ -24,6 +24,9 @@ func vis#buffer#MyWinBufExchange(winnr)
   exec dst_bufnr."b"
 endfunc
 
+"------------------------------------------------------
+" buffer copy
+"------------------------------------------------------
 func vis#buffer#MyWinBufCopy(winnr)
   let winnr = vis#util#MyPrompt("Winnr? ", a:winnr)
   if winnr == ""

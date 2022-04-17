@@ -5,7 +5,7 @@
 func vis#send#MyIDESendCmdE2T(cmd)
   let cmd = a:cmd
   if (cmd == "")
-    let cmd = util#TtRemoveBeginEndSpaces(getline('.'))
+    let cmd = bmk#util#TtRemoveBeginEndSpaces(getline('.'))
   endif
   wincmd j
   let bufnr = winbufnr(0)
