@@ -21,7 +21,7 @@ endfunc
 
 func vis#external#nerdtree#MyNERDTreeFind(dir)
   let dir = expand(a:dir)
-  call WblFind('NERD_tree', 1)
+  call wbl#WblFind('NERD_tree', 1)
   exec "NERDTreeFind" dir
 endfunc
 
