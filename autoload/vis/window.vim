@@ -81,10 +81,10 @@ endfunc
 func vis#window#MyClosePrevWin()
   let curr_winnr = winnr()
   wincmd p
-  call WblCopy()
+  call wbl#WblCopy()
   close
   exec curr_winnr."wincmd w"
-  call WblPaste()
+  call wbl#WblPaste()
 endfunc
 
 "------------------------------------------------------
