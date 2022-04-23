@@ -46,6 +46,10 @@ func MyTabDiff(file1, file2)
   call vis#tab#MyTabDiff(a:file1, a:file2)
 endfunc
 
+func MyIDESendCurrCmdE2T()
+  call vis#send#MyIDESendCmdE2T("")
+endfunc
+
 "------------------------------------------------------
 " command for tabline
 "------------------------------------------------------
@@ -83,6 +87,14 @@ command -nargs=1 -complete=dir  MyFern             call vis#external#fern#MyFern
 
 func MyFern(dir, drawer='', toggle='')
   call vis#external#fern#MyFern(a:dir, a:drawer, a:toggle)
+endfunc
+
+func MyFernViewItem()
+  call vis#external#fern#MyFernViewItem()
+endfunc
+
+func MyFernOpenItem()
+  call vis#external#fern#MyFernOpenItem()
 endfunc
 
 "------------------------------------------------------
@@ -125,6 +137,10 @@ command -nargs=+                MyTjump            call vis#internal#tjump#MyTju
 
 func MyTjump(tag_name, winnr=0)
   call vis#internal#tjump#MyTjump(a:tag_name, a:winnr)
+endfunc
+
+func MyTjumpPrompt()
+  call vis#internal#tjump#MyTjumpPrompt()
 endfunc
 
 "------------------------------------------------------

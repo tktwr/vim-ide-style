@@ -6,10 +6,11 @@ func vis#send#MyIDESendCmdE2T(cmd)
   let cmd = a:cmd
   if (cmd == "")
     let cmd = bmk#util#TtRemoveBeginEndSpaces(getline('.'))
+    let cmd = "> ".cmd."<CR>"
   endif
   wincmd j
-  let bufnr = winbufnr(0)
-	call term_sendkeys(bufnr, cmd."\<CR>")
+  let winnr = winnr()
+  call bmk#BmkExecTermCommand(cmd, winnr)
 endfunc
 
 " send 'cd dir' to a terminal
