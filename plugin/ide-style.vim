@@ -5,62 +5,62 @@ let g:my_tab_labels = {}
 let g:my_tab_info = ""
 
 set laststatus=2
-set statusline=%!vis#statusline#MyStatusline()
-set tabline=%!vis#tabline#MyTabLine()
+set statusline=%!vis#statusline#VisStatusline()
+set tabline=%!vis#tabline#VisTabLine()
 
 "------------------------------------------------------
 " command for ide
 "------------------------------------------------------
-command                         MyIDE            call vis#MyIDE()
-command                         MyWinInitSize    call vis#MyWinInitSize()
-command                         MySideBarToggle  call vis#sidebar#MySideBarToggle()
+command                         VisIDE            call vis#VisIDE()
+command                         VisWinInitSize    call vis#VisWinInitSize()
+command                         VisSideBarToggle  call vis#sidebar#VisSideBarToggle()
 
 "------------------------------------------------------
 " command for buffer
 "------------------------------------------------------
-command                         MyBufDelete      call vis#buffer#MyBufDelete()
+command                         VisBufDelete      call vis#buffer#VisBufDelete()
 
 "------------------------------------------------------
 " command for window
 "------------------------------------------------------
-command -nargs=1                MyWinResize      call vis#window#MyWinResize(<f-args>)
-command -nargs=1                MyWinVResize     call vis#window#MyWinVResize(<f-args>)
-command -nargs=1                Wx               call vis#window#MyWinBufExchange(<f-args>)
-command -nargs=1                Wc               call vis#window#MyWinBufCopy(<f-args>)
+command -nargs=1                VisWinResize      call vis#window#VisWinResize(<f-args>)
+command -nargs=1                VisWinVResize     call vis#window#VisWinVResize(<f-args>)
+command -nargs=1                Wx               call vis#window#VisWinBufExchange(<f-args>)
+command -nargs=1                Wc               call vis#window#VisWinBufCopy(<f-args>)
 
-command                         MyRedraw         call vis#MyRedraw()
+command                         VisRedraw         call vis#VisRedraw()
 
 "------------------------------------------------------
 " command for tab
 "------------------------------------------------------
-command -nargs=+ -complete=file MyTabDiff        call vis#tab#MyTabDiff(<f-args>)
-command -nargs=+ -complete=dir  MyTabDirDiff     call vis#tab#MyTabDirDiff(<f-args>)
-command                         MyTabDirDiffQuit call vis#tab#MyTabDirDiffQuit()
-command                         MyTabClosePrev   call vis#tab#MyTabClosePrev()
+command -nargs=+ -complete=file VisTabDiff        call vis#tab#VisTabDiff(<f-args>)
+command -nargs=+ -complete=dir  VisTabDirDiff     call vis#tab#VisTabDirDiff(<f-args>)
+command                         VisTabDirDiffQuit call vis#tab#VisTabDirDiffQuit()
+command                         VisTabClosePrev   call vis#tab#VisTabClosePrev()
 
-command -nargs=1                MyIDEVResizeT2E  call vis#send#MyIDEVResizeT2E(<f-args>)
-command -nargs=+ -complete=dir  MyIDESendCdT2T   call vis#send#MyIDESendCdT2T(<f-args>)
-command                         MyIDESendCdE2T   call vis#send#MyIDESendCdE2T()
+command -nargs=1                VisIDEVResizeT2E  call vis#send#VisIDEVResizeT2E(<f-args>)
+command -nargs=+ -complete=dir  VisIDESendCdT2T   call vis#send#VisIDESendCdT2T(<f-args>)
+command                         VisIDESendCdE2T   call vis#send#VisIDESendCdE2T()
 
-func MyTabDiff(file1, file2)
-  call vis#tab#MyTabDiff(a:file1, a:file2)
+func VisTabDiff(file1, file2)
+  call vis#tab#VisTabDiff(a:file1, a:file2)
 endfunc
 
-func MyIDESendCurrCmdE2T()
-  call vis#send#MyIDESendCmdE2T("")
+func VisIDESendCurrCmdE2T()
+  call vis#send#VisIDESendCmdE2T("")
 endfunc
 
 "------------------------------------------------------
 " command for tabline
 "------------------------------------------------------
-command -nargs=1                MyTabLineSetLabel call vis#tabline#MyTabLine_SetLabel(<f-args>)
-command -nargs=1                MyTabLineSetInfo  call vis#tabline#MyTabLine_SetInfo(<f-args>)
+command -nargs=1                VisTabLineSetLabel call vis#tabline#VisTabLine_SetLabel(<f-args>)
+command -nargs=1                VisTabLineSetInfo  call vis#tabline#VisTabLine_SetInfo(<f-args>)
 
 "------------------------------------------------------
 " command for term
 "------------------------------------------------------
-command -nargs=?                MyTerm             call vis#term#MyTerm(<f-args>)
-command -nargs=0                MyTermV            call vis#term#MyTermV()
+command -nargs=?                VisTerm             call vis#term#VisTerm(<f-args>)
+command -nargs=0                VisTermV            call vis#term#VisTermV()
 
 func Tapi_Exec(bufnr, cmdline)
   call vis#term#Tapi_Exec(a:bufnr, a:cmdline)
@@ -81,87 +81,87 @@ endfunc
 "------------------------------------------------------
 " command for fern
 "------------------------------------------------------
-command                         MyFernDrawerToggle call vis#external#fern#MyFernDrawerToggle()
-command -nargs=1 -complete=dir  MyFernDrawer       call vis#external#fern#MyFernDrawer(<f-args>)
-command -nargs=1 -complete=dir  MyFern             call vis#external#fern#MyFern(<f-args>)
+command                         VisFernDrawerToggle call vis#external#fern#VisFernDrawerToggle()
+command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#VisFernDrawer(<f-args>)
+command -nargs=1 -complete=dir  VisFern             call vis#external#fern#VisFern(<f-args>)
 
-func MyFern(dir, drawer='', toggle='')
-  call vis#external#fern#MyFern(a:dir, a:drawer, a:toggle)
+func VisFern(dir, drawer='', toggle='')
+  call vis#external#fern#VisFern(a:dir, a:drawer, a:toggle)
 endfunc
 
-func MyFernViewItem()
-  call vis#external#fern#MyFernViewItem()
+func VisFernViewItem()
+  call vis#external#fern#VisFernViewItem()
 endfunc
 
-func MyFernOpenItem()
-  call vis#external#fern#MyFernOpenItem()
+func VisFernOpenItem()
+  call vis#external#fern#VisFernOpenItem()
 endfunc
 
 "------------------------------------------------------
 " command for nerdtree
 "------------------------------------------------------
-command                         MyNERDTreeToggle   call vis#external#nerdtree#MyNERDTreeToggle()
-command -nargs=1 -complete=dir  MyNERDTreeFind     call vis#external#nerdtree#MyNERDTreeFind(<f-args>)
+command                         VisNERDTreeToggle   call vis#external#nerdtree#VisNERDTreeToggle()
+command -nargs=1 -complete=dir  VisNERDTreeFind     call vis#external#nerdtree#VisNERDTreeFind(<f-args>)
 
 "------------------------------------------------------
 " command for fugitive
 "------------------------------------------------------
-command -nargs=1                MyGgrep            call vis#external#fugitive#MyGgrep(<f-args>)
-command                         MyGstatusToggle    call vis#external#fugitive#MyGstatusToggle()
+command -nargs=1                VisGgrep            call vis#external#fugitive#VisGgrep(<f-args>)
+command                         VisGstatusToggle    call vis#external#fugitive#VisGstatusToggle()
 
 "------------------------------------------------------
 " command for quickhl
 "------------------------------------------------------
-command -nargs=1                MyQuickhl          call vis#external#quickhl#MyQuickhl(<f-args>)
+command -nargs=1                VisQuickhl          call vis#external#quickhl#VisQuickhl(<f-args>)
 
 "------------------------------------------------------
 " command for ref
 "------------------------------------------------------
-command -nargs=+                MyMan              call vis#external#ref#MyRef("man", <q-args>)
-command -nargs=+                MyPydoc            call vis#external#ref#MyRef("pydoc", <q-args>)
+command -nargs=+                VisMan              call vis#external#ref#VisRef("man", <q-args>)
+command -nargs=+                VisPydoc            call vis#external#ref#VisRef("pydoc", <q-args>)
 
 "------------------------------------------------------
 " command for help
 "------------------------------------------------------
-command -nargs=?                MyHelp             call vis#internal#help#MyHelp(<f-args>)
+command -nargs=?                VisHelp             call vis#internal#help#VisHelp(<f-args>)
 
 "------------------------------------------------------
 " command for vimgrep
 "------------------------------------------------------
-command -nargs=+                MyVimgrep          call vis#internal#vimgrep#MyVimgrep(<f-args>)
+command -nargs=+                VisVimgrep          call vis#internal#vimgrep#VisVimgrep(<f-args>)
 
 "------------------------------------------------------
 " command for tag jump
 "------------------------------------------------------
-command -nargs=+                MyTjump            call vis#internal#tjump#MyTjump(<f-args>)
+command -nargs=+                VisTjump            call vis#internal#tjump#VisTjump(<f-args>)
 
-func MyTjump(tag_name, winnr=0)
-  call vis#internal#tjump#MyTjump(a:tag_name, a:winnr)
+func VisTjump(tag_name, winnr=0)
+  call vis#internal#tjump#VisTjump(a:tag_name, a:winnr)
 endfunc
 
-func MyTjumpPrompt()
-  call vis#internal#tjump#MyTjumpPrompt()
+func VisTjumpPrompt()
+  call vis#internal#tjump#VisTjumpPrompt()
 endfunc
 
 "------------------------------------------------------
 " command for util
 "------------------------------------------------------
-command -nargs=1                MySetTab           call vis#util#MySetTab(<f-args>)
-command                         MyLineNumberToggle call vis#util#MyLineNumberToggle()
+command -nargs=1                VisSetTab           call vis#util#VisSetTab(<f-args>)
+command                         VisLineNumberToggle call vis#util#VisLineNumberToggle()
 
-command                         MyCheckEnv         call vis#util#MyCheckEnv()
-command -nargs=0                MyWinInfo          call vis#util#MyWinInfo()
+command                         VisCheckEnv         call vis#util#VisCheckEnv()
+command -nargs=0                VisWinInfo          call vis#util#VisWinInfo()
 
-command                         MyCdHere           exec "cd"  expand("%:p:h")
-command                         MyTcdHere          exec "tcd" expand("%:p:h")
-command                         MyLcdHere          exec "lcd" expand("%:p:h")
+command                         VisCdHere           exec "cd"  expand("%:p:h")
+command                         VisTcdHere          exec "tcd" expand("%:p:h")
+command                         VisLcdHere          exec "lcd" expand("%:p:h")
 
 "------------------------------------------------------
 " autocmd
 "------------------------------------------------------
 augroup ag_ide_map
   autocmd!
-  autocmd WinEnter        *      call vis#map#MyBufferMap()
+  autocmd WinEnter        *      call vis#map#VisBufferMap()
   autocmd QuickFixCmdPost *grep* below cwindow
   autocmd QuickFixCmdPost *make* below cwindow
 augroup END
@@ -169,33 +169,33 @@ augroup END
 augroup ag_ide_term
   autocmd!
   if !has('nvim')
-    autocmd TerminalOpen *       call vis#statusline#MySetStatuslineForTerm()
+    autocmd TerminalOpen *       call vis#statusline#VisSetStatuslineForTerm()
   else
-    autocmd TermOpen     *       call vis#statusline#MySetStatuslineForTerm()
+    autocmd TermOpen     *       call vis#statusline#VisSetStatuslineForTerm()
   endif
 augroup END
 
 augroup ag_ide_bmk
   autocmd!
-  autocmd FileType bmk           call vis#statusline#TtSetStatuslineForSideBar()
+  autocmd FileType bmk           call vis#statusline#VisSetStatuslineForSideBar()
 augroup END
 
 augroup ag_ide_fern
   autocmd!
   autocmd FileType fern          call glyph_palette#apply()
-  autocmd FileType fern          call vis#statusline#TtSetStatuslineForSideBar()
-  autocmd FileType fern          call vis#external#fern#MyFernMap()
-  autocmd User     FernSyntax    call vis#external#fern#MyFernSyntax()
-  autocmd User     FernHighlight call vis#external#fern#MyFernHighlight()
+  autocmd FileType fern          call vis#statusline#VisSetStatuslineForSideBar()
+  autocmd FileType fern          call vis#external#fern#VisFernMap()
+  autocmd User     FernSyntax    call vis#external#fern#VisFernSyntax()
+  autocmd User     FernHighlight call vis#external#fern#VisFernHighlight()
 augroup END
 
 augroup ag_ide_nerdtree
   autocmd!
-  autocmd FileType nerdtree      call vis#external#nerdtree#MyNERDTreeMap()
+  autocmd FileType nerdtree      call vis#external#nerdtree#VisNERDTreeMap()
 augroup END
 
 augroup ag_ide_fugitive
   autocmd!
-  autocmd FileType fugitive      call vis#external#fugitive#MyFugitiveMap()
+  autocmd FileType fugitive      call vis#external#fugitive#VisFugitiveMap()
 augroup END
 

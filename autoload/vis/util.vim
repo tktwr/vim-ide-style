@@ -1,4 +1,4 @@
-func vis#util#MyExpand(url)
+func vis#util#VisExpand(url)
   let url = a:url
   if (url == "")
     let url = expand("<cfile>")
@@ -6,8 +6,8 @@ func vis#util#MyExpand(url)
   return expand(url)
 endfunc
 
-func vis#util#MyExpandDir(url)
-  let url = vis#util#MyExpand(a:url)
+func vis#util#VisExpandDir(url)
+  let url = vis#util#VisExpand(a:url)
   let dir = bmk#BmkGetDirName(url)
 
   if (dir == "")
@@ -17,7 +17,7 @@ func vis#util#MyExpandDir(url)
   return dir
 endfunc
 
-func vis#util#MyUnexpand(dir)
+func vis#util#VisUnexpand(dir)
   let dir = a:dir
   let dir = substitute(dir, '^'.expand("$MY_PAPERS"), '$MY_PAPERS', "")
   let dir = substitute(dir, '^'.expand("$MY_GIT"), '$MY_GIT', "")
@@ -42,7 +42,7 @@ func vis#util#MyUnexpand(dir)
   return dir
 endfunc
 
-func vis#util#MyCWD()
+func vis#util#VisCWD()
   if haslocaldir() == 1
     let l:type = "local"
     let l:cwd = getcwd()
@@ -53,11 +53,11 @@ func vis#util#MyCWD()
     let l:type = "global"
     let l:cwd = getcwd(-1)
   endif
-  let l:cwd = vis#util#MyUnexpand(l:cwd)
+  let l:cwd = vis#util#VisUnexpand(l:cwd)
   return "[".l:type.":".l:cwd."]"
 endfunc
 
-func vis#util#MyPrompt(prompt, word)
+func vis#util#VisPrompt(prompt, word)
   let word = a:word
   if word == "?"
     let word = input(a:prompt)
@@ -71,17 +71,17 @@ func vis#util#MyPrompt(prompt, word)
   return word
 endfunc
 
-func vis#util#MySetTab(nr)
+func vis#util#VisSetTab(nr)
   let &tabstop=a:nr
   let &shiftwidth=a:nr
 endfunc
 
-func vis#util#MyLineNumberToggle()
+func vis#util#VisLineNumberToggle()
   set invnumber
   set invlist
 endfunc
 
-func vis#util#MyCheckEnv()
+func vis#util#VisCheckEnv()
   echom "version: ".v:version
   echom "unix: ".has("unix")
   echom "win32unix: ".has("win32unix")
@@ -104,7 +104,7 @@ func vis#util#MyCheckEnv()
   pwd
 endfunc
 
-func vis#util#MyWinInfo()
+func vis#util#VisWinInfo()
   echom "columns               : &columns      : ".&columns
   echom "lines                 : &lines        : ".&lines
   echom "current win's width   : winwidth(0)   : ".winwidth(0)

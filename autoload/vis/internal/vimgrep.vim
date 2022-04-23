@@ -1,5 +1,5 @@
-func vis#internal#vimgrep#MyVimgrep(word, files)
-  let word = vis#util#MyPrompt("Word? ", a:word)
+func vis#internal#vimgrep#VisVimgrep(word, files)
+  let word = vis#util#VisPrompt("Word? ", a:word)
   if word == ""
     return
   endif

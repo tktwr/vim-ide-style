@@ -1,14 +1,14 @@
-func vis#internal#tjump#MyTjump(tag_name, winnr=0)
-  call vis#window#TtGotoWinnr(a:winnr)
+func vis#internal#tjump#VisTjump(tag_name, winnr=0)
+  call vis#window#VisGotoWinnr(a:winnr)
   exec "tjump ".a:tag_name
 endfunc
 
-func vis#internal#tjump#MyTjumpPrompt()
-  let line = vis#util#MyPrompt("tag winnr? ", '??')
+func vis#internal#tjump#VisTjumpPrompt()
+  let line = vis#util#VisPrompt("tag winnr? ", '??')
   if line == ""
     return
   endif
 
-  exec "MyTjump" line
+  exec "VisTjump" line
 endfunc
 

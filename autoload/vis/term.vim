@@ -4,7 +4,7 @@
 "------------------------------------------------------
 " open terminal
 "------------------------------------------------------
-func vis#term#MyTerm(...)
+func vis#term#VisTerm(...)
   if a:0 == 0
     let l:type = 0
   else
@@ -25,7 +25,7 @@ func vis#term#MyTerm(...)
   endif
 endfunc
 
-func vis#term#MyTermV()
+func vis#term#VisTermV()
   vnew
   exec "term ++rows=1"
   wincmd p

@@ -21,7 +21,7 @@ VARIABLE                                              *ide-style-variable*
 ==========================================================================
 COMMAND                                                *ide-style-command*
 
-:MyIDE
+:VisIDE
         Open ide-style windows.
 
 ==========================================================================

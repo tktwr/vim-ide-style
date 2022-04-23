@@ -1,4 +1,4 @@
-func vis#internal#help#MyHelp(...)
+func vis#internal#help#VisHelp(...)
   if &filetype == "help"
     let start_from_help_win=1
   else
@@ -13,7 +13,7 @@ func vis#internal#help#MyHelp(...)
   endif
 
   if !start_from_help_win
-    call vis#window#MyClosePrevWin()
+    call vis#window#VisClosePrevWin()
   endif
 endfunc
 

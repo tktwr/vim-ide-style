@@ -1,22 +1,22 @@
 "======================================================
-" MyIDE
+" VisIDE
 "======================================================
-func vis#MyIDE()
-  let l:is_fullscreen = vis#window#TtIsFullscreen()
-  call vis#sidebar#MyMakeSideBar()
+func vis#VisIDE()
+  let l:is_fullscreen = vis#window#VisIsFullscreen()
+  call vis#sidebar#VisMakeSideBar()
   wincmd w
   if l:is_fullscreen
     vsp
-    MyTerm
+    VisTerm
     wincmd w
   endif
-  MyTerm
+  VisTerm
 endfunc
 
 "------------------------------------------------------
 " init size
 "------------------------------------------------------
-func s:MyWinInitSizeForEachWin()
+func s:VisWinInitSizeForEachWin()
   if &buftype == 'terminal'
     exec "resize" g:my_term_winheight
   elseif winnr() == 2 && &filetype == 'fern'
@@ -24,17 +24,17 @@ func s:MyWinInitSizeForEachWin()
   endif
 endfunc
 
-func vis#MyWinInitSize()
+func vis#VisWinInitSize()
   1wincmd w
   exec "normal \<C-W>="
   exec "vertical resize" g:my_left_winwidth
-  2,$windo call s:MyWinInitSizeForEachWin()
+  2,$windo call s:VisWinInitSizeForEachWin()
 endfunc
 
 "------------------------------------------------------
 " redraw
 "------------------------------------------------------
-func vis#MyRedraw()
+func vis#VisRedraw()
   redraw!
   set invnumber
   set invlist

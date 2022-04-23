@@ -1,11 +1,11 @@
 "------------------------------------------------------
 " statusline
 "------------------------------------------------------
-func vis#statusline#TtStatuslineWinNr()
+func vis#statusline#VisStatuslineWinNr()
   return printf("[%s] ", winnr())
 endfunc
 
-func vis#statusline#TtStatuslineFname()
+func vis#statusline#VisStatuslineFname()
   let cwd = getcwd()
   let dir = expand("%:p:h")
   let color = ""
@@ -18,7 +18,7 @@ func vis#statusline#TtStatuslineFname()
   return color."%t"."%0* "
 endfunc
 
-func vis#statusline#TtStatuslineFileType()
+func vis#statusline#VisStatuslineFileType()
   let ft = getwinvar(0, '&ft')
   let syn = getwinvar(0, '&syn')
 
@@ -31,11 +31,11 @@ func vis#statusline#TtStatuslineFileType()
   return type
 endfunc
 
-func vis#statusline#TtStatuslineIndicator()
+func vis#statusline#VisStatuslineIndicator()
   return "%m%r%w%q"
 endfunc
 
-func vis#statusline#TtStatuslineFileEnc()
+func vis#statusline#VisStatuslineFileEnc()
   let stat = ""
   if winwidth(0) >= 60
     let fenc = &fenc != '' ? &fenc : &enc
@@ -45,7 +45,7 @@ func vis#statusline#TtStatuslineFileEnc()
   return stat
 endfunc
 
-func vis#statusline#TtStatuslineLineInfo()
+func vis#statusline#VisStatuslineLineInfo()
   let stat = ""
   if winwidth(0) >= 60
     let stat = "[%c%V,%l/%L,%p%%]"
@@ -53,21 +53,21 @@ func vis#statusline#TtStatuslineLineInfo()
   return stat
 endfunc
 
-func vis#statusline#TtStatuslineSeparator()
+func vis#statusline#VisStatuslineSeparator()
   return "%<%="
 endfunc
 
 "------------------------------------------------------
 " statusline for buffer
 "------------------------------------------------------
-func vis#statusline#MyStatusline()
-  let stat = "%{vis#statusline#TtStatuslineWinNr()}"
-  let stat.= vis#statusline#TtStatuslineFname()
-  let stat.= "%{vis#statusline#TtStatuslineFileType()}"
-  let stat.= vis#statusline#TtStatuslineIndicator()
-  let stat.= "%{vis#statusline#TtStatuslineFileEnc()}"
-  let stat.= vis#statusline#TtStatuslineSeparator()
-  let stat.= vis#statusline#TtStatuslineLineInfo()
+func vis#statusline#VisStatusline()
+  let stat = "%{vis#statusline#VisStatuslineWinNr()}"
+  let stat.= vis#statusline#VisStatuslineFname()
+  let stat.= "%{vis#statusline#VisStatuslineFileType()}"
+  let stat.= vis#statusline#VisStatuslineIndicator()
+  let stat.= "%{vis#statusline#VisStatuslineFileEnc()}"
+  let stat.= vis#statusline#VisStatuslineSeparator()
+  let stat.= vis#statusline#VisStatuslineLineInfo()
 
   if $MY_PROMPT_TYPE >= 3
     let stat.= "%6*%{FugitiveStatusline()}%0*"
@@ -78,32 +78,32 @@ endfunc
 "------------------------------------------------------
 " statusline for sidebar
 "------------------------------------------------------
-func vis#statusline#TtStatuslineForSideBar()
-  let stat = "%{vis#statusline#TtStatuslineWinNr()}"
+func vis#statusline#VisStatuslineForSideBar()
+  let stat = "%{vis#statusline#VisStatuslineWinNr()}"
   let stat.= "%t "
-  let stat.= "%{vis#statusline#TtStatuslineFileType()}"
-  let stat.= vis#statusline#TtStatuslineIndicator()
-  let stat.= vis#statusline#TtStatuslineSeparator()
+  let stat.= "%{vis#statusline#VisStatuslineFileType()}"
+  let stat.= vis#statusline#VisStatuslineIndicator()
+  let stat.= vis#statusline#VisStatuslineSeparator()
   let stat.= "[%c,%l]"
   return stat
 endfunc
 
-func vis#statusline#TtSetStatuslineForSideBar()
-  setl statusline=%!vis#statusline#TtStatuslineForSideBar()
+func vis#statusline#VisSetStatuslineForSideBar()
+  setl statusline=%!vis#statusline#VisStatuslineForSideBar()
 endfunc
 
 "------------------------------------------------------
 " statusline for terminal
 "------------------------------------------------------
-func vis#statusline#MyStatuslineForTerm()
-  let stat = "%{vis#statusline#TtStatuslineWinNr()}"
+func vis#statusline#VisStatuslineForTerm()
+  let stat = "%{vis#statusline#VisStatuslineWinNr()}"
   let stat.= "terminal:%n"
-  let stat.= vis#statusline#TtStatuslineSeparator()
-  let stat.= "%{vis#util#MyCWD()}"
+  let stat.= vis#statusline#VisStatuslineSeparator()
+  let stat.= "%{vis#util#VisCWD()}"
   return stat
 endfunc
 
-func vis#statusline#MySetStatuslineForTerm()
-  setl statusline=%!vis#statusline#MyStatuslineForTerm()
+func vis#statusline#VisSetStatuslineForTerm()
+  setl statusline=%!vis#statusline#VisStatuslineForTerm()
 endfunc
 

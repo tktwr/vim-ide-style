@@ -1,7 +1,7 @@
 "------------------------------------------------------
 " tab
 "------------------------------------------------------
-func vis#tab#TtIsEmptyTab()
+func vis#tab#VisIsEmptyTab()
   let last_winnr = winnr('$')
   if last_winnr == 1 && &filetype == ""
     return 1
@@ -9,12 +9,12 @@ func vis#tab#TtIsEmptyTab()
   return 0
 endfunc
 
-func vis#tab#MyTabClosePrev()
-  let winnr = vis#window#TtFindFirstTerm()
+func vis#tab#VisTabClosePrev()
+  let winnr = vis#window#VisFindFirstTerm()
   if winnr == -1
     " terminal is not found in the tab
     tabclose
-    if vis#tab#TtIsEmptyTab()
+    if vis#tab#VisIsEmptyTab()
       " close redundant empty tab
       tabclose
     endif
@@ -25,7 +25,7 @@ endfunc
 "------------------------------------------------------
 " diff
 "------------------------------------------------------
-func vis#tab#MyTabDiff(file1, file2)
+func vis#tab#VisTabDiff(file1, file2)
   exec "tabedit" a:file2
   exec "vertical diffsplit" a:file1
 endfunc
@@ -33,7 +33,7 @@ endfunc
 "------------------------------------------------------
 " dirdiff
 "------------------------------------------------------
-func vis#tab#MyDirDiff(dir1, dir2)
+func vis#tab#VisDirDiff(dir1, dir2)
   let dir1 = substitute(a:dir1, ' ', '\\ ', 'g')
   let dir2 = substitute(a:dir2, ' ', '\\ ', 'g')
 
@@ -41,12 +41,12 @@ func vis#tab#MyDirDiff(dir1, dir2)
   redraw!
 endfunc
 
-func vis#tab#MyTabDirDiff(dir1, dir2)
+func vis#tab#VisTabDirDiff(dir1, dir2)
   tabedit
-  call vis#tab#MyDirDiff(a:dir1, a:dir2)
+  call vis#tab#VisDirDiff(a:dir1, a:dir2)
 endfunc
 
-func vis#tab#MyTabDirDiffQuit()
+func vis#tab#VisTabDirDiffQuit()
   exec "DirDiffQuit"
   tabclose
 endfunc

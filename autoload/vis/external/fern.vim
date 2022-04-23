@@ -2,8 +2,8 @@
 " fern
 "======================================================
 
-func vis#external#fern#MyFernDrawerOpen()
-  call vis#window#TtGotoWinnr(1)
+func vis#external#fern#VisFernDrawerOpen()
+  call vis#window#VisGotoWinnr(1)
 
   if exists('w:my_fern_init_buf') && &filetype != 'fern'
     exec w:my_fern_init_buf.'b'
@@ -13,18 +13,18 @@ endfunc
 " options:
 "   drawer: '-drawer'
 "   toggle: '-toggle'
-func vis#external#fern#MyFern(dir, drawer='', toggle='')
+func vis#external#fern#VisFern(dir, drawer='', toggle='')
   let dir = expand(a:dir)
   let dir = substitute(dir, ' ', '\\ ', 'g')
   let drawer = a:drawer
   let toggle = a:toggle
 
-  if (vis#sidebar#TtInSideBar() && winnr() == 1)
+  if (vis#sidebar#VisInSideBar() && winnr() == 1)
     let drawer = '-drawer'
   endif
 
   if drawer == '-drawer'
-    call vis#external#fern#MyFernDrawerOpen()
+    call vis#external#fern#VisFernDrawerOpen()
   endif
 
   let cmd = printf('Fern %s -reveal=%% %s %s', dir, drawer, toggle)
@@ -35,29 +35,29 @@ func vis#external#fern#MyFern(dir, drawer='', toggle='')
   endif
 endfunc
 
-func vis#external#fern#MyFernDrawerToggle()
-  call vis#external#fern#MyFern('.', '-drawer', '-toggle')
+func vis#external#fern#VisFernDrawerToggle()
+  call vis#external#fern#VisFern('.', '-drawer', '-toggle')
 endfunc
 
-func vis#external#fern#MyFernDrawer(dir)
-  call vis#external#fern#MyFern(a:dir, '-drawer', '')
+func vis#external#fern#VisFernDrawer(dir)
+  call vis#external#fern#VisFern(a:dir, '-drawer', '')
 endfunc
 
 "------------------------------------------------------
-func s:MyFernRoot()
+func s:VisFernRoot()
   let helper = fern#helper#new()
   let node = helper.sync.get_root_node()
   return node._path
 endfunc
 
-func s:MyFernSelected()
+func s:VisFernSelected()
   let helper = fern#helper#new()
   let node = helper.sync.get_cursor_node()
   return node._path
 endfunc
 
-func s:MyFernEditItem(winnr)
-  let selected = s:MyFernSelected()
+func s:VisFernEditItem(winnr)
+  let selected = s:VisFernSelected()
   if (selected == "")
     return
   endif
@@ -65,8 +65,8 @@ func s:MyFernEditItem(winnr)
   call bmk#BmkEdit(selected, a:winnr)
 endfunc
 
-func s:MyFernPreviewItem(winnr)
-  let selected = s:MyFernSelected()
+func s:VisFernPreviewItem(winnr)
+  let selected = s:VisFernSelected()
   if (isdirectory(selected))
     exec "normal \<Plug>(fern-action-expand)"
   elseif selected != ""
@@ -77,19 +77,19 @@ func s:MyFernPreviewItem(winnr)
 endfunc
 
 "------------------------------------------------------
-func vis#external#fern#MyFernOpenItem()
-  let selected = s:MyFernSelected()
+func vis#external#fern#VisFernOpenItem()
+  let selected = s:VisFernSelected()
   call bmk#BmkOpen(selected, 0)
 endfunc
 
-func vis#external#fern#MyFernViewItem()
-  let selected = s:MyFernSelected()
+func vis#external#fern#VisFernViewItem()
+  let selected = s:VisFernSelected()
   call bmk#BmkView(selected, 0)
 endfunc
 
 "------------------------------------------------------
-func s:MyFernPrintItem()
-  let key = s:MyFernSelected()
+func s:VisFernPrintItem()
+  let key = s:VisFernSelected()
   if (len(key) > g:fern#drawer_width / 2)
     echo key
   else
@@ -97,18 +97,18 @@ func s:MyFernPrintItem()
   endif
 endfunc
 
-func s:MyFernPrevItem()
+func s:VisFernPrevItem()
   normal -
-  call s:MyFernPrintItem()
+  call s:VisFernPrintItem()
 endfunc
 
-func s:MyFernNextItem()
+func s:VisFernNextItem()
   normal +
-  call s:MyFernPrintItem()
+  call s:VisFernPrintItem()
 endfunc
 
 "------------------------------------------------------
-function! vis#external#fern#MyFernMap() abort
+function! vis#external#fern#VisFernMap() abort
   nmap <buffer><expr>
         \ <Plug>(my-fern-select-expand-collapse)
         \ fern#smart#leaf(
@@ -119,8 +119,8 @@ function! vis#external#fern#MyFernMap() abort
 
   nmap <buffer> <2-LeftMouse> <Plug>(my-fern-select-expand-collapse)
   nmap <buffer> <CR>          <Plug>(my-fern-select-expand-collapse)
-  nmap <buffer> <C-CR>        :call vis#external#fern#MyFernViewItem()<CR>
-  nmap <buffer> <S-CR>        :call vis#external#fern#MyFernOpenItem()<CR>
+  nmap <buffer> <C-CR>        :call vis#external#fern#VisFernViewItem()<CR>
+  nmap <buffer> <S-CR>        :call vis#external#fern#VisFernOpenItem()<CR>
 
   nmap <buffer> N     <Plug>(fern-action-new-path)
   nmap <buffer> D     <Plug>(fern-action-remove)
@@ -135,18 +135,18 @@ function! vis#external#fern#MyFernMap() abort
   nmap <buffer> v     <Plug>(fern-action-open:vsplit)
 
   nmap <buffer> h     <Plug>(fern-action-collapse)
-  nmap <buffer> l     :call <SID>MyFernPreviewItem(-2)<CR>
-  nmap <buffer> j     :call <SID>MyFernNextItem()<CR>
-  nmap <buffer> k     :call <SID>MyFernPrevItem()<CR>
+  nmap <buffer> l     :call <SID>VisFernPreviewItem(-2)<CR>
+  nmap <buffer> j     :call <SID>VisFernNextItem()<CR>
+  nmap <buffer> k     :call <SID>VisFernPrevItem()<CR>
 
-  nmap <buffer> 2     :call <SID>MyFernEditItem(2)<CR>
-  nmap <buffer> 3     :call <SID>MyFernEditItem(3)<CR>
-  nmap <buffer> 4     :call <SID>MyFernEditItem(4)<CR>
-  nmap <buffer> 5     :call <SID>MyFernEditItem(5)<CR>
-  nmap <buffer> 6     :call <SID>MyFernEditItem(6)<CR>
-  nmap <buffer> 7     :call <SID>MyFernEditItem(7)<CR>
-  nmap <buffer> 8     :call <SID>MyFernEditItem(8)<CR>
-  nmap <buffer> 9     :call <SID>MyFernEditItem(9)<CR>
+  nmap <buffer> 2     :call <SID>VisFernEditItem(2)<CR>
+  nmap <buffer> 3     :call <SID>VisFernEditItem(3)<CR>
+  nmap <buffer> 4     :call <SID>VisFernEditItem(4)<CR>
+  nmap <buffer> 5     :call <SID>VisFernEditItem(5)<CR>
+  nmap <buffer> 6     :call <SID>VisFernEditItem(6)<CR>
+  nmap <buffer> 7     :call <SID>VisFernEditItem(7)<CR>
+  nmap <buffer> 8     :call <SID>VisFernEditItem(8)<CR>
+  nmap <buffer> 9     :call <SID>VisFernEditItem(9)<CR>
 
   nmap <silent> <buffer> <Space> :CpmOpen<CR>
 
@@ -154,7 +154,7 @@ function! vis#external#fern#MyFernMap() abort
   nmap <buffer><nowait> > <Plug>(fern-action-enter)
 endfunction
 
-function! vis#external#fern#MyFernSyntax() abort
+function! vis#external#fern#VisFernSyntax() abort
   syn match  fernCPP          ".*.cpp\ze.*$"
   syn match  fernC            ".*.c\ze.*$"
   syn match  fernH            ".*.h\ze.*$"
@@ -180,7 +180,7 @@ function! vis#external#fern#MyFernSyntax() abort
   hi link fernMakeSH     MyOrange
 endfunction
 
-function! vis#external#fern#MyFernHighlight() abort
+function! vis#external#fern#VisFernHighlight() abort
   hi link FernRootSymbol     MyRed
   hi link FernRootText       MyRed
   hi link FernBranchSymbol   MyRed

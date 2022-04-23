@@ -1,5 +1,5 @@
-func vis#external#ref#MyRef(cmd, word)
-  let word = vis#util#MyPrompt("Word? ", a:word)
+func vis#external#ref#VisRef(cmd, word)
+  let word = vis#util#VisPrompt("Word? ", a:word)
   if word == ""
     return
   endif
@@ -9,7 +9,7 @@ func vis#external#ref#MyRef(cmd, word)
     exec "above Ref" a:cmd word
   else
     exec "above Ref" a:cmd word
-    call vis#window#MyClosePrevWin()
+    call vis#window#VisClosePrevWin()
   endif
 endfunc
 
