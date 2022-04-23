@@ -1,4 +1,4 @@
-*ide-style.txt*
+*ide-style.txt* a helper plugin for ide-style window management
 
 Author  : Takehiro Tawara
 License : MIT license
@@ -9,13 +9,20 @@ INTRODUCTION                                      *ide-style-introduction*
 ide-style is a helper plugin for ide-style window management.
 
 ==========================================================================
+INSTALL                                                *ide-style-install*
+
+For vim-plug, install the plugin as follows.
+>
+        Plug 'tktwr/vim-ide-style'
+<
+==========================================================================
+VARIABLE                                              *ide-style-variable*
+
+==========================================================================
 COMMAND                                                *ide-style-command*
 
 :MyIDE
         Open ide-style windows.
-
-==========================================================================
-VARIABLE                                              *ide-style-variable*
 
 ==========================================================================
 vim:tw=78:ft=help:norl:
