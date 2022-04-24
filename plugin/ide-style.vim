@@ -10,7 +10,7 @@ set tabline=%!vis#tabline#VisTabLine()
 "------------------------------------------------------
 command                         VisIDE            call vis#VisIDE()
 command                         VisWinInitSize    call vis#VisWinInitSize()
-command                         VisSideBarToggle  call vis#sidebar#VisSideBarToggle()
+command                         VisRedraw         call vis#VisRedraw()
 
 "------------------------------------------------------
 " command for buffer
@@ -22,10 +22,13 @@ command                         VisBufDelete      call vis#buffer#VisBufDelete()
 "------------------------------------------------------
 command -nargs=1                VisWinResize      call vis#window#VisWinResize(<f-args>)
 command -nargs=1                VisWinVResize     call vis#window#VisWinVResize(<f-args>)
-command -nargs=1                Wx               call vis#window#VisWinBufExchange(<f-args>)
-command -nargs=1                Wc               call vis#window#VisWinBufCopy(<f-args>)
+command -nargs=1                Wx                call vis#window#VisWinBufExchange(<f-args>)
+command -nargs=1                Wc                call vis#window#VisWinBufCopy(<f-args>)
 
-command                         VisRedraw         call vis#VisRedraw()
+"------------------------------------------------------
+" command for sidebar
+"------------------------------------------------------
+command                         VisSideBarToggle  call vis#sidebar#VisSideBarToggle()
 
 "------------------------------------------------------
 " command for tab
@@ -35,16 +38,16 @@ command -nargs=+ -complete=dir  VisTabDirDiff     call vis#tab#VisTabDirDiff(<f-
 command                         VisTabDirDiffQuit call vis#tab#VisTabDirDiffQuit()
 command                         VisTabClosePrev   call vis#tab#VisTabClosePrev()
 
-command -nargs=1                VisIDEVResizeT2E  call vis#send#VisIDEVResizeT2E(<f-args>)
-command -nargs=+ -complete=dir  VisIDESendCdT2T   call vis#send#VisIDESendCdT2T(<f-args>)
-command                         VisIDESendCdE2T   call vis#send#VisIDESendCdE2T()
+command -nargs=1                VisVResizeT2E     call vis#send#VisVResizeT2E(<f-args>)
+command -nargs=+ -complete=dir  VisSendCdT2T      call vis#send#VisSendCdT2T(<f-args>)
+command                         VisSendCdE2T      call vis#send#VisSendCdE2T()
 
 func VisTabDiff(file1, file2)
   call vis#tab#VisTabDiff(a:file1, a:file2)
 endfunc
 
-func VisIDESendCurrCmdE2T()
-  call vis#send#VisIDESendCmdE2T("")
+func VisSendCurrCmdE2T()
+  call vis#send#VisSendCmdE2T("")
 endfunc
 
 "------------------------------------------------------
@@ -56,8 +59,8 @@ command -nargs=1                VisTabLineSetInfo  call vis#tabline#VisTabLine_S
 "------------------------------------------------------
 " command for term
 "------------------------------------------------------
-command -nargs=?                VisTerm             call vis#term#VisTerm(<f-args>)
-command -nargs=0                VisTermV            call vis#term#VisTermV()
+command -nargs=?                VisTerm            call vis#term#VisTerm(<f-args>)
+command -nargs=0                VisTermV           call vis#term#VisTermV()
 
 func Tapi_Exec(bufnr, cmdline)
   call vis#term#Tapi_Exec(a:bufnr, a:cmdline)
