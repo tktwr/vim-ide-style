@@ -11,7 +11,7 @@ func vis#term#VisTerm(...)
     let l:type = a:1
   endif
   if l:type == 0
-    exec "below term ++rows=".g:my_term_winheight
+    exec "below term ++rows=".g:vis#vis_term_winheight
     set winfixheight
   elseif l:type == 1
     tabedit
@@ -30,7 +30,7 @@ func vis#term#VisTermV()
   exec "term ++rows=1"
   wincmd p
   close
-  exec "resize".g:my_term_winheight
+  exec "resize".g:vis#vis_term_winheight
   set winfixheight
 endfunc
 

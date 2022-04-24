@@ -1,9 +1,6 @@
 "------------------------------------------------------
 " init
 "------------------------------------------------------
-let g:my_tab_labels = {}
-let g:my_tab_info = ""
-
 set laststatus=2
 set statusline=%!vis#statusline#VisStatusline()
 set tabline=%!vis#tabline#VisTabLine()
@@ -199,3 +196,4 @@ augroup ag_ide_fugitive
   autocmd FileType fugitive      call vis#external#fugitive#VisFugitiveMap()
 augroup END
 
+call vis#VisInit()

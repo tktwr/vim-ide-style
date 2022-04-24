@@ -4,7 +4,7 @@ func vis#external#fugitive#VisGgrep(word)
     return
   endif
 
-  let cmd = printf("Ggrep -I '%s' -- ':!tags*'", word)
+  let cmd = printf("silent Ggrep -I '%s' -- ':!tags*'", word)
   exec cmd
 endfunc
 
@@ -13,7 +13,7 @@ func vis#external#fugitive#VisGstatusToggle()
     normal q
   else
     above Git
-    exec "resize" g:my_gstatus_winheight
+    exec "resize" g:vis#vis_gstatus_winheight
   endif
 endfunc
 
