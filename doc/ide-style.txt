@@ -13,6 +13,8 @@ INSTALL                                                *ide-style-install*
 
 For vim-plug, install the plugin as follows.
 >
+        Plug 'tktwr/vim-winbuf-menu'
+        Plug 'tktwr/vim-bmk-menu'
         Plug 'tktwr/vim-ide-style'
 <
 ==========================================================================
