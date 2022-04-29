@@ -19,26 +19,42 @@ endfunc
 
 func vis#util#VisUnexpand(dir)
   let dir = a:dir
-  let dir = substitute(dir, '^'.expand("$MY_PAPERS"), '$MY_PAPERS', "")
-  let dir = substitute(dir, '^'.expand("$MY_GIT"), '$MY_GIT', "")
-  let dir = substitute(dir, '^'.expand("$MY_WORK"), '$MY_WORK', "")
-  let dir = substitute(dir, '^'.expand("$MY_PROJ"), '$MY_PROJ', "")
-  let dir = substitute(dir, '^'.expand("$MY_DOC"), '$MY_DOC', "")
-  let dir = substitute(dir, '^'.expand("$MY_OFFICE"), '$MY_OFFICE', "")
-  let dir = substitute(dir, '^'.expand("$MY_DIARY"), '$MY_DIARY', "")
-  let dir = substitute(dir, '^'.expand("$MY_MEMO"), '$MY_MEMO', "")
-  let dir = substitute(dir, '^'.expand("$MY_ETC"), '$MY_ETC', "")
-  let dir = substitute(dir, '^'.expand("$MY_ENV"), '$MY_ENV', "")
-  let dir = substitute(dir, '^'.expand("$MY_REMOTE_CONFIG"), '$MY_REMOTE_CONFIG', "")
-  let dir = substitute(dir, '^'.expand("$MY_LOCAL_CONFIG"), '$MY_LOCAL_CONFIG', "")
-  let dir = substitute(dir, '^'.expand("$MY_PRIVATE_CONFIG"), '$MY_PRIVATE_CONFIG', "")
-  let dir = substitute(dir, '^'.expand("$MY_PRIVATE"), '$MY_PRIVATE', "")
-  let dir = substitute(dir, '^'.expand("$MY_PROTECTED"), '$MY_PROTECTED', "")
-  let dir = substitute(dir, '^'.expand("$MY_PUBLIC"), '$MY_PUBLIC', "")
-  let dir = substitute(dir, '^'.expand("$MY_DESKTOP"), '$MY_DESKTOP', "")
-  let dir = substitute(dir, '^'.expand("$MY_DOWNLOADS"), '$MY_DOWNLOADS', "")
-  let dir = substitute(dir, '^'.expand("$MY_HOME"), '^', "")
-  let dir = substitute(dir, '^'.expand("$HOME"), '~', "")
+
+  let s:unexpand_env_list = [
+    \ '$MY_PAPERS',
+    \ '$MY_GIT',
+    \ '$MY_WORK',
+    \ '$MY_PROJ',
+    \ '$MY_DOC',
+    \ '$MY_OFFICE',
+    \ '$MY_DIARY',
+    \ '$MY_MEMO',
+    \ '$MY_ETC',
+    \ '$MY_ENV',
+    \ '$MY_REMOTE_CONFIG',
+    \ '$MY_LOCAL_CONFIG',
+    \ '$MY_PRIVATE_CONFIG',
+    \ '$MY_PRIVATE',
+    \ '$MY_PROTECTED',
+    \ '$MY_PUBLIC',
+    \ '$MY_DESKTOP',
+    \ '$MY_DOWNLOADS',
+    \ ]
+
+  if !exists('s:unexpand_env_dict')
+    let s:unexpand_env_dict = {}
+    for i in s:unexpand_env_list
+      if exists(i)
+        let s:unexpand_env_dict[expand(i)] = i
+      endif
+    endfor
+    let s:unexpand_env_dict[expand('$HOME')] = '~'
+  endif
+
+  for i in reverse(sort(keys(s:unexpand_env_dict)))
+    let dir = substitute(dir, '^'.i, s:unexpand_env_dict[i], '')
+  endfor
+
   return dir
 endfunc
 
