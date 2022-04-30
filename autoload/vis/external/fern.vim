@@ -56,6 +56,12 @@ func s:VisFernSelected()
   return node._path
 endfunc
 
+func vis#external#fern#VisLcd()
+  let selected = s:VisFernSelected()
+  let dir = bmk#util#BmkGetDirName(selected)
+  exec "lcd" dir
+endfunc
+
 func s:VisFernEditItem(winnr)
   let selected = s:VisFernSelected()
   if (selected == "")
@@ -121,6 +127,7 @@ function! vis#external#fern#VisFernMap() abort
   nmap <buffer> <CR>          <Plug>(my-fern-select-expand-collapse)
   nmap <buffer> <C-CR>        :call vis#external#fern#VisFernViewItem()<CR>
   nmap <buffer> <S-CR>        :call vis#external#fern#VisFernOpenItem()<CR>
+  nmap <buffer> <C-.>         :call vis#external#fern#VisLcd()<CR>
 
   nmap <buffer> N     <Plug>(fern-action-new-path)
   nmap <buffer> D     <Plug>(fern-action-remove)

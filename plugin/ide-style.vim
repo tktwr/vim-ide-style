@@ -38,16 +38,20 @@ command -nargs=+ -complete=dir  VisTabDirDiff     call vis#tab#VisTabDirDiff(<f-
 command                         VisTabDirDiffQuit call vis#tab#VisTabDirDiffQuit()
 command                         VisTabClosePrev   call vis#tab#VisTabClosePrev()
 
-command -nargs=1                VisVResizeT2E     call vis#send#VisVResizeT2E(<f-args>)
-command -nargs=+ -complete=dir  VisSendCdT2T      call vis#send#VisSendCdT2T(<f-args>)
-command                         VisSendCdE2T      call vis#send#VisSendCdE2T()
-
 func VisTabDiff(file1, file2)
   call vis#tab#VisTabDiff(a:file1, a:file2)
 endfunc
 
-func VisSendCurrCmdE2T()
-  call vis#send#VisSendCmdE2T("")
+func VisTabGstatusToggle()
+  call vis#external#fern#VisLcd()
+  tabedit
+  call vis#external#fugitive#VisGstatusToggle()
+endfunc
+
+func VisTabGV()
+  call vis#external#fern#VisLcd()
+  tabedit
+  call MyGV()
 endfunc
 
 "------------------------------------------------------
@@ -76,6 +80,17 @@ endfunc
 
 func Tapi_ExecInNewTab(bufnr, cmdline)
   call vis#term#Tapi_ExecInNewTab(a:bufnr, a:cmdline)
+endfunc
+
+"------------------------------------------------------
+" command for send
+"------------------------------------------------------
+command -nargs=1                VisVResizeT2E     call vis#send#VisVResizeT2E(<f-args>)
+command -nargs=+ -complete=dir  VisSendCdT2T      call vis#send#VisSendCdT2T(<f-args>)
+command                         VisSendCdE2T      call vis#send#VisSendCdE2T()
+
+func VisSendCurrCmdE2T()
+  call vis#send#VisSendCmdE2T("")
 endfunc
 
 "------------------------------------------------------

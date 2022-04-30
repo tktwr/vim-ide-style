@@ -1,10 +1,10 @@
-# ide-style.vim
+# vim-ide-style
 
-ide-style is a helper plugin for ide-style window management.
+vim-ide-style is a helper plugin for ide-style window management.
 
 ## Install
 
-ide-style is intended for use with
+vim-ide-style is intended for use with
 [fern](https://github.com/lambdalisue/fern.vim).
 
 For vim-plug, install the fern plugin as follows.
@@ -17,7 +17,11 @@ let g:fern#disable_default_mappings = 1
 let g:fern#renderer = 'nerdfont'
 ~~~
 
-Install the ide-style plugin as follows.
+vim-ide-style is supposed to be used with
+[vim-winbuf-menu](https://github.com/tktwr/vim-winbuf-menu) and
+[vim-bmk-menu](https://github.com/tktwr/vim-bmk-menu).
+
+For vim-plug, install the vim-ide-style plugin as follows.
 ~~~
 Plug 'tktwr/vim-winbuf-menu'
 Plug 'tktwr/vim-bmk-menu'

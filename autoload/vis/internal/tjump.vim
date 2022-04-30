@@ -1,6 +1,7 @@
 func vis#internal#tjump#VisTjump(tag_name, winnr=0)
   call vis#window#VisGotoWinnr(a:winnr)
   exec "tjump ".a:tag_name
+  "exec "lcd" expand("%:p:h")
 endfunc
 
 func vis#internal#tjump#VisTjumpPrompt()
