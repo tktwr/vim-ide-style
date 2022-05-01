@@ -16,14 +16,26 @@ command                         VisRedraw         call vis#VisRedraw()
 " command for buffer
 "------------------------------------------------------
 command                         VisBufDelete      call vis#buffer#VisBufDelete()
+command -nargs=1                Wx                call vis#buffer#VisWinBufExchange(<f-args>)
+command -nargs=1                Wc                call vis#buffer#VisWinBufCopy(<f-args>)
 
 "------------------------------------------------------
 " command for window
 "------------------------------------------------------
 command -nargs=1                VisWinResize      call vis#window#VisWinResize(<f-args>)
 command -nargs=1                VisWinVResize     call vis#window#VisWinVResize(<f-args>)
-command -nargs=1                Wx                call vis#window#VisWinBufExchange(<f-args>)
-command -nargs=1                Wc                call vis#window#VisWinBufCopy(<f-args>)
+
+func VisWinMaximizeXToggle(max_width)
+  call vis#window#VisWinMaximizeXToggle(a:max_width)
+endfunc
+
+func VisWinMaximizeYToggle(max_height)
+  call vis#window#VisWinMaximizeYToggle(a:max_height)
+endfunc
+
+func VisWinMaximizeXYToggle(max_width, max_height)
+  call vis#window#VisWinMaximizeXYToggle(a:max_width, a:max_height)
+endfunc
 
 "------------------------------------------------------
 " command for sidebar
