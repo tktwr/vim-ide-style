@@ -83,8 +83,9 @@ if [ "$VIM_TERMINAL" ]; then
   alias GV='vimapi.sh --in-new-tab MyGV'
   alias GS='vimapi.sh --in-new-tab VisGstatusToggle'
   alias E='vimapi.sh --in-new-tab VisIDE'
-  alias T='vimapi.sh VisTerm'
+  alias I='vimapi.sh VisWinInitSize'
   alias N='vimapi.sh new'
+  alias T='vimapi.sh VisTerm'
 
   alias D='vimapi-dir'
   alias D2='vimapi-dir2'
