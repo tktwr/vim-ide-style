@@ -169,6 +169,8 @@ function! vis#external#fern#VisFernSyntax() abort
   syn match  fernSH           ".*.sh\ze.*$"
   syn match  fernVIM          ".*.vim\ze.*$"
   syn match  fernHTML         ".*.html\ze.*$"
+  syn match  fernMD           ".*.md.html\ze.*$"
+  syn match  fernMD           ".*.md\ze.*$"
   syn match  fernGLB          ".*.glb\ze.*$"
   syn match  fernCMakeLists   ".*CMakeLists.txt\ze.*$"
   syn match  fernMakefile     ".*Makefile\ze.*$"
@@ -180,7 +182,8 @@ function! vis#external#fern#VisFernSyntax() abort
   hi link fernPY         MyYellow
   hi link fernSH         MyPurple
   "hi link fernVIM        MyGreen
-  hi link fernHTML       MyYellow
+  hi link fernHTML       MyPurple
+  hi link fernMD         MyYellow
   hi link fernGLB        MyAqua
   hi link fernCMakeLists MyOrange
   hi link fernMakefile   MyOrange
