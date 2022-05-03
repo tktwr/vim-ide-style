@@ -176,24 +176,32 @@ function! vis#external#fern#VisFernSyntax() abort
   syn match  fernMakefile     ".*Makefile\ze.*$"
   syn match  fernMakeSH       ".*make.*.sh\ze.*$"
 
-  hi link fernCPP        MyGreen
-  hi link fernC          MyGreen
-  hi link fernH          MyAqua
-  hi link fernPY         MyYellow
-  hi link fernSH         MyPurple
-  "hi link fernVIM        MyGreen
-  hi link fernHTML       MyPurple
-  hi link fernMD         MyYellow
-  hi link fernGLB        MyAqua
-  hi link fernCMakeLists MyOrange
-  hi link fernMakefile   MyOrange
-  hi link fernMakeSH     MyOrange
+  hi link fernCPP             VisGreen
+  hi link fernC               VisGreen
+  hi link fernH               VisAqua
+  hi link fernPY              VisYellow
+  hi link fernSH              VisPurple
+  "hi link fernVIM             VisGreen
+  hi link fernHTML            VisPurple
+  hi link fernMD              VisYellow
+  hi link fernGLB             VisAqua
+  hi link fernCMakeLists      VisOrange
+  hi link fernMakefile        VisOrange
+  hi link fernMakeSH          VisOrange
 endfunction
 
 function! vis#external#fern#VisFernHighlight() abort
-  hi link FernRootSymbol     MyRed
-  hi link FernRootText       MyRed
-  hi link FernBranchSymbol   MyRed
-  hi link FernBranchText     MyRed
+  hi VisRed                   ctermfg=167 guifg=#fb4934
+  hi VisGreen                 ctermfg=142 guifg=#b8bb26
+  hi VisYellow                ctermfg=214 guifg=#fabd2f
+  hi VisBlue                  ctermfg=109 guifg=#707fd9
+  hi VisPurple                ctermfg=175 guifg=#d3869b
+  hi VisAqua                  ctermfg=108 guifg=#8ec07c
+  hi VisOrange                ctermfg=208 guifg=#fe8019
+
+  hi link FernRootSymbol      VisRed
+  hi link FernRootText        VisRed
+  hi link FernBranchSymbol    VisRed
+  hi link FernBranchText      VisRed
 endfunction
 
