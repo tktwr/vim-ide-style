@@ -10,6 +10,8 @@ func vis#VisInit()
 
   let g:vis#vis_tab_labels = {}
   let g:vis#vis_tab_info = ""
+
+  call vis#highlight#VisHighlight()
 endfunc
 
 func vis#VisIDE()

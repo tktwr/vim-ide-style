@@ -191,14 +191,6 @@ function! vis#external#fern#VisFernSyntax() abort
 endfunction
 
 function! vis#external#fern#VisFernHighlight() abort
-  hi VisRed                   ctermfg=167 guifg=#fb4934
-  hi VisGreen                 ctermfg=142 guifg=#b8bb26
-  hi VisYellow                ctermfg=214 guifg=#fabd2f
-  hi VisBlue                  ctermfg=109 guifg=#707fd9
-  hi VisPurple                ctermfg=175 guifg=#d3869b
-  hi VisAqua                  ctermfg=108 guifg=#8ec07c
-  hi VisOrange                ctermfg=208 guifg=#fe8019
-
   hi link FernRootSymbol      VisRed
   hi link FernRootText        VisRed
   hi link FernBranchSymbol    VisRed
