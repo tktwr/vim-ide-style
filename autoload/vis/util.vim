@@ -45,10 +45,10 @@ func vis#util#VisUnexpand(dir)
     let s:unexpand_env_dict = {}
     for i in s:unexpand_env_list
       if exists(i)
-        let s:unexpand_env_dict[expand(i)] = i
+        let s:unexpand_env_dict[resolve(expand(i))] = i
       endif
     endfor
-    let s:unexpand_env_dict[expand('$HOME')] = '~'
+    let s:unexpand_env_dict[resolve(expand('$HOME'))] = '~'
   endif
 
   for i in reverse(sort(keys(s:unexpand_env_dict)))

@@ -26,14 +26,22 @@ f_help() {
   echo "  --winnr <nr>          ... set winnr"
 }
 
-f_cygpath_unix() {
-  local os=$(uname -o)
-  case $os in
-    Msys)
-      cygpath -au "$*"
+f_path_unix() {
+  local p="$1"
+  local os_name=$(uname -osr)
+  case $os_name in
+    *Msys*)
+      cygpath -au "$p"
       ;;
-    GNU/Linux)
-      echo "$*"
+    *WSL*)
+      if [ -e "$p" ]; then
+        wslpath -au `wslpath -aw "$p"`
+      else
+        echo "$p"
+      fi
+      ;;
+    *)
+      echo "$p"
       ;;
   esac
 }
@@ -44,7 +52,7 @@ f_vimapi() {
 
 f_vimapi_dir() {
   local dir="${1:-$PWD}"
-  local dir=$(f_cygpath_unix "$dir")
+  local dir=$(f_path_unix "$dir")
   local winnr=${2:-1}
   if [ -n "$dir" ]; then
     f_vimapi "call BmkEditDir('$dir/', $winnr)"
@@ -52,7 +60,7 @@ f_vimapi_dir() {
 }
 
 f_vimapi_edit() {
-  local file=$(f_cygpath_unix "$1")
+  local file=$(f_path_unix "$1")
   local winnr="${2:--1}"
   if [ -n "$file" ]; then
     f_vimapi "call BmkEditFile('$file', $winnr)"
@@ -83,7 +91,7 @@ f_parse_args() {
         ;;
       --filepath)
         shift
-        g_filepath=$(f_cygpath_unix "$1")
+        g_filepath=$(f_path_unix "$1")
         ;;
       --winnr)
         shift
