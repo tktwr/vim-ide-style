@@ -199,6 +199,7 @@ augroup ag_ide_term
     autocmd TerminalOpen *       call vis#statusline#VisSetStatuslineForTerm()
   else
     autocmd TermOpen     *       call vis#statusline#VisSetStatuslineForTerm()
+    autocmd TermOpen     *       startinsert
   endif
 augroup END
 

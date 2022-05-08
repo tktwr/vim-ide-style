@@ -10,8 +10,14 @@ func vis#term#VisTerm(...)
   else
     let l:type = a:1
   endif
+
   if l:type == 0
-    exec "below term ++rows=".g:vis#vis_term_winheight
+    if has('nvim')
+      exec "below ".g:vis#vis_term_winheight."new"
+      term
+    else
+      exec "below term ++rows=".g:vis#vis_term_winheight
+    endif
     set winfixheight
   elseif l:type == 1
     tabedit
