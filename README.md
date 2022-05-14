@@ -31,10 +31,7 @@ Plug 'tktwr/vim-ide-style'
 ## bashrc
 
 ~~~
-export MY_VIM_BMK="$MY_VIM/plugged/vim-bmk-menu"
-export MY_VIM_IDE="$MY_VIM/plugged/vim-ide-style"
-export PATH="$MY_VIM_IDE/bin:$MY_VIM_BMK/bin:$PATH"
-source $MY_VIM_IDE/etc/bashrc
+source ~/.vim/plugged/vim-ide-style/etc/bashrc
 ~~~
 
 ## Command

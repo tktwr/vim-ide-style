@@ -64,10 +64,7 @@ vimapi-tabline-set-label() {
 }
 
 vimapi-tabline-set-info() {
-  info=""
-  info="$info[$MY_PYTHON_TYPE,$MY_PYTHON_VENV]"
-  info="$info[$MY_BUILD_SYS,$MY_BUILD_CONFIG]"
-  vimapi.sh VisTabLineSetInfo "$info"
+  vimapi.sh VisTabLineSetInfo "$*"
 }
 
 #------------------------------------------------------
@@ -100,3 +97,11 @@ fi
 
 alias vimdiff='vimdiff.sh'
 alias vimdirdiff='vimdirdiff.sh'
+
+#------------------------------------------------------
+# path
+#------------------------------------------------------
+sfile=$(realpath $BASH_SOURCE)
+sdir=${sfile%/*}
+export VIM_IDE_DIR=${sdir%/*}
+export PATH="$VIM_IDE_DIR/bin:$PATH"
