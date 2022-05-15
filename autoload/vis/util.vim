@@ -20,30 +20,9 @@ endfunc
 func vis#util#VisUnexpand(dir)
   let dir = a:dir
 
-  let s:unexpand_env_list = [
-    \ '$MY_PAPERS',
-    \ '$MY_GIT',
-    \ '$MY_WORK',
-    \ '$MY_PROJ',
-    \ '$MY_DOC',
-    \ '$MY_OFFICE',
-    \ '$MY_DIARY',
-    \ '$MY_MEMO',
-    \ '$MY_ETC',
-    \ '$MY_ENV',
-    \ '$MY_REMOTE_CONFIG',
-    \ '$MY_LOCAL_CONFIG',
-    \ '$MY_PRIVATE_CONFIG',
-    \ '$MY_PRIVATE',
-    \ '$MY_PROTECTED',
-    \ '$MY_PUBLIC',
-    \ '$MY_DESKTOP',
-    \ '$MY_DOWNLOADS',
-    \ ]
-
   if !exists('s:unexpand_env_dict')
     let s:unexpand_env_dict = {}
-    for i in s:unexpand_env_list
+    for i in g:vis#vis_unexpand_env_list
       if exists(i)
         let s:unexpand_env_dict[resolve(expand(i))] = i
       endif

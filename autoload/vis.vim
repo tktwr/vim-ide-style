@@ -11,7 +11,16 @@ func vis#VisInit()
   let g:vis#vis_tab_labels = {}
   let g:vis#vis_tab_info = ""
 
+  let g:vis#vis_unexpand_env_list = []
+
   call vis#highlight#VisHighlight()
+  call vis#VisSetting()
+endfunc
+
+func vis#VisSetting()
+  if exists("g:vis_unexpand_env_list")
+    let g:vis#vis_unexpand_env_list = g:vis_unexpand_env_list
+  endif
 endfunc
 
 func vis#VisIDE()
