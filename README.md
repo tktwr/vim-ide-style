@@ -42,6 +42,7 @@ Plug 'tktwr/vim-ide-style'
 
 ~~~
 source ~/.vim/plugged/vim-ide-style/etc/bashrc
+source ~/.vim/plugged/vim-ide-style/etc/bashrc.alias
 ~~~
 
 ## Command
