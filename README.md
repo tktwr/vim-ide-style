@@ -2,12 +2,15 @@
 
 vim-ide-style is a helper plugin for ide-style window management.
 
+Requirements: Vim >= 8.1 or Neovim >= 0.7.0 (limited functionalities)
+
 ## Install
+
+Install plugins using a plugin manager such as
+[vim-plug](https://github.com/junegunn/vim-plug).
 
 vim-ide-style is intended for use with
 [fern](https://github.com/lambdalisue/fern.vim).
-
-For vim-plug, install the fern plugin as follows.
 ~~~
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/nerdfont.vim'
@@ -17,11 +20,18 @@ let g:fern#disable_default_mappings = 1
 let g:fern#renderer = 'nerdfont'
 ~~~
 
+Install
+[popup-menu.nvim](https://github.com/kamykn/popup-menu.nvim)
+to support a popup menu in neovim.
+~~~
+if has('nvim')
+  Plug 'kamykn/popup-menu.nvim'
+endif
+~~~
+
 vim-ide-style is supposed to be used with
 [vim-winbuf-menu](https://github.com/tktwr/vim-winbuf-menu) and
 [vim-bmk-menu](https://github.com/tktwr/vim-bmk-menu).
-
-For vim-plug, install the vim-ide-style plugin as follows.
 ~~~
 Plug 'tktwr/vim-winbuf-menu'
 Plug 'tktwr/vim-bmk-menu'
