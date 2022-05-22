@@ -16,8 +16,13 @@ endfunc
 func vis#external#fern#VisFern(dir, drawer='', toggle='')
   let dir = expand(a:dir)
   let dir = substitute(dir, ' ', '\\ ', 'g')
+  let reveal = '-reveal='.expand('%')
   let drawer = a:drawer
   let toggle = a:toggle
+
+  if &filetype == 'fern'
+    let reveal = ''
+  endif
 
   if (vis#sidebar#VisInSideBar() && winnr() == 1)
     let drawer = '-drawer'
@@ -27,7 +32,7 @@ func vis#external#fern#VisFern(dir, drawer='', toggle='')
     call vis#external#fern#VisFernDrawerOpen()
   endif
 
-  let cmd = printf('Fern %s -reveal=%% %s %s', dir, drawer, toggle)
+  let cmd = printf('Fern %s %s %s %s', dir, reveal, drawer, toggle)
   exec cmd
 
   if !exists('w:my_fern_init_buf')
