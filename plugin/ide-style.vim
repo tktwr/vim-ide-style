@@ -54,6 +54,10 @@ func VisTabDiff(file1, file2)
   call vis#tab#VisTabDiff(a:file1, a:file2)
 endfunc
 
+func VisTabDirDiff(file1, file2)
+  call vis#tab#VisTabDirDiff(a:file1, a:file2)
+endfunc
+
 func VisTabGstatusToggle()
   call vis#external#fern#VisLcd()
   tabedit
