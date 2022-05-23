@@ -46,28 +46,10 @@ command                         VisSideBarToggle  call vis#sidebar#VisSideBarTog
 " command for tab
 "------------------------------------------------------
 command -nargs=+ -complete=file VisTabDiff        call vis#tab#VisTabDiff(<f-args>)
-command -nargs=+ -complete=dir  VisTabDirDiff     call vis#tab#VisTabDirDiff(<f-args>)
-command                         VisTabDirDiffQuit call vis#tab#VisTabDirDiffQuit()
 command                         VisTabClosePrev   call vis#tab#VisTabClosePrev()
 
 func VisTabDiff(file1, file2)
   call vis#tab#VisTabDiff(a:file1, a:file2)
-endfunc
-
-func VisTabDirDiff(file1, file2)
-  call vis#tab#VisTabDirDiff(a:file1, a:file2)
-endfunc
-
-func VisTabGstatusToggle()
-  call vis#external#fern#VisLcd()
-  tabedit
-  call vis#external#fugitive#VisGstatusToggle()
-endfunc
-
-func VisTabGV()
-  call vis#external#fern#VisLcd()
-  tabedit
-  call MyGV()
 endfunc
 
 "------------------------------------------------------
@@ -110,6 +92,16 @@ func VisSendCurrCmdE2T()
 endfunc
 
 "------------------------------------------------------
+" command for dirdiff
+"------------------------------------------------------
+command -nargs=+ -complete=dir  VisTabDirDiff     call vis#external#dirdiff#VisTabDirDiff(<f-args>)
+command                         VisTabDirDiffQuit call vis#external#dirdiff#VisTabDirDiffQuit()
+
+func VisTabDirDiff(dir1, dir2)
+  call vis#external#dirdiff#VisTabDirDiff(a:dir1, a:dir2)
+endfunc
+
+"------------------------------------------------------
 " command for fern
 "------------------------------------------------------
 command                         VisFernDrawerToggle call vis#external#fern#VisFernDrawerToggle()
@@ -139,6 +131,21 @@ command -nargs=1 -complete=dir  VisNERDTreeFind     call vis#external#nerdtree#V
 "------------------------------------------------------
 command -nargs=1                VisGgrep            call vis#external#fugitive#VisGgrep(<f-args>)
 command                         VisGstatusToggle    call vis#external#fugitive#VisGstatusToggle()
+
+func VisTabGstatusToggle()
+  call vis#external#fern#VisLcd()
+  tabedit
+  call vis#external#fugitive#VisGstatusToggle()
+endfunc
+
+"------------------------------------------------------
+" command for gv
+"------------------------------------------------------
+func VisTabGV()
+  call vis#external#fern#VisLcd()
+  tabedit
+  call MyGV()
+endfunc
 
 "------------------------------------------------------
 " command for quickhl

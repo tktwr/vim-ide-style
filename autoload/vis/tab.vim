@@ -30,24 +30,3 @@ func vis#tab#VisTabDiff(file1, file2)
   exec "vertical diffsplit" a:file1
 endfunc
 
-"------------------------------------------------------
-" dirdiff
-"------------------------------------------------------
-func vis#tab#VisDirDiff(dir1, dir2)
-  let dir1 = substitute(a:dir1, ' ', '\\ ', 'g')
-  let dir2 = substitute(a:dir2, ' ', '\\ ', 'g')
-
-  exec "DirDiff" dir1 dir2
-  redraw!
-endfunc
-
-func vis#tab#VisTabDirDiff(dir1, dir2)
-  tabedit
-  call vis#tab#VisDirDiff(a:dir1, a:dir2)
-endfunc
-
-func vis#tab#VisTabDirDiffQuit()
-  exec "DirDiffQuit"
-  tabclose
-endfunc
-
