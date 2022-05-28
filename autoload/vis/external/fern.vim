@@ -99,6 +99,12 @@ func vis#external#fern#VisFernViewItem()
 endfunc
 
 "------------------------------------------------------
+func vis#external#fern#VisFernBmkItem()
+  let selected = s:VisFernSelected()
+  call cpm#CpmSaveURL(selected)
+endfunc
+
+"------------------------------------------------------
 func s:VisFernPrintItem()
   let key = s:VisFernSelected()
   if (len(key) > g:fern#drawer_width / 2)

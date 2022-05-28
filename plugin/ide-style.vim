@@ -112,12 +112,16 @@ func VisFern(dir, drawer='', toggle='')
   call vis#external#fern#VisFern(a:dir, a:drawer, a:toggle)
 endfunc
 
+func VisFernOpenItem()
+  call vis#external#fern#VisFernOpenItem()
+endfunc
+
 func VisFernViewItem()
   call vis#external#fern#VisFernViewItem()
 endfunc
 
-func VisFernOpenItem()
-  call vis#external#fern#VisFernOpenItem()
+func VisFernBmkItem()
+  call vis#external#fern#VisFernBmkItem()
 endfunc
 
 "------------------------------------------------------
