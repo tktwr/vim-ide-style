@@ -60,7 +60,10 @@ vimapi-termcd() {
 }
 
 vimapi-tabline-set-label() {
-  vimapi.sh VisTabLineSetLabel "$*"
+  label=$(prompt.sh 'label' '' "$*")
+  if [ -n "$label" ]; then
+    vimapi.sh VisTabLineSetLabel "$label"
+  fi
 }
 
 vimapi-tabline-set-info() {
