@@ -138,6 +138,7 @@ function! vis#external#fern#VisFernMap() abort
   nmap <buffer> <CR>          <Plug>(my-fern-select-expand-collapse)
   nmap <buffer> <C-CR>        :call vis#external#fern#VisFernViewItem()<CR>
   nmap <buffer> <S-CR>        :call vis#external#fern#VisFernOpenItem()<CR>
+  nmap <buffer> <C-B>         :call vis#external#fern#VisFernBmkItem()<CR>
   nmap <buffer> <C-.>         :call vis#external#fern#VisLcd()<CR>
 
   nmap <buffer> N     <Plug>(fern-action-new-path)
