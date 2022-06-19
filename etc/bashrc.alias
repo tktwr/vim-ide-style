@@ -13,7 +13,6 @@ if [ "$VIM_TERMINAL" ]; then
   alias E='vimapi.sh --in-new-tab VisIDE'
   alias T='vimapi.sh VisTerm'
   alias N='vimapi.sh new'
-  alias I='vimapi.sh VisWinInitSize'
 
   alias D='vimapi-dir'
   alias D2='vimapi-dir2'

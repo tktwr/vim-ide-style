@@ -24,6 +24,17 @@ func vis#VisSetting()
 endfunc
 
 func vis#VisIDE()
+  if winnr('$') == 1
+    call s:CreateIDE()
+  else
+    call s:InitSize()
+  endif
+endfunc
+
+"------------------------------------------------------
+" create
+"------------------------------------------------------
+func s:CreateIDE()
   let l:is_fullscreen = vis#window#VisIsFullscreen()
   call vis#sidebar#VisMakeSideBar()
   wincmd w
@@ -38,7 +49,7 @@ endfunc
 "------------------------------------------------------
 " init size
 "------------------------------------------------------
-func s:VisWinInitSizeForEachWin()
+func s:InitSizeForEachWin()
   if &buftype == 'terminal'
     exec "resize" g:vis#vis_term_winheight
   elseif winnr() == 2 && &filetype == 'fern'
@@ -46,11 +57,11 @@ func s:VisWinInitSizeForEachWin()
   endif
 endfunc
 
-func vis#VisWinInitSize()
+func s:InitSize()
   1wincmd w
   exec "normal \<C-W>="
   exec "vertical resize" g:vis#vis_left_winwidth
-  2,$windo call s:VisWinInitSizeForEachWin()
+  2,$windo call s:InitSizeForEachWin()
 endfunc
 
 "------------------------------------------------------

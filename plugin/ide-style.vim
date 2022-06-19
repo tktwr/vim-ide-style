@@ -9,7 +9,6 @@ set tabline=%!vis#tabline#VisTabLine()
 " command for ide
 "------------------------------------------------------
 command                         VisIDE            call vis#VisIDE()
-command                         VisWinInitSize    call vis#VisWinInitSize()
 command                         VisRedraw         call vis#VisRedraw()
 
 "------------------------------------------------------
