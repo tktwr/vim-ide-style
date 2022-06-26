@@ -10,7 +10,7 @@ if [ "$VIM_TERMINAL" ]; then
 
   alias GV='vimapi.sh --in-new-tab MyGV'
   alias GS='vimapi.sh --in-new-tab VisGstatusToggle'
-  alias E='vimapi.sh --in-new-tab VisIDE'
+  alias I='vimapi.sh --in-new-tab VisIDE'
   alias T='vimapi.sh VisTerm'
   alias N='vimapi.sh new'
 
@@ -21,7 +21,7 @@ if [ "$VIM_TERMINAL" ]; then
 else
   alias GV='vim -c "MyGV"'
   alias GS='vim -c "VisGstatusToggle"'
-  alias E='vim -c "VisIDE"'
+  alias I='vim -c "VisIDE"'
   alias T='vim -c "VisTerm"'
 fi
 
