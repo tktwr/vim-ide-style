@@ -25,6 +25,7 @@ endfunc
 
 func vis#VisIDE()
   if winnr('$') == 1
+    tcd
     call s:CreateIDE()
   else
     call s:InitSize()
