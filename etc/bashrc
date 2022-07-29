@@ -3,6 +3,28 @@
 #------------------------------------------------------
 # vimapi
 #------------------------------------------------------
+vimapi-edit-file() {
+  local file=$(pathconv.sh unix "$1")
+  local winnr="${2:--1}"
+  if [ -n "$file" ]; then
+    vimapi.sh "call BmkEditFile('$file', $winnr)"
+  fi
+}
+
+vimapi-edit-dir() {
+  local dir="${1:-$PWD}"
+  local dir=$(pathconv.sh unix "$dir")
+  local winnr=${2:-1}
+  if [ -n "$dir" ]; then
+    vimapi.sh "call BmkEditDir('$dir/', $winnr)"
+  fi
+}
+
+vimapi-edit-dir-2() {
+  local dir="${1:-$PWD}"
+  vimapi-edit-dir "$dir" 2
+}
+
 vimapi-cd() {
   local dir=${*:-$HOME}
   cd "$dir"
@@ -19,37 +41,9 @@ vimapi-popd() {
   vimapi.sh "lcd $PWD"
 }
 
-vimapi-dir() {
-  local dir=${1:-$PWD}
-  local winnr=${2:-1}
-  vimapi.sh --winnr $winnr --edit-dir "$dir"
-}
-
-vimapi-dir2() {
-  local dir=${1:-$PWD}
-  local winnr=2
-  vimapi.sh --winnr $winnr --edit-dir "$dir"
-}
-
-vimapi-vim() {
-  local file="$1"
-  local winnr=${2:--1}
-  vimapi.sh --winnr $winnr --edit "$file"
-}
-
 vimapi-resize() {
   local rows=${1:-10}
   vimapi.sh VisWinResize $rows
-}
-
-vimapi-nerdtree() {
-  local dir=${*:-$PWD}
-  vimapi.sh VisNERDTreeFind "$dir/"
-}
-
-vimapi-fern() {
-  local dir=${*:-$PWD}
-  vimapi.sh VisFernDrawer "$dir/"
 }
 
 vimapi-termcd() {
@@ -78,5 +72,6 @@ vim_vis_plugin_dir() {
   sdir=${sfile%/*}
   echo ${sdir%/*}
 }
+
 export VIM_IDE_DIR=$(vim_vis_plugin_dir)
 export PATH="$VIM_IDE_DIR/bin:$PATH"

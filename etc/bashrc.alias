@@ -2,7 +2,10 @@
 # alias
 #------------------------------------------------------
 if [ "$VIM_TERMINAL" ]; then
-  vim() { vimapi-vim "$@"; }
+  vim() { vimapi-edit-file "$@"; }
+
+  alias D='vimapi-edit-dir'
+  alias D2='vimapi-edit-dir-2'
 
   alias cd='vimapi-cd'
   alias pushd='vimapi-pushd'
@@ -13,9 +16,6 @@ if [ "$VIM_TERMINAL" ]; then
   alias I='vimapi.sh --in-new-tab VisIDE'
   alias T='vimapi.sh VisTerm'
   alias N='vimapi.sh new'
-
-  alias D='vimapi-dir'
-  alias D2='vimapi-dir2'
 
   alias ,resize='vimapi-resize'
 else
