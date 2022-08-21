@@ -1,40 +1,44 @@
 "======================================================
 " tabline
 "======================================================
+hi MarkLeftSel          ctermfg=108 guifg=#8ec07c ctermbg=237 guibg=#3c3836
+hi MarkLeft             ctermfg=239 guifg=#504945 ctermbg=237 guibg=#3c3836
+
 func vis#tabline#VisTabLine()
-  let s = ''
+  let tabline_all = ''
 
   for i in range(tabpagenr('$'))
     " select the highlighting
     if i + 1 == tabpagenr()
-      let s .= '%#TabLineSel#'
+      let color = '%#TabLineSel#'
+      let mark_left = "%#MarkLeftSel#\ue0b0"
     else
-      let s .= '%#TabLine#'
+      let color = '%#TabLine#'
+      let mark_left = "%#MarkLeft#\ue0b0"
     endif
 
     " set the tab page number (for mouse clicks)
-    let s .= '%' . (i + 1) . 'T'
-
-    " the label is made by vis#tabline#VisTabLine_GetLabel()
-    let s .= ' %{vis#tabline#VisTabLine_GetLabel(' . (i + 1) . ')} '
+    let tag = printf('%%%dT', i + 1)
+    let label = printf('%%{vis#tabline#VisTabLine_GetLabel(%d)}', i + 1)
+    let tabline_all .= printf('%s%s %s %s ', tag, color, label, mark_left)
   endfor
 
   " after the last tab fill with TabLineFill and reset tab page nr
-  let s .= '%#TabLineFill#%T'
+  let tabline_all .= '%#TabLineFill#%T'
 
-  let s .= "%="
+  let tabline_all .= "%="
   if $MY_PROMPT_TYPE >= 3
-    let s .= "\ [coc:%{coc#status()}]"
+    let tabline_all .= "\ [coc:%{coc#status()}]"
   endif
-  let s .= "\ %6*%{vis#util#VisCWD()}%0*"
-  let s .= "\ %6*%{vis#tabline#VisTabLine_GetInfo()}%0*"
+  let tabline_all .= "\ %6*%{vis#util#VisCWD()}%0*"
+  let tabline_all .= "\ %6*%{vis#tabline#VisTabLine_GetInfo()}%0*"
 
   " right-align the label to close the current tab page
   if tabpagenr('$') > 1
-    let s .= "\ %#TabLine#%999X[x]"
+    let tabline_all .= "\ %#TabLine#%999X[x]"
   endif
 
-  return s
+  return tabline_all
 endfunc
 
 "------------------------------------------------------
