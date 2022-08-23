@@ -53,6 +53,13 @@ vimapi-termcd() {
   fi
 }
 
+vimapi-term-set-label() {
+  label=$(prompt.sh 'label' '' "$*")
+  if [ -n "$label" ]; then
+    vimapi.sh VisStatuslineForTermSetLabel "$label"
+  fi
+}
+
 vimapi-tabline-set-label() {
   label=$(prompt.sh 'label' '' "$*")
   if [ -n "$label" ]; then

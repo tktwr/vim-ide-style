@@ -57,6 +57,11 @@ func VisTabEdit()
 endfunc
 
 "------------------------------------------------------
+" command for statusline
+"------------------------------------------------------
+command -nargs=1                VisStatuslineForTermSetLabel call vis#statusline#VisStatuslineForTerm_SetLabel(<f-args>)
+
+"------------------------------------------------------
 " command for tabline
 "------------------------------------------------------
 command -nargs=1                VisTabLineSetLabel call vis#tabline#VisTabLine_SetLabel(<f-args>)

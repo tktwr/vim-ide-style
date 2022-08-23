@@ -1,11 +1,11 @@
 "------------------------------------------------------
 " statusline
 "------------------------------------------------------
-func vis#statusline#VisStatuslineWinNr()
+func vis#statusline#VisStatusline_WinNr()
   return printf("[%s] ", winnr())
 endfunc
 
-func vis#statusline#VisStatuslineFname()
+func vis#statusline#VisStatusline_Fname()
   let cwd = getcwd()
   let dir = expand("%:p:h")
   let color = ""
@@ -18,7 +18,7 @@ func vis#statusline#VisStatuslineFname()
   return color."%t"."%0* "
 endfunc
 
-func vis#statusline#VisStatuslineFileType()
+func vis#statusline#VisStatusline_FileType()
   let ft = getwinvar(0, '&ft')
   let syn = getwinvar(0, '&syn')
 
@@ -31,11 +31,11 @@ func vis#statusline#VisStatuslineFileType()
   return type
 endfunc
 
-func vis#statusline#VisStatuslineIndicator()
+func vis#statusline#VisStatusline_Indicator()
   return "%m%r%w%q"
 endfunc
 
-func vis#statusline#VisStatuslineFileEnc()
+func vis#statusline#VisStatusline_FileEnc()
   let stat = ""
   if winwidth(0) >= 60
     let fenc = &fenc != '' ? &fenc : &enc
@@ -45,7 +45,7 @@ func vis#statusline#VisStatuslineFileEnc()
   return stat
 endfunc
 
-func vis#statusline#VisStatuslineLineInfo()
+func vis#statusline#VisStatusline_LineInfo()
   let stat = ""
   if winwidth(0) >= 60
     let stat = "[%c%V,%l/%L,%p%%]"
@@ -53,7 +53,7 @@ func vis#statusline#VisStatuslineLineInfo()
   return stat
 endfunc
 
-func vis#statusline#VisStatuslineSeparator()
+func vis#statusline#VisStatusline_Separator()
   return "%<%="
 endfunc
 
@@ -61,13 +61,13 @@ endfunc
 " statusline for buffer
 "------------------------------------------------------
 func vis#statusline#VisStatusline()
-  let stat = "%{vis#statusline#VisStatuslineWinNr()}"
-  let stat.= vis#statusline#VisStatuslineFname()
-  let stat.= "%{vis#statusline#VisStatuslineFileType()}"
-  let stat.= vis#statusline#VisStatuslineIndicator()
-  let stat.= "%{vis#statusline#VisStatuslineFileEnc()}"
-  let stat.= vis#statusline#VisStatuslineSeparator()
-  let stat.= vis#statusline#VisStatuslineLineInfo()
+  let stat = "%{vis#statusline#VisStatusline_WinNr()}"
+  let stat.= vis#statusline#VisStatusline_Fname()
+  let stat.= "%{vis#statusline#VisStatusline_FileType()}"
+  let stat.= vis#statusline#VisStatusline_Indicator()
+  let stat.= "%{vis#statusline#VisStatusline_FileEnc()}"
+  let stat.= vis#statusline#VisStatusline_Separator()
+  let stat.= vis#statusline#VisStatusline_LineInfo()
 
   if $MY_PROMPT_TYPE >= 3
     let stat.= "%6*%{FugitiveStatusline()}%0*"
@@ -79,11 +79,11 @@ endfunc
 " statusline for sidebar
 "------------------------------------------------------
 func vis#statusline#VisStatuslineForSideBar()
-  let stat = "%{vis#statusline#VisStatuslineWinNr()}"
+  let stat = "%{vis#statusline#VisStatusline_WinNr()}"
   let stat.= "%t "
-  let stat.= "%{vis#statusline#VisStatuslineFileType()}"
-  let stat.= vis#statusline#VisStatuslineIndicator()
-  let stat.= vis#statusline#VisStatuslineSeparator()
+  let stat.= "%{vis#statusline#VisStatusline_FileType()}"
+  let stat.= vis#statusline#VisStatusline_Indicator()
+  let stat.= vis#statusline#VisStatusline_Separator()
   let stat.= "[%c,%l]"
   return stat
 endfunc
@@ -95,10 +95,22 @@ endfunc
 "------------------------------------------------------
 " statusline for terminal
 "------------------------------------------------------
+func vis#statusline#VisStatuslineForTerm_GetLabel()
+  if !exists("w:status_label")
+    let w:status_label = "terminal"
+  endif
+  return w:status_label
+endfunc
+
+func vis#statusline#VisStatuslineForTerm_SetLabel(label)
+  let w:status_label = a:label
+  call vis#statusline#VisSetStatuslineForTerm()
+endfunc
+
 func vis#statusline#VisStatuslineForTerm()
-  let stat = "%{vis#statusline#VisStatuslineWinNr()}"
-  let stat.= "terminal:%n"
-  let stat.= vis#statusline#VisStatuslineSeparator()
+  let stat = "%{vis#statusline#VisStatusline_WinNr()}"
+  let stat.= "%{vis#statusline#VisStatuslineForTerm_GetLabel()} (bufnr:%n)"
+  let stat.= vis#statusline#VisStatusline_Separator()
   let stat.= "%{vis#util#VisCWD()}"
   return stat
 endfunc
