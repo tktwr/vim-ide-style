@@ -11,6 +11,11 @@ if [ "$VIM_TERMINAL" ]; then
   alias pushd='vimapi-pushd'
   alias popd='vimapi-popd'
 
+  alias pwd.alt='vimapi-get-cwd-alt-term'
+  alias cd.alt='vimapi-cd $(vimapi-get-cwd-alt-term)'
+  cp.alt() { cp "$@" $(vimapi-get-cwd-alt-term); }
+  mv.alt() { mv "$@" $(vimapi-get-cwd-alt-term); }
+
   alias GV='vimapi.sh --in-new-tab MyGV'
   alias GS='vimapi.sh --in-new-tab VisGstatusToggle'
   alias I='vimapi.sh --in-new-tab VisIDE'

@@ -47,7 +47,7 @@ func vis#term#Tapi_ExecEcho(bufnr, cmdline)
   let output = eval(a:cmdline)
   let lines = []
   call add(lines, output)
-  call writefile(lines, expand('~/.vim_ide_style_pipe'))
+  call writefile(lines, expand('$VIM_IDE_PIPE'))
 endfunc
 
 func vis#term#Tapi_Exec(bufnr, cmdline)

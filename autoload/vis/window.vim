@@ -93,6 +93,10 @@ endfunc
 
 "------------------------------------------------------
 " find the first terminal window
+"
+" return:
+"   >0: found winnr
+"   -1: not found
 "------------------------------------------------------
 func vis#window#VisFindFirstTerm(begin_winnr=1)
   let curr_winnr = winnr()
@@ -112,7 +116,35 @@ func vis#window#VisFindFirstTerm(begin_winnr=1)
 endfunc
 
 "------------------------------------------------------
+" find the alternative terminal window
+"
+" return:
+"   >0: found winnr
+"   -1: not found
+"------------------------------------------------------
+func vis#window#VisFindAltTerm()
+  let curr_winnr = winnr()
+  let last_winnr = winnr('$')
+  let i = 1
+  while i <= last_winnr
+    call vis#window#VisGotoWinnr(i)
+    if &buftype == 'terminal' && i != curr_winnr
+      call vis#window#VisGotoWinnr(curr_winnr)
+      return i
+    endif
+    let i += 1
+  endwhile
+
+  call vis#window#VisGotoWinnr(curr_winnr)
+  return -1
+endfunc
+
+"------------------------------------------------------
 " find the first editor window
+"
+" return:
+"   >0: found winnr
+"   -1: not found
 "------------------------------------------------------
 func vis#window#VisFindFirstEditor(begin_winnr=1)
   let curr_winnr = winnr()
@@ -133,6 +165,10 @@ endfunc
 
 "------------------------------------------------------
 " find the last editor window from the current window
+"
+" return:
+"   >0: found winnr
+"   -1: not found
 "------------------------------------------------------
 func vis#window#VisFindLastEditor()
   let curr_winnr = winnr()
@@ -152,11 +188,16 @@ endfunc
 
 "------------------------------------------------------
 " find an editor
+"
+" args:
+"   winnr == -2: find the first editor window
+"   winnr == -1: find the last editor window
+"   winnr ==  0: the current window
+"   winnr >=  1: the specified window
+" return:
+"   >0: found winnr
+"   -1: not found
 "------------------------------------------------------
-" winnr == -2: the first editor window
-" winnr == -1: the last editor window
-" winnr ==  0: the current window
-" winnr >=  1: the specified window
 func vis#window#VisFindEditor(winnr)
   let winnr = a:winnr
   if winnr == -2
