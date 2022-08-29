@@ -43,6 +43,13 @@ endfunc
 "------------------------------------------------------
 " terminal to editor
 "------------------------------------------------------
+func vis#term#Tapi_ExecEcho(bufnr, cmdline)
+  let output = eval(a:cmdline)
+  let lines = []
+  call add(lines, output)
+  call writefile(lines, expand('~/.vim_ide_style_pipe'))
+endfunc
+
 func vis#term#Tapi_Exec(bufnr, cmdline)
   exec a:cmdline
 endfunc

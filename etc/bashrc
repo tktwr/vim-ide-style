@@ -3,6 +3,18 @@
 #------------------------------------------------------
 # vimapi
 #------------------------------------------------------
+vimapi-get-cwd() {
+  winnr=${1:-0}
+
+  pipe_file=~/.vim_ide_style_pipe
+  if [ ! -e $pipe_file ]; then
+    mkfifo -m600 $pipe_file
+  fi
+
+  vimapi.sh --exec-echo "vis#util#VisGetCWD($winnr)"
+  cat $pipe_file
+}
+
 vimapi-edit-file() {
   local file=$(pathconv.sh unix "$1")
   local winnr="${2:--1}"

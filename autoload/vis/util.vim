@@ -37,6 +37,14 @@ func vis#util#VisUnexpand(dir)
   return dir
 endfunc
 
+func vis#util#VisGetCWD(winnr)
+  let curr_winnr = winnr()
+  call vis#window#VisGotoWinnr(a:winnr)
+  let l:cwd = getcwd()
+  call vis#window#VisGotoWinnr(curr_winnr)
+  return l:cwd
+endfunc
+
 func vis#util#VisCWD()
   if haslocaldir() == 1
     let l:type = "local"

@@ -20,7 +20,7 @@ f_help() {
 }
 
 f_vimapi() {
-  printf '\e]51;["call","%s","%s"]\x07' "$g_tapi" "$1"
+  printf '\e]51;["call","%s","%s"]\x07' "$g_tapi" "$1" 1>&2
 }
 
 f_parse_args() {
@@ -39,6 +39,9 @@ f_parse_args() {
       --in-new-tab)
         g_tapi="Tapi_ExecInNewTab"
         ;;
+      --exec-echo)
+        g_tapi="Tapi_ExecEcho"
+        ;;
       *)
         g_args="$*"
         break
@@ -49,11 +52,11 @@ f_parse_args() {
 }
 
 f_print_args() {
-  echo "g_tapi = $g_tapi"
-  echo "g_args = $g_args"
+  echo "g_tapi = $g_tapi" 1>&2
+  echo "g_args = $g_args" 1>&2
 }
 
 f_parse_args "$@"
-f_print_args
+#f_print_args
 f_vimapi "$g_args"
 

@@ -5,7 +5,10 @@ func vis#internal#help#VisHelp(...)
     let start_from_help_win=0
   endif
 
-  exec "vertical resize" g:vis#vis_help_winwidth
+  if winwidth(0) < g:vis#vis_help_winwidth
+    exec "vertical resize" g:vis#vis_help_winwidth
+  endif
+
   if a:0 == 0
     exec "above help"
   else

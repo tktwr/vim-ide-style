@@ -73,6 +73,10 @@ command -nargs=1                VisTabLineSetInfo  call vis#tabline#VisTabLine_S
 command -nargs=?                VisTerm            call vis#term#VisTerm(<f-args>)
 command -nargs=0                VisTermV           call vis#term#VisTermV()
 
+func Tapi_ExecEcho(bufnr, cmdline)
+  call vis#term#Tapi_ExecEcho(a:bufnr, a:cmdline)
+endfunc
+
 func Tapi_Exec(bufnr, cmdline)
   call vis#term#Tapi_Exec(a:bufnr, a:cmdline)
 endfunc
