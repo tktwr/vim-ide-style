@@ -19,3 +19,8 @@ func vis#external#dirdiff#VisTabDirDiffQuit()
   tabclose
 endfunc
 
+func vis#external#dirdiff#VisTabInDirDiff()
+  let winnr = vis#window#VisFindFirstWindow({i, curr_winnr -> &filetype == 'dirdiff'})
+  return winnr > 0
+endfunc
+

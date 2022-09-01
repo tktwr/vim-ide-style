@@ -92,19 +92,19 @@ func vis#window#VisClosePrevWin()
 endfunc
 
 "------------------------------------------------------
-" find the first terminal window
+" find the first window
 "
 " return:
 "   >0: found winnr
 "   -1: not found
 "------------------------------------------------------
-func vis#window#VisFindFirstTerm(begin_winnr=1)
+func vis#window#VisFindFirstWindow(func, begin_winnr=1)
   let curr_winnr = winnr()
   let last_winnr = winnr('$')
   let i = a:begin_winnr
   while i <= last_winnr
     call vis#window#VisGotoWinnr(i)
-    if &buftype == 'terminal'
+    if a:func(i, curr_winnr)
       call vis#window#VisGotoWinnr(curr_winnr)
       return i
     endif
@@ -116,66 +116,18 @@ func vis#window#VisFindFirstTerm(begin_winnr=1)
 endfunc
 
 "------------------------------------------------------
-" find the alternative terminal window
+" find the last window from the current window
 "
 " return:
 "   >0: found winnr
 "   -1: not found
 "------------------------------------------------------
-func vis#window#VisFindAltTerm()
-  let curr_winnr = winnr()
-  let last_winnr = winnr('$')
-  let i = 1
-  while i <= last_winnr
-    call vis#window#VisGotoWinnr(i)
-    if &buftype == 'terminal' && i != curr_winnr
-      call vis#window#VisGotoWinnr(curr_winnr)
-      return i
-    endif
-    let i += 1
-  endwhile
-
-  call vis#window#VisGotoWinnr(curr_winnr)
-  return -1
-endfunc
-
-"------------------------------------------------------
-" find the first editor window
-"
-" return:
-"   >0: found winnr
-"   -1: not found
-"------------------------------------------------------
-func vis#window#VisFindFirstEditor(begin_winnr=1)
-  let curr_winnr = winnr()
-  let last_winnr = winnr('$')
-  let i = a:begin_winnr
-  while i <= last_winnr
-    call vis#window#VisGotoWinnr(i)
-    if !vis#sidebar#VisInSideBar() && &buftype != 'terminal'
-      call vis#window#VisGotoWinnr(curr_winnr)
-      return i
-    endif
-    let i += 1
-  endwhile
-
-  call vis#window#VisGotoWinnr(curr_winnr)
-  return -1
-endfunc
-
-"------------------------------------------------------
-" find the last editor window from the current window
-"
-" return:
-"   >0: found winnr
-"   -1: not found
-"------------------------------------------------------
-func vis#window#VisFindLastEditor()
+func vis#window#VisFindLastWindow(func)
   let curr_winnr = winnr()
   let i = curr_winnr
   while i > 0
     call vis#window#VisGotoWinnr(i)
-    if !vis#sidebar#VisInSideBar() && &buftype != 'terminal'
+    if a:func(i, curr_winnr)
       call vis#window#VisGotoWinnr(curr_winnr)
       return i
     endif
@@ -184,6 +136,23 @@ func vis#window#VisFindLastEditor()
 
   call vis#window#VisGotoWinnr(curr_winnr)
   return -1
+endfunc
+
+"------------------------------------------------------
+func vis#window#VisFindFirstTerm(begin_winnr=1)
+  return vis#window#VisFindFirstWindow({i, curr_winnr -> &buftype == 'terminal'}, a:begin_winnr)
+endfunc
+
+func vis#window#VisFindAltTerm(begin_winnr=1)
+  return vis#window#VisFindFirstWindow({i, curr_winnr -> &buftype == 'terminal' && i != curr_winnr}, a:begin_winnr)
+endfunc
+
+func vis#window#VisFindFirstEditor(begin_winnr=1)
+  return vis#window#VisFindFirstWindow({i, curr_winnr -> &buftype != 'terminal' && !vis#sidebar#VisInSideBar()}, a:begin_winnr)
+endfunc
+
+func vis#window#VisFindLastEditor()
+  return vis#window#VisFindLastWindow({i, curr_winnr -> &buftype != 'terminal' && !vis#sidebar#VisInSideBar()})
 endfunc
 
 "------------------------------------------------------

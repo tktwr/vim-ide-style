@@ -10,6 +10,12 @@ func vis#tab#VisIsEmptyTab()
 endfunc
 
 func vis#tab#VisTabClosePrev()
+  if vis#external#dirdiff#VisTabInDirDiff()
+    call vis#external#dirdiff#VisTabDirDiffQuit()
+    tabprev
+    return
+  endif
+
   let winnr = vis#window#VisFindFirstTerm()
   if winnr == -1
     " terminal is not found in the tab
