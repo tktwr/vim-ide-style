@@ -27,14 +27,6 @@ vimapi-get-cwd-alt-term() {
   cat $pipe_file
 }
 
-vimapi-edit-file() {
-  local file=$(pathconv.sh unix "$1")
-  local winnr="${2:--1}"
-  if [ -n "$file" ]; then
-    vimapi.sh "call BmkEditFile('$file', $winnr)"
-  fi
-}
-
 vimapi-edit-dir() {
   local dir="${1:-$PWD}"
   local dir=$(pathconv.sh unix "$dir")

@@ -2,8 +2,6 @@
 # alias
 #------------------------------------------------------
 if [ "$VIM_TERMINAL" ]; then
-  vim() { vimapi-edit-file "$@"; }
-
   alias D='vimapi-edit-dir'
   alias D2='vimapi-edit-dir-2'
 
@@ -30,6 +28,6 @@ else
   alias T='vim -c "VisTerm"'
 fi
 
+alias vim='vim.sh'
 alias vimdiff='vimdiff.sh'
 alias vimdirdiff='vimdirdiff.sh'
-
