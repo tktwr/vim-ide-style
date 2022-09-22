@@ -228,6 +228,7 @@ augroup ag_ide_term
   else
     autocmd TermOpen     *       call vis#statusline#VisSetStatuslineForTerm()
     autocmd TermOpen     *       startinsert
+    autocmd BufWinEnter,WinEnter term://* startinsert
   endif
 augroup END
 

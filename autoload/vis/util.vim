@@ -60,6 +60,14 @@ func vis#util#VisCWD()
   return "[".l:type.":".l:cwd."]"
 endfunc
 
+" VisPrompt
+"
+" prompt:
+"   prompt text
+" word:
+"   word: pass through
+"   ?   : show input prompt
+"   ??  : show input prompt with '<cfile>'
 func vis#util#VisPrompt(prompt, word)
   let word = a:word
   if word == "?"
