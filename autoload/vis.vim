@@ -2,9 +2,12 @@
 " VisIDE
 "======================================================
 func vis#VisInit()
+  " height
   let g:vis#vis_term_winheight = 10
   let g:vis#vis_gstatus_winheight = 10
   let g:vis#vis_fern_2nd_winheight = 18
+
+  " width
   let g:vis#vis_help_winwidth = 82
   let g:vis#vis_left_winwidth = 30
 

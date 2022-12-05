@@ -4,31 +4,14 @@
 "------------------------------------------------------
 " open terminal
 "------------------------------------------------------
-func vis#term#VisTerm(...)
-  if a:0 == 0
-    let l:type = 0
+func vis#term#VisTerm(loc="below")
+  if has('nvim')
+    exec printf("%s %dnew", a:loc, g:vis#vis_term_winheight)
+    term
   else
-    let l:type = a:1
+    exec printf("%s term ++rows=%d", a:loc, g:vis#vis_term_winheight)
   endif
-
-  if l:type == 0
-    if has('nvim')
-      exec "below ".g:vis#vis_term_winheight."new"
-      term
-    else
-      exec "below term ++rows=".g:vis#vis_term_winheight
-    endif
-    set winfixheight
-  elseif l:type == 1
-    tabedit
-    bot term
-    only
-  elseif l:type == 2
-    tabedit
-    bot term
-    only
-    bot term
-  endif
+  set winfixheight
 endfunc
 
 func vis#term#VisTermV()
