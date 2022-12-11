@@ -2,8 +2,8 @@
 # alias
 #------------------------------------------------------
 if [ "$VIM_TERMINAL" ]; then
-  alias D='vimapi-edit-dir'
-  alias D2='vimapi-edit-dir-2'
+  alias F='vimapi-edit-dir'
+  alias F2='vimapi-edit-dir-2'
 
   alias cd='vimapi-cd'
   alias pushd='vimapi-pushd'
