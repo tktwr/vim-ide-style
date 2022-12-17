@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bin_name=`basename $0`
+bin_name=vimapi.sh
 
 g_tapi="Tapi_Exec"
 g_args=""
