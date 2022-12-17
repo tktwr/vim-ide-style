@@ -1,92 +1,5 @@
 #!/bin/bash
 
-export VIM_IDE_PIPE=~/.vim_ide_style_pipe
-
-#------------------------------------------------------
-# vimapi
-#------------------------------------------------------
-f_make_pipe() {
-  pipe_file=$1
-  if [ ! -e $pipe_file ]; then
-    mkfifo -m600 $pipe_file
-  fi
-}
-
-vimapi-get-cwd() {
-  winnr=${1:-0}
-  pipe_file=$VIM_IDE_PIPE
-  f_make_pipe $pipe_file
-  vimapi.sh --exec-echo "vis#util#VisGetCWD($winnr)"
-  cat $pipe_file
-}
-
-vimapi-get-cwd-alt-term() {
-  pipe_file=$VIM_IDE_PIPE
-  f_make_pipe $pipe_file
-  vimapi.sh --exec-echo "vis#util#VisGetCWD(vis#window#VisFindAltTerm())"
-  cat $pipe_file
-}
-
-vimapi-edit-dir() {
-  local dir="${1:-$PWD}"
-  local dir=$(pathconv.sh unix "$dir")
-  local winnr=${2:-1}
-  if [ -n "$dir" ]; then
-    vimapi.sh "call BmkEditDir('$dir/', $winnr)"
-  fi
-}
-
-vimapi-edit-dir-2() {
-  local dir="${1:-$PWD}"
-  vimapi-edit-dir "$dir" 2
-}
-
-vimapi-cd() {
-  local dir=${*:-$HOME}
-  cd "$dir"
-  vimapi.sh "lcd $PWD"
-}
-
-vimapi-pushd() {
-  pushd "$@"
-  vimapi.sh "lcd $PWD"
-}
-
-vimapi-popd() {
-  popd "$@"
-  vimapi.sh "lcd $PWD"
-}
-
-vimapi-resize() {
-  local rows=${1:-10}
-  vimapi.sh VisWinResize $rows
-}
-
-vimapi-termcd() {
-  local winnr="$1"
-  if [ -n "$winnr" ]; then
-    vimapi.sh VisSendCdT2T "$PWD" $winnr
-  fi
-}
-
-vimapi-term-set-label() {
-  label=$(prompt.sh 'label' '' "$*")
-  if [ -n "$label" ]; then
-    vimapi.sh VisStatuslineForTermSetLabel "$label"
-  fi
-}
-
-vimapi-tabline-set-label() {
-  label=$(prompt.sh 'label' '' "$*")
-  if [ -n "$label" ]; then
-    vimapi.sh VisTabLineSetLabel "$label"
-  fi
-}
-
-vimapi-tabline-set-info() {
-  vimapi.sh VisTabLineSetInfo "$*"
-}
-
 #------------------------------------------------------
 # path
 #------------------------------------------------------
@@ -98,3 +11,146 @@ vim_vis_plugin_dir() {
 
 export VIM_IDE_DIR=$(vim_vis_plugin_dir)
 export PATH="$VIM_IDE_DIR/bin:$PATH"
+export VIM_IDE_PIPE=~/.vim_ide_style_pipe
+
+#------------------------------------------------------
+# vimapi
+#------------------------------------------------------
+vimapi_make_pipe() {
+  pipe_file=$1
+  if [ ! -e $pipe_file ]; then
+    mkfifo -m600 $pipe_file
+  fi
+}
+
+vimapi_exec() {
+  printf '\e]51;["call","Tapi_Exec","%s"]\x07' "$*" 1>&2
+}
+
+vimapi_exec_echo() {
+  printf '\e]51;["call","Tapi_ExecEcho","%s"]\x07' "$*" 1>&2
+}
+
+vimapi_exec_in_prev_win() {
+  printf '\e]51;["call","Tapi_ExecInPrevWin","%s"]\x07' "$*" 1>&2
+}
+
+vimapi_exec_in_above_win() {
+  printf '\e]51;["call","Tapi_ExecInAboveWin","%s"]\x07' "$*" 1>&2
+}
+
+vimapi_exec_in_new_tab() {
+  printf '\e]51;["call","Tapi_ExecInNewTab","%s"]\x07' "$*" 1>&2
+}
+
+#------------------------------------------------------
+# cwd
+#------------------------------------------------------
+vimapi-get-cwd() {
+  winnr=${1:-0}
+  pipe_file=$VIM_IDE_PIPE
+  vimapi_make_pipe $pipe_file
+  vimapi_exec_echo "vis#util#VisGetCWD($winnr)"
+  cat $pipe_file
+}
+
+vimapi-get-cwd-alt-term() {
+  pipe_file=$VIM_IDE_PIPE
+  vimapi_make_pipe $pipe_file
+  vimapi_exec_echo "vis#util#VisGetCWD(vis#window#VisFindAltTerm())"
+  cat $pipe_file
+}
+
+#------------------------------------------------------
+# edit
+#------------------------------------------------------
+vimapi-edit-file() {
+  local file=$(pathconv.sh unix "$1")
+  local winnr="${2:--1}"
+  if [ -n "$file" ]; then
+    vimapi_exec "call BmkEditFile('$file', $winnr)"
+  fi
+}
+
+vimapi-edit-dir() {
+  local dir="${1:-$PWD}"
+  local dir=$(pathconv.sh unix "$dir")
+  local winnr=${2:-1}
+  if [ -n "$dir" ]; then
+    vimapi_exec "call BmkEditDir('$dir/', $winnr)"
+  fi
+}
+
+vimapi-edit-dir-2() {
+  local dir="${1:-$PWD}"
+  vimapi-edit-dir "$dir" 2
+}
+
+#------------------------------------------------------
+# cd
+#------------------------------------------------------
+vimapi-cd() {
+  local dir=${*:-$HOME}
+  cd "$dir"
+  vimapi_exec "lcd $PWD"
+}
+
+vimapi-pushd() {
+  pushd "$@"
+  vimapi_exec "lcd $PWD"
+}
+
+vimapi-popd() {
+  popd "$@"
+  vimapi_exec "lcd $PWD"
+}
+
+#------------------------------------------------------
+# cd-term
+#------------------------------------------------------
+vimapi-cd-term() {
+  local winnr="$1"
+  if [ -n "$winnr" ]; then
+    vimapi_exec VisSendCdT2T "$PWD" $winnr
+  fi
+}
+
+#------------------------------------------------------
+# resize
+#------------------------------------------------------
+vimapi-resize() {
+  local rows=${1:-10}
+  vimapi_exec VisWinResize $rows
+}
+
+#------------------------------------------------------
+# label
+#------------------------------------------------------
+vimapi-term-set-label() {
+  label=$(prompt.sh 'label' '' "$*")
+  if [ -n "$label" ]; then
+    vimapi_exec VisStatuslineForTermSetLabel "$label"
+  fi
+}
+
+vimapi-tabline-set-label() {
+  label=$(prompt.sh 'label' '' "$*")
+  if [ -n "$label" ]; then
+    vimapi_exec VisTabLineSetLabel "$label"
+  fi
+}
+
+vimapi-tabline-set-info() {
+  vimapi_exec VisTabLineSetInfo "$*"
+}
+
+#------------------------------------------------------
+# export
+#------------------------------------------------------
+export -f vimapi_exec
+export -f vimapi_exec_echo
+export -f vimapi_exec_in_prev_win
+export -f vimapi_exec_in_above_win
+export -f vimapi_exec_in_new_tab
+export -f vimapi-edit-file
+

@@ -9,17 +9,21 @@ if [ "$VIM_TERMINAL" ]; then
   alias pushd='vimapi-pushd'
   alias popd='vimapi-popd'
 
+  alias cd.term='vimapi-cd-term'
+
   alias pwd.alt='vimapi-get-cwd-alt-term'
   alias cd.alt='vimapi-cd $(vimapi-get-cwd-alt-term)'
   cp.alt() { cp "$@" $(vimapi-get-cwd-alt-term); }
   mv.alt() { mv "$@" $(vimapi-get-cwd-alt-term); }
 
-  alias GV='vimapi.sh --in-new-tab MyGV'
-  alias GS='vimapi.sh --in-new-tab VisGstatusToggle'
-  alias I='vimapi.sh --in-new-tab VisIDE'
-  alias T='vimapi.sh VisTerm above'
-  alias N='vimapi.sh new'
+  alias GV='vimapi_exec_in_new_tab MyGV'
+  alias GS='vimapi_exec_in_new_tab VisGstatusToggle'
+  alias I='vimapi_exec_in_new_tab VisIDE'
+  alias N='vimapi_exec new'
+  alias T='vimapi_exec VisTerm above'
+  alias TV='vimapi_exec VisTermV'
 
+  alias ,tabe='vimapi_exec tabedit'
   alias ,resize='vimapi-resize'
 else
   alias GV='vim -c "MyGV"'
