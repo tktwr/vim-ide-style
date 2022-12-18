@@ -30,6 +30,9 @@ else
   alias GS='vim -c "VisGstatusToggle"'
   alias I='vim -c "VisIDE"'
   alias T='vim -c "VisTerm"'
+
+  alias nI='nvim -c "VisIDE"'
+  alias nT='nvim -c "VisTerm"'
 fi
 
 alias vim='vim.sh'
