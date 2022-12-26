@@ -34,6 +34,7 @@ func vis#external#fern#VisFern(dir, drawer='', toggle='')
 
   let cmd = printf('Fern %s %s %s %s', dir, reveal, drawer, toggle)
   exec cmd
+  exec "lcd" dir
 
   if !exists('w:my_fern_init_buf')
     let w:my_fern_init_buf = bufnr('%')
