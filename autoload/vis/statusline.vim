@@ -90,7 +90,7 @@ func vis#statusline#cwd()
 endfunc
 
 func vis#statusline#term_label()
-  let stat = "%{vis#statusline#VisStatuslineForTerm_GetLabel()}"
+  let stat = "%{vis#statusline#get_label()}"
   let stat.= " (bufnr:%n)"
   return stat
 endfunc
@@ -109,7 +109,6 @@ func vis#statusline#VisStatusline()
   if $MY_PROMPT_TYPE >= 3
     let stat.= vis#statusline#git_status()
   endif
-
   return stat
 endfunc
 
@@ -118,9 +117,7 @@ endfunc
 "------------------------------------------------------
 func vis#statusline#VisStatuslineForSideBar()
   let stat = vis#statusline#win_nr()
-  let stat.= "%t "
-  "let stat.= vis#statusline#file_type()
-  "let stat.= vis#statusline#indicator()
+  let stat.= "%t"
   let stat.= vis#statusline#separator()
   let stat.= "[%l/%L]"
   return stat
@@ -133,14 +130,14 @@ endfunc
 "------------------------------------------------------
 " statusline for terminal
 "------------------------------------------------------
-func vis#statusline#VisStatuslineForTerm_GetLabel()
+func vis#statusline#get_label()
   if !exists("w:status_label")
     let w:status_label = "terminal"
   endif
   return w:status_label
 endfunc
 
-func vis#statusline#VisStatuslineForTerm_SetLabel(label)
+func vis#statusline#set_label(label)
   let w:status_label = a:label
   call vis#statusline#VisSetStatuslineForTerm()
 endfunc

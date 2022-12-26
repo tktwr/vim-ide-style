@@ -14,7 +14,7 @@ func vis#tabline#VisTabLine()
 
     " set the tab page number (for mouse clicks)
     let tag = printf('%%%dT', i + 1)
-    let label = printf('%%{vis#tabline#VisTabLine_GetLabel(%d)}', i + 1)
+    let label = printf('%%{vis#tabline#get_label(%d)}', i + 1)
     let tabline_all .= printf('%s%s %s ', tag, color, label)
     let tabline_all .= '%#TabLineFill# '
   endfor
@@ -26,7 +26,7 @@ func vis#tabline#VisTabLine()
     let tabline_all .= ' [coc:%{coc#status()}]'
   endif
   let tabline_all .= ' %#VisCWD#%{vis#util#VisCWD()}%#TabLineFill#'
-  let tabline_all .= ' %#VisInfo#%{vis#tabline#VisTabLine_GetInfo()}%#TabLineFill#'
+  let tabline_all .= ' %#VisInfo#%{vis#tabline#get_info()}%#TabLineFill#'
 
   return tabline_all
 endfunc
@@ -34,7 +34,7 @@ endfunc
 "------------------------------------------------------
 " get tab label
 "------------------------------------------------------
-func vis#tabline#VisTabLine_GetLabel(nr)
+func vis#tabline#get_label(nr)
   let tab_labels = keys(g:vis#vis_tab_labels)
   let r = match(tab_labels, a:nr-1)
   if r != -1
@@ -47,20 +47,20 @@ func vis#tabline#VisTabLine_GetLabel(nr)
   return "[".a:nr."] ".label
 endfunc
 
-func vis#tabline#VisTabLine_GetInfo()
+func vis#tabline#get_info()
   return g:vis#vis_tab_info
 endfunc
 
 "------------------------------------------------------
 " set tab label
 "------------------------------------------------------
-func vis#tabline#VisTabLine_SetLabel(label)
+func vis#tabline#set_label(label)
   let nr = tabpagenr()
   let g:vis#vis_tab_labels[nr-1] = a:label
   set tabline=%!vis#tabline#VisTabLine()
 endfunc
 
-func vis#tabline#VisTabLine_SetInfo(label)
+func vis#tabline#set_info(label)
   let g:vis#vis_tab_info = a:label
   set tabline=%!vis#tabline#VisTabLine()
 endfunc

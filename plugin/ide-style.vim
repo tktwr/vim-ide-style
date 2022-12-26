@@ -59,13 +59,13 @@ endfunc
 "------------------------------------------------------
 " command for statusline
 "------------------------------------------------------
-command -nargs=1                VisStatuslineForTermSetLabel call vis#statusline#VisStatuslineForTerm_SetLabel(<f-args>)
+command -nargs=1                VisStatuslineForTermSetLabel call vis#statusline#set_label(<f-args>)
 
 "------------------------------------------------------
 " command for tabline
 "------------------------------------------------------
-command -nargs=1                VisTabLineSetLabel call vis#tabline#VisTabLine_SetLabel(<f-args>)
-command -nargs=1                VisTabLineSetInfo  call vis#tabline#VisTabLine_SetInfo(<f-args>)
+command -nargs=1                VisTabLineSetLabel call vis#tabline#set_label(<f-args>)
+command -nargs=1                VisTabLineSetInfo  call vis#tabline#set_info(<f-args>)
 
 "------------------------------------------------------
 " command for term
