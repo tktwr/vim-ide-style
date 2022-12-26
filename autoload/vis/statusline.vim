@@ -2,16 +2,17 @@
 " statusline
 "------------------------------------------------------
 func vis#statusline#_file_type()
+  let stat = ""
   let ft = getwinvar(0, '&ft')
   let syn = getwinvar(0, '&syn')
 
   if ft == syn
-    let type = printf("[%s]", ft)
+    let stat = printf("[%s]", ft)
   else
-    let type = printf("[%s,%s]", ft, syn)
+    let stat = printf("[%s,%s]", ft, syn)
   endif
 
-  return type
+  return stat
 endfunc
 
 func vis#statusline#_file_encoding()
@@ -22,6 +23,16 @@ func vis#statusline#_file_encoding()
     let stat = printf("[%s,%s]", fenc, ff)
   endif
   return stat
+endfunc
+
+func vis#statusline#_is_same_dir()
+  let cwd = getcwd(0, 0)
+  let dir = expand("%:p:h")
+  if (cwd != dir)
+    return "*"
+  else
+    return ""
+  endif
 endfunc
 
 "------------------------------------------------------
@@ -36,13 +47,12 @@ func vis#statusline#win_nr()
 endfunc
 
 func vis#statusline#file_name()
-  let cwd = getcwd()
-  let dir = expand("%:p:h")
-  let color = "%#VisFname#"
-  if (cwd != dir)
-    let color = "%#VisFname2#"
-  endif
-  return color."%t"."%#StatusLineNC# "
+  let stat = "%#VisFname#"
+  let stat.= "%{vis#statusline#_is_same_dir()}"
+  let stat.= "%t"
+  let stat.= "%#StatusLineNC#"
+  let stat.= " "
+  return stat
 endfunc
 
 func vis#statusline#file_type()
@@ -58,11 +68,7 @@ func vis#statusline#indicator()
 endfunc
 
 func vis#statusline#line_info()
-  let stat = ""
-  if winwidth(0) >= 60
-    let stat = "[%c%V,%l/%L,%p%%]"
-  endif
-  return stat
+  return "[%c%V,%l/%L,%p%%]"
 endfunc
 
 func vis#statusline#separator()
@@ -70,21 +76,23 @@ func vis#statusline#separator()
 endfunc
 
 func vis#statusline#git_status()
-  let s = "%#VisGitStatus#"
-  let s.= "%{FugitiveStatusline()}"
-  let s.= "%#StatusLineNC#"
-  return s
+  let stat = "%#VisGitStatus#"
+  let stat.= "%{FugitiveStatusline()}"
+  let stat.= "%#StatusLineNC#"
+  return stat
 endfunc
 
 func vis#statusline#cwd()
-  let s = "%#VisCWD#"
-  let s.= "%{vis#util#VisCWD()}"
-  let s.= "%#StatusLineNC#"
-  return s
+  let stat = "%#VisCWD#"
+  let stat.= "%{vis#util#VisCWD()}"
+  let stat.= "%#StatusLineNC#"
+  return stat
 endfunc
 
 func vis#statusline#term_label()
-  return "%{vis#statusline#VisStatuslineForTerm_GetLabel()} (bufnr:%n)"
+  let stat = "%{vis#statusline#VisStatuslineForTerm_GetLabel()}"
+  let stat.= " (bufnr:%n)"
+  return stat
 endfunc
 
 "------------------------------------------------------

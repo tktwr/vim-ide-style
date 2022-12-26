@@ -40,24 +40,24 @@ endfunc
 func vis#util#VisGetCWD(winnr)
   let curr_winnr = winnr()
   call vis#window#VisGotoWinnr(a:winnr)
-  let l:cwd = getcwd()
+  let l:cwd = getcwd(0, 0)
   call vis#window#VisGotoWinnr(curr_winnr)
   return l:cwd
 endfunc
 
 func vis#util#VisCWD()
   if haslocaldir() == 1
-    let l:type = "local"
-    let l:cwd = getcwd()
+    let type = "local"
+    let cwd = getcwd(0, 0)
   elseif haslocaldir() == 2
-    let l:type = "tab"
-    let l:cwd = getcwd(-1, 0)
+    let type = "tab"
+    let cwd = getcwd(-1, 0)
   else
-    let l:type = "global"
-    let l:cwd = getcwd(-1)
+    let type = "global"
+    let cwd = getcwd(-1)
   endif
-  let l:cwd = vis#util#VisUnexpand(l:cwd)
-  return "[".l:type.":".l:cwd."]"
+  let cwd = vis#util#VisUnexpand(cwd)
+  return printf("[%s:%s]", type, cwd)
 endfunc
 
 " VisPrompt
