@@ -138,12 +138,6 @@ func VisFernBmkItem()
 endfunc
 
 "------------------------------------------------------
-" command for nerdtree
-"------------------------------------------------------
-command                         VisNERDTreeToggle   call vis#external#nerdtree#VisNERDTreeToggle()
-command -nargs=1 -complete=dir  VisNERDTreeFind     call vis#external#nerdtree#VisNERDTreeFind(<f-args>)
-
-"------------------------------------------------------
 " command for fugitive
 "------------------------------------------------------
 command -nargs=1                VisGgrep            call vis#external#fugitive#VisGgrep(<f-args>)
@@ -244,11 +238,6 @@ augroup ag_ide_fern
   autocmd FileType fern          call vis#external#fern#VisFernMap()
   autocmd User     FernSyntax    call vis#external#fern#VisFernSyntax()
   autocmd User     FernHighlight call vis#external#fern#VisFernHighlight()
-augroup END
-
-augroup ag_ide_nerdtree
-  autocmd!
-  autocmd FileType nerdtree      call vis#external#nerdtree#VisNERDTreeMap()
 augroup END
 
 augroup ag_ide_fugitive
