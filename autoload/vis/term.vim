@@ -15,11 +15,12 @@ func vis#term#VisTerm(loc="below")
 endfunc
 
 func vis#term#VisTermV()
+  let h = winheight(0)
   vnew
   exec "term ++rows=1"
   wincmd p
   close
-  exec "resize".g:vis#vis_term_winheight
+  exec "resize" h
   set winfixheight
 endfunc
 
