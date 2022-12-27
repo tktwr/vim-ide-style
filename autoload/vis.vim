@@ -16,7 +16,10 @@ func vis#VisInit()
 
   let g:vis#vis_unexpand_env_list = []
 
-  call vis#highlight#VisHighlight()
+  set laststatus=2
+  call vis#statusline#setup()
+  call vis#tabline#setup()
+  call vis#highlight#setup()
   call vis#VisSetting()
 endfunc
 

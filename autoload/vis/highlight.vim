@@ -2,7 +2,7 @@
 " highlight
 "======================================================
 
-func vis#highlight#VisHighlight()
+func vis#highlight#setup()
   hi VisRed           ctermfg=167 guifg=#fb4934
   hi VisGreen         ctermfg=142 guifg=#b8bb26
   hi VisYellow        ctermfg=214 guifg=#fabd2f

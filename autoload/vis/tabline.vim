@@ -1,7 +1,7 @@
 "======================================================
 " tabline
 "======================================================
-func vis#tabline#VisTabLine()
+func vis#tabline#_setup()
   let tabline_all = ''
 
   for i in range(tabpagenr('$'))
@@ -31,8 +31,12 @@ func vis#tabline#VisTabLine()
   return tabline_all
 endfunc
 
+func vis#tabline#setup()
+  set tabline=%!vis#tabline#_setup()
+endfunc
+
 "------------------------------------------------------
-" get tab label
+" label
 "------------------------------------------------------
 func vis#tabline#get_label(nr)
   let tab_labels = keys(g:vis#vis_tab_labels)
@@ -47,21 +51,21 @@ func vis#tabline#get_label(nr)
   return "[".a:nr."] ".label
 endfunc
 
+func vis#tabline#set_label(label)
+  let nr = tabpagenr()
+  let g:vis#vis_tab_labels[nr-1] = a:label
+  call vis#tabline#setup()
+endfunc
+
+"------------------------------------------------------
+" info
+"------------------------------------------------------
 func vis#tabline#get_info()
   return g:vis#vis_tab_info
 endfunc
 
-"------------------------------------------------------
-" set tab label
-"------------------------------------------------------
-func vis#tabline#set_label(label)
-  let nr = tabpagenr()
-  let g:vis#vis_tab_labels[nr-1] = a:label
-  set tabline=%!vis#tabline#VisTabLine()
-endfunc
-
 func vis#tabline#set_info(label)
   let g:vis#vis_tab_info = a:label
-  set tabline=%!vis#tabline#VisTabLine()
+  call vis#tabline#setup()
 endfunc
 

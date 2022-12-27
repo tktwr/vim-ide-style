@@ -1,11 +1,4 @@
 "------------------------------------------------------
-" init
-"------------------------------------------------------
-set laststatus=2
-set statusline=%!vis#statusline#VisStatusline()
-set tabline=%!vis#tabline#VisTabLine()
-
-"------------------------------------------------------
 " command for ide
 "------------------------------------------------------
 command                         VisIDE            call vis#VisIDE()
@@ -208,41 +201,27 @@ command                         VisLcdHere          exec "lcd" expand("%:p:h")
 "------------------------------------------------------
 " autocmd
 "------------------------------------------------------
-augroup ag_ide_map
+augroup ag_ide_style
   autocmd!
-  autocmd WinEnter        *      call vis#map#VisBufferMap()
-  autocmd QuickFixCmdPost *grep* below cwindow
-  autocmd QuickFixCmdPost *make* below cwindow
-augroup END
 
-augroup ag_ide_term
-  autocmd!
-  if !has('nvim')
-    autocmd TerminalOpen *       call vis#statusline#VisSetStatuslineForTerm()
-  else
-    autocmd TermOpen     *       call vis#statusline#VisSetStatuslineForTerm()
-    autocmd TermOpen     *       startinsert
+  if has('nvim')
+    autocmd TermOpen      *               call vis#statusline#setup_term()
+    autocmd TermOpen      *               startinsert
     autocmd BufWinEnter,WinEnter term://* startinsert
+  else
+    autocmd TerminalOpen  *               call vis#statusline#setup_term()
   endif
-augroup END
 
-augroup ag_ide_bmk
-  autocmd!
-  autocmd FileType bmk           call vis#statusline#VisSetStatuslineForSideBar()
-augroup END
-
-augroup ag_ide_fern
-  autocmd!
-  autocmd FileType fern          call glyph_palette#apply()
-  autocmd FileType fern          call vis#statusline#VisSetStatuslineForSideBar()
-  autocmd FileType fern          call vis#external#fern#VisFernMap()
-  autocmd User     FernSyntax    call vis#external#fern#VisFernSyntax()
-  autocmd User     FernHighlight call vis#external#fern#VisFernHighlight()
-augroup END
-
-augroup ag_ide_fugitive
-  autocmd!
-  autocmd FileType fugitive      call vis#external#fugitive#VisFugitiveMap()
+  autocmd QuickFixCmdPost *grep*          below cwindow
+  autocmd QuickFixCmdPost *make*          below cwindow
+  autocmd WinEnter        *               call vis#map#VisBufferMap()
+  autocmd FileType        bmk             call vis#statusline#setup_side_bar()
+  autocmd FileType        fern            call glyph_palette#apply()
+  autocmd FileType        fern            call vis#statusline#setup_side_bar()
+  autocmd FileType        fern            call vis#external#fern#VisFernMap()
+  autocmd User            FernSyntax      call vis#external#fern#VisFernSyntax()
+  autocmd User            FernHighlight   call vis#external#fern#VisFernHighlight()
+  autocmd FileType        fugitive        call vis#external#fugitive#VisFugitiveMap()
 augroup END
 
 call vis#VisInit()

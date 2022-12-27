@@ -1,6 +1,6 @@
-"------------------------------------------------------
+"======================================================
 " statusline
-"------------------------------------------------------
+"======================================================
 func vis#statusline#_file_type()
   let stat = ""
   let ft = getwinvar(0, '&ft')
@@ -98,7 +98,7 @@ endfunc
 "------------------------------------------------------
 " statusline for buffer
 "------------------------------------------------------
-func vis#statusline#VisStatusline()
+func vis#statusline#_setup()
   let stat = vis#statusline#win_nr()
   let stat.= vis#statusline#file_name()
   let stat.= vis#statusline#file_type()
@@ -112,10 +112,14 @@ func vis#statusline#VisStatusline()
   return stat
 endfunc
 
+func vis#statusline#setup()
+  set statusline=%!vis#statusline#_setup()
+endfunc
+
 "------------------------------------------------------
 " statusline for sidebar
 "------------------------------------------------------
-func vis#statusline#VisStatuslineForSideBar()
+func vis#statusline#_setup_side_bar()
   let stat = vis#statusline#win_nr()
   let stat.= "%t"
   let stat.= vis#statusline#separator()
@@ -123,8 +127,8 @@ func vis#statusline#VisStatuslineForSideBar()
   return stat
 endfunc
 
-func vis#statusline#VisSetStatuslineForSideBar()
-  setl statusline=%!vis#statusline#VisStatuslineForSideBar()
+func vis#statusline#setup_side_bar()
+  setl statusline=%!vis#statusline#_setup_side_bar()
 endfunc
 
 "------------------------------------------------------
@@ -139,10 +143,10 @@ endfunc
 
 func vis#statusline#set_label(label)
   let w:status_label = a:label
-  call vis#statusline#VisSetStatuslineForTerm()
+  call vis#statusline#setup_term()
 endfunc
 
-func vis#statusline#VisStatuslineForTerm()
+func vis#statusline#_setup_term()
   let stat = vis#statusline#win_nr()
   let stat.= vis#statusline#term_label()
   let stat.= vis#statusline#separator()
@@ -150,7 +154,7 @@ func vis#statusline#VisStatuslineForTerm()
   return stat
 endfunc
 
-func vis#statusline#VisSetStatuslineForTerm()
-  setl statusline=%!vis#statusline#VisStatuslineForTerm()
+func vis#statusline#setup_term()
+  setl statusline=%!vis#statusline#_setup_term()
 endfunc
 
