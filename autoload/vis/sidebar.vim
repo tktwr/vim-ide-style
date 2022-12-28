@@ -1,13 +1,13 @@
 "======================================================
 " side bar
 "======================================================
-func vis#sidebar#VisMakeSideBar()
+func vis#sidebar#create()
   call vis#external#fern#VisFernDrawerToggle()
   below split
   exec "resize" g:vis#vis_fern_2nd_winheight
 endfunc
 
-func vis#sidebar#VisSideBarToggle()
+func vis#sidebar#toggle()
   1wincmd w
   if winwidth(0) < 5
     exec "vertical resize" g:vis#vis_left_winwidth
@@ -17,7 +17,7 @@ func vis#sidebar#VisSideBarToggle()
   wincmd p
 endfunc
 
-func vis#sidebar#VisInSideBar()
+func vis#sidebar#inside()
   let winnr = winnr()
   if (winnr <= 2 && winwidth(0) <= g:vis#vis_left_winwidth)
     return 1

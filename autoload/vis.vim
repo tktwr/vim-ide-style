@@ -1,7 +1,7 @@
 "======================================================
 " VisIDE
 "======================================================
-func vis#VisInit()
+func vis#init()
   " height
   let g:vis#vis_term_winheight = 10
   let g:vis#vis_gstatus_winheight = 10
@@ -20,15 +20,16 @@ func vis#VisInit()
   call vis#statusline#setup()
   call vis#tabline#setup()
   call vis#highlight#setup()
-  call vis#VisSetting()
+  call vis#settings()
 endfunc
 
-func vis#VisSetting()
+func vis#settings()
   if exists("g:vis_unexpand_env_list")
     let g:vis#vis_unexpand_env_list = g:vis_unexpand_env_list
   endif
 endfunc
 
+"------------------------------------------------------
 func vis#VisIDE()
   if winnr('$') == 1
     tcd
@@ -42,10 +43,9 @@ endfunc
 " create
 "------------------------------------------------------
 func s:CreateIDE()
-  let l:is_fullscreen = vis#window#VisIsFullscreen()
-  call vis#sidebar#VisMakeSideBar()
+  call vis#sidebar#create()
   wincmd w
-  if l:is_fullscreen
+  if vis#window#is_fullscreen()
     vsp
     VisTerm
     wincmd w

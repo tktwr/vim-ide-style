@@ -14,12 +14,12 @@ func vis#external#dirdiff#VisTabDirDiff(dir1, dir2)
   call vis#external#dirdiff#VisDirDiff(a:dir1, a:dir2)
 endfunc
 
-func vis#external#dirdiff#VisTabDirDiffQuit()
+func vis#external#dirdiff#quit()
   exec "DirDiffQuit"
   tabclose
 endfunc
 
-func vis#external#dirdiff#VisTabInDirDiff()
+func vis#external#dirdiff#inside()
   let winnr = vis#window#VisFindFirstWindow({i, curr_winnr -> &filetype == 'dirdiff'})
   return winnr > 0
 endfunc

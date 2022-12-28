@@ -1,7 +1,7 @@
 "------------------------------------------------------
 " buffer delete
 "------------------------------------------------------
-func vis#buffer#VisBufDelete()
+func vis#buffer#delete()
   let nr = bufnr('%')
   enew
   exec "bdelete" nr
@@ -10,7 +10,7 @@ endfunc
 "------------------------------------------------------
 " buffer exchange
 "------------------------------------------------------
-func vis#buffer#VisWinBufExchange(winnr)
+func vis#buffer#exchange(winnr)
   let winnr = vis#util#VisPrompt("Winnr? ", a:winnr)
   if winnr == ""
     return
@@ -27,7 +27,7 @@ endfunc
 "------------------------------------------------------
 " buffer copy
 "------------------------------------------------------
-func vis#buffer#VisWinBufCopy(winnr)
+func vis#buffer#copy(winnr)
   let winnr = vis#util#VisPrompt("Winnr? ", a:winnr)
   if winnr == ""
     return

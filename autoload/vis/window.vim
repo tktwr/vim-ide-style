@@ -4,7 +4,7 @@
 "------------------------------------------------------
 " query
 "------------------------------------------------------
-func vis#window#VisIsFullscreen()
+func vis#window#is_fullscreen()
   if &columns > 150
     return 1
   else
@@ -24,7 +24,7 @@ endfunc
 "------------------------------------------------------
 " maximize window
 "------------------------------------------------------
-func vis#window#VisWinMaximizeXToggle(max_width)
+func vis#window#maximize_x_toggle(max_width)
   let w = winwidth(0)
   if !exists('w:orig_width')
     let w:orig_width = w
@@ -37,7 +37,7 @@ func vis#window#VisWinMaximizeXToggle(max_width)
   exec "vertical resize" w
 endfunc
 
-func vis#window#VisWinMaximizeYToggle(max_height)
+func vis#window#maximize_y_toggle(max_height)
   let h = winheight(0)
   if !exists('w:orig_height')
     let w:orig_height = h
@@ -50,20 +50,20 @@ func vis#window#VisWinMaximizeYToggle(max_height)
   exec "resize" h
 endfunc
 
-func vis#window#VisWinMaximizeXYToggle(max_width, max_height)
-  call vis#window#VisWinMaximizeXToggle(a:max_width)
-  call vis#window#VisWinMaximizeYToggle(a:max_height)
+func vis#window#maximize_xy_toggle(max_width, max_height)
+  call vis#window#maximize_x_toggle(a:max_width)
+  call vis#window#maximize_y_toggle(a:max_height)
 endfunc
 
 "------------------------------------------------------
 " resize window
 "------------------------------------------------------
-func vis#window#VisWinResize(height)
+func vis#window#resize(height)
   exec "resize" a:height
   let w:orig_height = a:height
 endfunc
 
-func vis#window#VisWinVResize(width)
+func vis#window#vresize(width)
   exec "vertical resize" a:width
   let w:orig_width = a:width
 endfunc
@@ -148,11 +148,11 @@ func vis#window#VisFindAltTerm(begin_winnr=1)
 endfunc
 
 func vis#window#VisFindFirstEditor(begin_winnr=1)
-  return vis#window#VisFindFirstWindow({i, curr_winnr -> &buftype != 'terminal' && !vis#sidebar#VisInSideBar()}, a:begin_winnr)
+  return vis#window#VisFindFirstWindow({i, curr_winnr -> &buftype != 'terminal' && !vis#sidebar#inside()}, a:begin_winnr)
 endfunc
 
 func vis#window#VisFindLastEditor()
-  return vis#window#VisFindLastWindow({i, curr_winnr -> &buftype != 'terminal' && !vis#sidebar#VisInSideBar()})
+  return vis#window#VisFindLastWindow({i, curr_winnr -> &buftype != 'terminal' && !vis#sidebar#inside()})
 endfunc
 
 "------------------------------------------------------

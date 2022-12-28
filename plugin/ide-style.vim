@@ -7,42 +7,46 @@ command                         VisRedraw         call vis#VisRedraw()
 "------------------------------------------------------
 " command for buffer
 "------------------------------------------------------
-command                         VisBufDelete      call vis#buffer#VisBufDelete()
-command -nargs=1                Wx                call vis#buffer#VisWinBufExchange(<f-args>)
-command -nargs=1                Wc                call vis#buffer#VisWinBufCopy(<f-args>)
+command                         VisBufDelete      call vis#buffer#delete()
+command -nargs=1                Wx                call vis#buffer#exchange(<f-args>)
+command -nargs=1                Wc                call vis#buffer#copy(<f-args>)
 
 "------------------------------------------------------
 " command for window
 "------------------------------------------------------
-command -nargs=1                VisWinResize      call vis#window#VisWinResize(<f-args>)
-command -nargs=1                VisWinVResize     call vis#window#VisWinVResize(<f-args>)
+command -nargs=1                VisWinResize      call vis#window#resize(<f-args>)
+command -nargs=1                VisWinVResize     call vis#window#vresize(<f-args>)
 
 func VisWinMaximizeXToggle(max_width)
-  call vis#window#VisWinMaximizeXToggle(a:max_width)
+  call vis#window#maximize_x_toggle(a:max_width)
 endfunc
 
 func VisWinMaximizeYToggle(max_height)
-  call vis#window#VisWinMaximizeYToggle(a:max_height)
+  call vis#window#maximize_y_toggle(a:max_height)
 endfunc
 
 func VisWinMaximizeXYToggle(max_width, max_height)
-  call vis#window#VisWinMaximizeXYToggle(a:max_width, a:max_height)
+  call vis#window#maximize_xy_toggle(a:max_width, a:max_height)
 endfunc
 
 "------------------------------------------------------
 " command for sidebar
 "------------------------------------------------------
-command                         VisSideBarToggle  call vis#sidebar#VisSideBarToggle()
+command                         VisSideBarToggle  call vis#sidebar#toggle()
+
+"------------------------------------------------------
+" command for diff
+"------------------------------------------------------
+command -nargs=+ -complete=file VisTabDiff        call vis#internal#diff#VisTabDiff(<f-args>)
+
+func VisTabDiff(file1, file2)
+  call vis#internal#diff#VisTabDiff(a:file1, a:file2)
+endfunc
 
 "------------------------------------------------------
 " command for tab
 "------------------------------------------------------
-command -nargs=+ -complete=file VisTabDiff        call vis#tab#VisTabDiff(<f-args>)
-command                         VisTabClosePrev   call vis#tab#VisTabClosePrev()
-
-func VisTabDiff(file1, file2)
-  call vis#tab#VisTabDiff(a:file1, a:file2)
-endfunc
+command                         VisTabClosePrev   call vis#tab#close_prev()
 
 func VisTabEdit()
   tabedit
@@ -101,7 +105,7 @@ endfunc
 " command for dirdiff
 "------------------------------------------------------
 command -nargs=+ -complete=dir  VisTabDirDiff     call vis#external#dirdiff#VisTabDirDiff(<f-args>)
-command                         VisTabDirDiffQuit call vis#external#dirdiff#VisTabDirDiffQuit()
+command                         VisTabDirDiffQuit call vis#external#dirdiff#quit()
 
 func VisTabDirDiff(dir1, dir2)
   call vis#external#dirdiff#VisTabDirDiff(a:dir1, a:dir2)
@@ -133,13 +137,13 @@ endfunc
 "------------------------------------------------------
 " command for fugitive
 "------------------------------------------------------
-command -nargs=1                VisGgrep            call vis#external#fugitive#VisGgrep(<f-args>)
-command                         VisGstatusToggle    call vis#external#fugitive#VisGstatusToggle()
+command -nargs=1                VisGgrep            call vis#external#fugitive#ggrep(<f-args>)
+command                         VisGstatusToggle    call vis#external#fugitive#toggle()
 
 func VisTabGstatusToggle()
   call vis#external#fern#VisLcd()
   tabedit
-  call vis#external#fugitive#VisGstatusToggle()
+  call vis#external#fugitive#toggle()
 endfunc
 
 "------------------------------------------------------
@@ -214,14 +218,14 @@ augroup ag_ide_style
 
   autocmd QuickFixCmdPost *grep*          below cwindow
   autocmd QuickFixCmdPost *make*          below cwindow
-  autocmd WinEnter        *               call vis#map#VisBufferMap()
+  autocmd WinEnter        *               call vis#map#setup()
   autocmd FileType        bmk             call vis#statusline#setup_side_bar()
   autocmd FileType        fern            call glyph_palette#apply()
   autocmd FileType        fern            call vis#statusline#setup_side_bar()
-  autocmd FileType        fern            call vis#external#fern#VisFernMap()
-  autocmd User            FernSyntax      call vis#external#fern#VisFernSyntax()
-  autocmd User            FernHighlight   call vis#external#fern#VisFernHighlight()
-  autocmd FileType        fugitive        call vis#external#fugitive#VisFugitiveMap()
+  autocmd FileType        fern            call vis#external#fern#map()
+  autocmd User            FernSyntax      call vis#external#fern#syntax()
+  autocmd User            FernHighlight   call vis#external#fern#highlight()
+  autocmd FileType        fugitive        call vis#external#fugitive#map()
 augroup END
 
-call vis#VisInit()
+call vis#init()

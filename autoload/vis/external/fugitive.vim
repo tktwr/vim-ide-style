@@ -1,4 +1,4 @@
-func vis#external#fugitive#VisGgrep(word)
+func vis#external#fugitive#ggrep(word)
   let word = vis#util#VisPrompt("Word? ", a:word)
   if word == ""
     return
@@ -8,7 +8,7 @@ func vis#external#fugitive#VisGgrep(word)
   exec cmd
 endfunc
 
-func vis#external#fugitive#VisGstatusToggle()
+func vis#external#fugitive#toggle()
   if (&filetype == "fugitive")
     normal q
   else
@@ -17,7 +17,7 @@ func vis#external#fugitive#VisGstatusToggle()
   endif
 endfunc
 
-func vis#external#fugitive#VisFugitiveMap()
+func vis#external#fugitive#map()
   nmap <buffer> D       dd
 endfunc
 

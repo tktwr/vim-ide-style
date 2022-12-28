@@ -24,7 +24,7 @@ func vis#external#fern#VisFern(dir, drawer='', toggle='')
     let reveal = ''
   endif
 
-  if (vis#sidebar#VisInSideBar() && winnr() == 1)
+  if (vis#sidebar#inside() && winnr() == 1)
     let drawer = '-drawer'
   endif
 
@@ -126,7 +126,7 @@ func s:VisFernNextItem()
 endfunc
 
 "------------------------------------------------------
-function! vis#external#fern#VisFernMap() abort
+function! vis#external#fern#map() abort
   nmap <buffer><expr>
         \ <Plug>(my-fern-select-expand-collapse)
         \ fern#smart#leaf(
@@ -173,7 +173,7 @@ function! vis#external#fern#VisFernMap() abort
   nmap <buffer><nowait> > <Plug>(fern-action-enter)
 endfunction
 
-function! vis#external#fern#VisFernSyntax() abort
+function! vis#external#fern#syntax() abort
   syn match  fernCPP          ".*.cpp\ze.*$"
   syn match  fernC            ".*.c\ze.*$"
   syn match  fernH            ".*.h\ze.*$"
@@ -202,7 +202,7 @@ function! vis#external#fern#VisFernSyntax() abort
   hi link fernMakeSH          VisOrange
 endfunction
 
-function! vis#external#fern#VisFernHighlight() abort
+function! vis#external#fern#highlight() abort
   hi link FernRootSymbol      VisRed
   hi link FernRootText        VisRed
   hi link FernBranchSymbol    VisRed

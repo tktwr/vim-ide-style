@@ -1,7 +1,7 @@
 "------------------------------------------------------
 " tab
 "------------------------------------------------------
-func vis#tab#VisIsEmptyTab()
+func vis#tab#empty()
   let last_winnr = winnr('$')
   if last_winnr == 1 && &filetype == ""
     return 1
@@ -9,9 +9,9 @@ func vis#tab#VisIsEmptyTab()
   return 0
 endfunc
 
-func vis#tab#VisTabClosePrev()
-  if vis#external#dirdiff#VisTabInDirDiff()
-    call vis#external#dirdiff#VisTabDirDiffQuit()
+func vis#tab#close_prev()
+  if vis#external#dirdiff#inside()
+    call vis#external#dirdiff#quit()
     tabprev
     return
   endif
@@ -20,19 +20,11 @@ func vis#tab#VisTabClosePrev()
   if winnr == -1
     " terminal is not found in the tab
     tabclose
-    if vis#tab#VisIsEmptyTab()
+    if vis#tab#empty()
       " close redundant empty tab
       tabclose
     endif
     tabprev
   endif
-endfunc
-
-"------------------------------------------------------
-" diff
-"------------------------------------------------------
-func vis#tab#VisTabDiff(file1, file2)
-  exec "tabedit" a:file2
-  exec "vertical diffsplit" a:file1
 endfunc
 
