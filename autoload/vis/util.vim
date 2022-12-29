@@ -39,9 +39,9 @@ endfunc
 
 func vis#util#VisGetCWD(winnr)
   let curr_winnr = winnr()
-  call vis#window#VisGotoWinnr(a:winnr)
+  call vis#window#goto(a:winnr)
   let l:cwd = getcwd(0, 0)
-  call vis#window#VisGotoWinnr(curr_winnr)
+  call vis#window#goto(curr_winnr)
   return l:cwd
 endfunc
 

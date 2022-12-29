@@ -9,7 +9,7 @@ func vis#external#ref#VisRef(cmd, word)
     exec "above Ref" a:cmd word
   else
     exec "above Ref" a:cmd word
-    call vis#window#VisClosePrevWin()
+    call vis#window#close_prev_win()
   endif
 endfunc
 

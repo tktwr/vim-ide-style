@@ -15,7 +15,7 @@ endfunc
 "------------------------------------------------------
 " move
 "------------------------------------------------------
-func vis#window#VisGotoWinnr(winnr)
+func vis#window#goto(winnr)
   if a:winnr > 0
     exec a:winnr."wincmd w"
   endif
@@ -78,7 +78,7 @@ endfunc
 "------------------------------------------------------
 " close window
 "------------------------------------------------------
-func vis#window#VisClosePrevWin()
+func vis#window#close_prev_win()
   let curr_winnr = winnr()
   wincmd p
   if exists("*wbl#WblCopy")
@@ -103,15 +103,15 @@ func vis#window#VisFindFirstWindow(func, begin_winnr=1)
   let last_winnr = winnr('$')
   let i = a:begin_winnr
   while i <= last_winnr
-    call vis#window#VisGotoWinnr(i)
+    call vis#window#goto(i)
     if a:func(i, curr_winnr)
-      call vis#window#VisGotoWinnr(curr_winnr)
+      call vis#window#goto(curr_winnr)
       return i
     endif
     let i += 1
   endwhile
 
-  call vis#window#VisGotoWinnr(curr_winnr)
+  call vis#window#goto(curr_winnr)
   return -1
 endfunc
 
@@ -126,15 +126,15 @@ func vis#window#VisFindLastWindow(func)
   let curr_winnr = winnr()
   let i = curr_winnr
   while i > 0
-    call vis#window#VisGotoWinnr(i)
+    call vis#window#goto(i)
     if a:func(i, curr_winnr)
-      call vis#window#VisGotoWinnr(curr_winnr)
+      call vis#window#goto(curr_winnr)
       return i
     endif
     let i -= 1
   endwhile
 
-  call vis#window#VisGotoWinnr(curr_winnr)
+  call vis#window#goto(curr_winnr)
   return -1
 endfunc
 

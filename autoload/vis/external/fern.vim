@@ -3,7 +3,7 @@
 "======================================================
 
 func vis#external#fern#VisFernDrawerOpen()
-  call vis#window#VisGotoWinnr(1)
+  call vis#window#goto(1)
 
   if exists('w:my_fern_init_buf') && &filetype != 'fern'
     exec w:my_fern_init_buf.'b'

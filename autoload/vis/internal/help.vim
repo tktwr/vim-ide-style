@@ -16,7 +16,7 @@ func vis#internal#help#VisHelp(...)
   endif
 
   if !start_from_help_win
-    call vis#window#VisClosePrevWin()
+    call vis#window#close_prev_win()
   endif
 endfunc
 
