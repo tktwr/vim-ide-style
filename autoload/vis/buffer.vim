@@ -1,4 +1,15 @@
 "------------------------------------------------------
+" buffer lcd_here
+"------------------------------------------------------
+func vis#buffer#lcd_here()
+  let file = expand('%:p')
+  if filereadable(file)
+    let dir = fnamemodify(file, ':h')
+    exec "lcd" dir
+  endif
+endfunc
+
+"------------------------------------------------------
 " buffer delete
 "------------------------------------------------------
 func vis#buffer#delete()

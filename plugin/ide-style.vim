@@ -141,7 +141,7 @@ command -nargs=1                VisGgrep            call vis#external#fugitive#g
 command                         VisGstatusToggle    call vis#external#fugitive#toggle()
 
 func VisTabGstatusToggle()
-  call vis#external#fern#VisLcd()
+  call vis#external#fern#lcd_here()
   tabedit
   call vis#external#fugitive#toggle()
 endfunc
@@ -150,7 +150,7 @@ endfunc
 " command for gv
 "------------------------------------------------------
 func VisTabGV()
-  call vis#external#fern#VisLcd()
+  call vis#external#fern#lcd_here()
   tabedit
   call MyGV()
 endfunc
@@ -219,6 +219,7 @@ augroup ag_ide_style
   autocmd QuickFixCmdPost *grep*          below cwindow
   autocmd QuickFixCmdPost *make*          below cwindow
   autocmd WinEnter        *               call vis#map#setup()
+  autocmd BufEnter        *               call vis#buffer#lcd_here()
   autocmd FileType        bmk             call vis#statusline#setup_side_bar()
   autocmd FileType        fern            call glyph_palette#apply()
   autocmd FileType        fern            call vis#statusline#setup_side_bar()
