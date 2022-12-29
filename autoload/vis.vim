@@ -30,19 +30,32 @@ func vis#settings()
 endfunc
 
 "------------------------------------------------------
-func vis#VisIDE()
+func vis#ide()
   if winnr('$') == 1
     tcd
-    call s:CreateIDE()
+    call s:create_ide()
   else
-    call s:InitSize()
+    call s:init_size()
   endif
+endfunc
+
+func vis#redraw()
+  redraw!
+  set invnumber
+  set invlist
+  call quickhl#manual#reset()
+  nohlsearch
+  let l:dir = getcwd()
+  let l:file = expand("%")
+  echo printf("%s [%s]", l:file, l:dir)
+  "file
+  IndentGuidesToggle
 endfunc
 
 "------------------------------------------------------
 " create
 "------------------------------------------------------
-func s:CreateIDE()
+func s:create_ide()
   call vis#sidebar#create()
   wincmd w
   if vis#window#is_fullscreen()
@@ -56,7 +69,7 @@ endfunc
 "------------------------------------------------------
 " init size
 "------------------------------------------------------
-func s:InitSizeForEachWin()
+func s:resize_for_each()
   if &buftype == 'terminal'
     exec "resize" g:vis#vis_term_winheight
   elseif winnr() == 2 && &filetype == 'fern'
@@ -64,26 +77,10 @@ func s:InitSizeForEachWin()
   endif
 endfunc
 
-func s:InitSize()
+func s:init_size()
   1wincmd w
   exec "normal \<C-W>="
   exec "vertical resize" g:vis#vis_left_winwidth
-  2,$windo call s:InitSizeForEachWin()
-endfunc
-
-"------------------------------------------------------
-" redraw
-"------------------------------------------------------
-func vis#VisRedraw()
-  redraw!
-  set invnumber
-  set invlist
-  call quickhl#manual#reset()
-  nohlsearch
-  let l:dir = getcwd()
-  let l:file = expand("%")
-  echo printf("%s [%s]", l:file, l:dir)
-  "file
-  IndentGuidesToggle
+  2,$windo call s:resize_for_each()
 endfunc
 

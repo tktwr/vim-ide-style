@@ -4,7 +4,7 @@
 "------------------------------------------------------
 " open terminal
 "------------------------------------------------------
-func vis#term#VisTerm(loc="below")
+func vis#term#open(loc="below")
   if has('nvim')
     exec printf("%s %dnew", a:loc, g:vis#vis_term_winheight)
     term
@@ -14,7 +14,7 @@ func vis#term#VisTerm(loc="below")
   set winfixheight
 endfunc
 
-func vis#term#VisTermV()
+func vis#term#vopen()
   let h = winheight(0)
   vnew
   exec "term ++rows=1"

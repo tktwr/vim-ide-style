@@ -71,7 +71,7 @@ endfunc
 "------------------------------------------------------
 " place window
 "------------------------------------------------------
-func vis#window#VisWinPlace(place)
+func vis#window#place(place)
   exec "wincmd " a:place
 endfunc
 

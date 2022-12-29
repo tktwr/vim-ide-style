@@ -1,8 +1,8 @@
 "------------------------------------------------------
 " command for ide
 "------------------------------------------------------
-command                         VisIDE            call vis#VisIDE()
-command                         VisRedraw         call vis#VisRedraw()
+command                         VisIDE            call vis#ide()
+command                         VisRedraw         call vis#redraw()
 
 "------------------------------------------------------
 " command for buffer
@@ -67,8 +67,8 @@ command -nargs=1                VisTabLineSetInfo  call vis#tabline#set_info(<f-
 "------------------------------------------------------
 " command for term
 "------------------------------------------------------
-command -nargs=?                VisTerm            call vis#term#VisTerm(<f-args>)
-command -nargs=0                VisTermV           call vis#term#VisTermV()
+command -nargs=?                VisTerm            call vis#term#open(<f-args>)
+command -nargs=0                VisTermV           call vis#term#vopen()
 
 func Tapi_ExecEcho(bufnr, cmdline)
   call vis#term#Tapi_ExecEcho(a:bufnr, a:cmdline)
@@ -93,12 +93,12 @@ endfunc
 "------------------------------------------------------
 " command for send
 "------------------------------------------------------
-command -nargs=1                VisVResizeT2E     call vis#send#VisVResizeT2E(<f-args>)
-command -nargs=+ -complete=dir  VisSendCdT2T      call vis#send#VisSendCdT2T(<f-args>)
-command                         VisSendCdE2T      call vis#send#VisSendCdE2T()
+command -nargs=1                VisVResizeT2E     call vis#send#vresize_t2e(<f-args>)
+command -nargs=+ -complete=dir  VisSendCdT2T      call vis#send#cd_t2t(<f-args>)
+command                         VisSendCdE2T      call vis#send#cd_e2t()
 
 func VisSendCurrCmdE2T()
-  call vis#send#VisSendCmdE2T("")
+  call vis#send#cmd_e2t("")
 endfunc
 
 "------------------------------------------------------
