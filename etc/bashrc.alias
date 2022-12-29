@@ -16,7 +16,7 @@ if [ "$VIM_TERMINAL" ]; then
   cp.alt() { cp "$@" $(vimapi-get-cwd-alt-term); }
   mv.alt() { mv "$@" $(vimapi-get-cwd-alt-term); }
 
-  alias GV='vimapi_exec_in_new_tab MyGV'
+  alias GV='vimapi_exec_in_new_tab VisGV'
   alias GS='vimapi_exec_in_new_tab VisGstatusToggle'
   alias I='vimapi_exec_in_new_tab VisIDE'
   alias N='vimapi_exec new'
@@ -26,7 +26,7 @@ if [ "$VIM_TERMINAL" ]; then
   alias ,tabe='vimapi_exec tabedit'
   alias ,resize='vimapi-resize'
 else
-  alias GV='vim -c "MyGV"'
+  alias GV='vim -c "VisGV"'
   alias GS='vim -c "VisGstatusToggle"'
   alias I='vim -c "VisIDE"'
   alias T='vim -c "VisTerm"'

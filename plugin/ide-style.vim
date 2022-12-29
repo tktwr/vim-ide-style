@@ -141,7 +141,6 @@ command -nargs=1                VisGgrep            call vis#external#fugitive#g
 command                         VisGstatusToggle    call vis#external#fugitive#toggle()
 
 func VisTabGstatusToggle()
-  call vis#external#fern#lcd_here()
   tabedit
   call vis#external#fugitive#toggle()
 endfunc
@@ -149,10 +148,11 @@ endfunc
 "------------------------------------------------------
 " command for gv
 "------------------------------------------------------
+command                         VisGV               call vis#external#gv#open()
+
 func VisTabGV()
-  call vis#external#fern#lcd_here()
   tabedit
-  call MyGV()
+  call vis#external#gv#open()
 endfunc
 
 "------------------------------------------------------
@@ -227,6 +227,7 @@ augroup ag_ide_style
   autocmd User            FernSyntax      call vis#external#fern#syntax()
   autocmd User            FernHighlight   call vis#external#fern#highlight()
   autocmd FileType        fugitive        call vis#external#fugitive#map()
+  autocmd FileType        git             call vis#external#gv#map()
 augroup END
 
 call vis#init()
