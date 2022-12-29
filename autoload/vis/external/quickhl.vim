@@ -1,4 +1,4 @@
-func vis#external#quickhl#VisQuickhl(word)
+func vis#external#quickhl#open_prompt(word)
   let word = vis#util#VisPrompt("Word? ", a:word)
   if word == ""
     return

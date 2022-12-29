@@ -1,7 +1,7 @@
 "======================================================
 " dirdiff
 "======================================================
-func vis#external#dirdiff#VisDirDiff(dir1, dir2)
+func vis#external#dirdiff#open(dir1, dir2)
   let dir1 = substitute(a:dir1, ' ', '\\ ', 'g')
   let dir2 = substitute(a:dir2, ' ', '\\ ', 'g')
 
@@ -9,9 +9,9 @@ func vis#external#dirdiff#VisDirDiff(dir1, dir2)
   redraw!
 endfunc
 
-func vis#external#dirdiff#VisTabDirDiff(dir1, dir2)
+func vis#external#dirdiff#tab_open(dir1, dir2)
   tabedit
-  call vis#external#dirdiff#VisDirDiff(a:dir1, a:dir2)
+  call vis#external#dirdiff#open(a:dir1, a:dir2)
 endfunc
 
 func vis#external#dirdiff#quit()

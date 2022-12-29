@@ -37,10 +37,10 @@ command                         VisSideBarToggle  call vis#sidebar#toggle()
 "------------------------------------------------------
 " command for diff
 "------------------------------------------------------
-command -nargs=+ -complete=file VisTabDiff        call vis#internal#diff#VisTabDiff(<f-args>)
+command -nargs=+ -complete=file VisTabDiff        call vis#internal#diff#tab_open(<f-args>)
 
 func VisTabDiff(file1, file2)
-  call vis#internal#diff#VisTabDiff(a:file1, a:file2)
+  call vis#internal#diff#tab_open(a:file1, a:file2)
 endfunc
 
 "------------------------------------------------------
@@ -104,22 +104,22 @@ endfunc
 "------------------------------------------------------
 " command for dirdiff
 "------------------------------------------------------
-command -nargs=+ -complete=dir  VisTabDirDiff     call vis#external#dirdiff#VisTabDirDiff(<f-args>)
+command -nargs=+ -complete=dir  VisTabDirDiff     call vis#external#dirdiff#tab_open(<f-args>)
 command                         VisTabDirDiffQuit call vis#external#dirdiff#quit()
 
 func VisTabDirDiff(dir1, dir2)
-  call vis#external#dirdiff#VisTabDirDiff(a:dir1, a:dir2)
+  call vis#external#dirdiff#tab_open(a:dir1, a:dir2)
 endfunc
 
 "------------------------------------------------------
 " command for fern
 "------------------------------------------------------
-command                         VisFernDrawerToggle call vis#external#fern#VisFernDrawerToggle()
-command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#VisFernDrawer(<f-args>)
-command -nargs=1 -complete=dir  VisFern             call vis#external#fern#VisFern(<f-args>)
+command                         VisFernDrawerToggle call vis#external#fern#open_drawer_toggle()
+command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#open_drawer(<f-args>)
+command -nargs=1 -complete=dir  VisFern             call vis#external#fern#open(<f-args>)
 
 func VisFern(dir, drawer='', toggle='')
-  call vis#external#fern#VisFern(a:dir, a:drawer, a:toggle)
+  call vis#external#fern#open(a:dir, a:drawer, a:toggle)
 endfunc
 
 func VisFernOpenItem()
@@ -158,35 +158,35 @@ endfunc
 "------------------------------------------------------
 " command for quickhl
 "------------------------------------------------------
-command -nargs=1                VisQuickhl          call vis#external#quickhl#VisQuickhl(<f-args>)
+command -nargs=1                VisQuickhl          call vis#external#quickhl#open_prompt(<f-args>)
 
 "------------------------------------------------------
 " command for ref
 "------------------------------------------------------
-command -nargs=+                VisMan              call vis#external#ref#VisRef("man", <q-args>)
-command -nargs=+                VisPydoc            call vis#external#ref#VisRef("pydoc", <q-args>)
+command -nargs=+                VisMan              call vis#external#ref#open_prompt("man", <q-args>)
+command -nargs=+                VisPydoc            call vis#external#ref#open_prompt("pydoc", <q-args>)
 
 "------------------------------------------------------
 " command for help
 "------------------------------------------------------
-command -nargs=?                VisHelp             call vis#internal#help#VisHelp(<f-args>)
+command -nargs=?                VisHelp             call vis#internal#help#open(<f-args>)
 
 "------------------------------------------------------
 " command for vimgrep
 "------------------------------------------------------
-command -nargs=+                VisVimgrep          call vis#internal#vimgrep#VisVimgrep(<f-args>)
+command -nargs=+                VisVimgrep          call vis#internal#vimgrep#open_prompt(<f-args>)
 
 "------------------------------------------------------
 " command for tag jump
 "------------------------------------------------------
-command -nargs=+                VisTjump            call vis#internal#tjump#VisTjump(<f-args>)
+command -nargs=+                VisTjump            call vis#internal#tjump#open(<f-args>)
 
 func VisTjump(tag_name, winnr=0)
-  call vis#internal#tjump#VisTjump(a:tag_name, a:winnr)
+  call vis#internal#tjump#open(a:tag_name, a:winnr)
 endfunc
 
 func VisTjumpPrompt()
-  call vis#internal#tjump#VisTjumpPrompt()
+  call vis#internal#tjump#open_prompt()
 endfunc
 
 "------------------------------------------------------

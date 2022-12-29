@@ -1,4 +1,4 @@
-func vis#internal#vimgrep#VisVimgrep(word, files)
+func vis#internal#vimgrep#open_prompt(word, files)
   let word = vis#util#VisPrompt("Word? ", a:word)
   if word == ""
     return

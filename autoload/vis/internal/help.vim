@@ -1,4 +1,4 @@
-func vis#internal#help#VisHelp(...)
+func vis#internal#help#open(...)
   if &filetype == "help"
     let start_from_help_win=1
   else

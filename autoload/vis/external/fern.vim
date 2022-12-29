@@ -2,7 +2,7 @@
 " fern
 "======================================================
 
-func vis#external#fern#VisFernDrawerOpen()
+func vis#external#fern#find_drawer()
   call vis#window#goto(1)
 
   if exists('w:my_fern_init_buf') && &filetype != 'fern'
@@ -13,7 +13,7 @@ endfunc
 " options:
 "   drawer: '-drawer'
 "   toggle: '-toggle'
-func vis#external#fern#VisFern(dir, drawer='', toggle='')
+func vis#external#fern#open(dir, drawer='', toggle='')
   let dir = expand(a:dir)
   let dir = substitute(dir, ' ', '\\ ', 'g')
   let reveal = '-reveal='.expand('%')
@@ -29,7 +29,7 @@ func vis#external#fern#VisFern(dir, drawer='', toggle='')
   endif
 
   if drawer == '-drawer'
-    call vis#external#fern#VisFernDrawerOpen()
+    call vis#external#fern#find_drawer()
   endif
 
   let cmd = printf('Fern %s %s %s %s', dir, reveal, drawer, toggle)
@@ -41,12 +41,12 @@ func vis#external#fern#VisFern(dir, drawer='', toggle='')
   endif
 endfunc
 
-func vis#external#fern#VisFernDrawerToggle()
-  call vis#external#fern#VisFern('.', '-drawer', '-toggle')
+func vis#external#fern#open_drawer_toggle()
+  call vis#external#fern#open('.', '-drawer', '-toggle')
 endfunc
 
-func vis#external#fern#VisFernDrawer(dir)
-  call vis#external#fern#VisFern(a:dir, '-drawer', '')
+func vis#external#fern#open_drawer(dir)
+  call vis#external#fern#open(a:dir, '-drawer', '')
 endfunc
 
 "------------------------------------------------------

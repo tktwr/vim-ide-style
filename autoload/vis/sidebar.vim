@@ -2,7 +2,7 @@
 " side bar
 "======================================================
 func vis#sidebar#create()
-  call vis#external#fern#VisFernDrawerToggle()
+  call vis#external#fern#open_drawer_toggle()
   below split
   exec "resize" g:vis#vis_fern_2nd_winheight
 endfunc

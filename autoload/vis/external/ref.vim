@@ -1,4 +1,4 @@
-func vis#external#ref#VisRef(cmd, word)
+func vis#external#ref#open_prompt(cmd, word)
   let word = vis#util#VisPrompt("Word? ", a:word)
   if word == ""
     return
