@@ -68,7 +68,7 @@ endfunc
 "   word: pass through
 "   ?   : show input prompt
 "   ??  : show input prompt with '<cfile>'
-func vis#util#VisPrompt(prompt, word)
+func vis#util#prompt(prompt, word)
   let word = a:word
   if word == "?"
     let word = input(a:prompt)

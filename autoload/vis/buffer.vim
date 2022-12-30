@@ -22,7 +22,7 @@ endfunc
 " buffer exchange
 "------------------------------------------------------
 func vis#buffer#exchange(winnr)
-  let winnr = vis#util#VisPrompt("Winnr? ", a:winnr)
+  let winnr = vis#util#prompt("Winnr? ", a:winnr)
   if winnr == ""
     return
   endif
@@ -39,7 +39,7 @@ endfunc
 " buffer copy
 "------------------------------------------------------
 func vis#buffer#copy(winnr)
-  let winnr = vis#util#VisPrompt("Winnr? ", a:winnr)
+  let winnr = vis#util#prompt("Winnr? ", a:winnr)
   if winnr == ""
     return
   endif
