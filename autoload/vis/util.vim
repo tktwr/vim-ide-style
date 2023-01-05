@@ -129,3 +129,7 @@ func vis#util#VisWinInfo()
   echom "current buf's winid   : bufwinid('%') : ".bufwinid('%')
 endfunc
 
+func vis#util#abs_filepath(filepath)
+  return fnamemodify(resolve(expand(a:filepath)), ':p')
+endfunc
+
