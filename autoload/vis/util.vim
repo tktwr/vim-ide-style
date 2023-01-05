@@ -82,17 +82,17 @@ func vis#util#prompt(prompt, word)
   return word
 endfunc
 
-func vis#util#VisSetTab(nr)
+func vis#util#set_tabstop(nr)
   let &tabstop=a:nr
   let &shiftwidth=a:nr
 endfunc
 
-func vis#util#VisLineNumberToggle()
+func vis#util#line_number_toggle()
   set invnumber
   set invlist
 endfunc
 
-func vis#util#VisCheckEnv()
+func vis#util#check_env()
   echom "version: ".v:version
   echom "unix: ".has("unix")
   echom "win32unix: ".has("win32unix")
@@ -115,7 +115,7 @@ func vis#util#VisCheckEnv()
   pwd
 endfunc
 
-func vis#util#VisWinInfo()
+func vis#util#win_info()
   echom "columns               : &columns      : ".&columns
   echom "lines                 : &lines        : ".&lines
   echom "current win's width   : winwidth(0)   : ".winwidth(0)

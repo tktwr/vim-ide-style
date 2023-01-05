@@ -192,11 +192,11 @@ endfunc
 "------------------------------------------------------
 " command for util
 "------------------------------------------------------
-command -nargs=1                VisSetTab           call vis#util#VisSetTab(<f-args>)
-command                         VisLineNumberToggle call vis#util#VisLineNumberToggle()
+command -nargs=1                VisSetTabstop       call vis#util#set_tabstop(<f-args>)
+command                         VisLineNumberToggle call vis#util#line_number_toggle()
 
-command                         VisCheckEnv         call vis#util#VisCheckEnv()
-command -nargs=0                VisWinInfo          call vis#util#VisWinInfo()
+command                         VisCheckEnv         call vis#util#check_env()
+command -nargs=0                VisWinInfo          call vis#util#win_info()
 
 command                         VisCdHere           exec "cd"  expand("%:p:h")
 command                         VisTcdHere          exec "tcd" expand("%:p:h")
