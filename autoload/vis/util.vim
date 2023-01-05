@@ -60,8 +60,6 @@ func vis#util#VisCWD()
   return printf("[%s:%s]", type, cwd)
 endfunc
 
-" VisPrompt
-"
 " prompt:
 "   prompt text
 " word:

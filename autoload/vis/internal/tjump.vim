@@ -4,7 +4,7 @@ func vis#internal#tjump#open(tag_name, winnr=0)
 endfunc
 
 func vis#internal#tjump#open_prompt()
-  let line = vis#util#VisPrompt("Tag [Winnr]? ", '??')
+  let line = vis#util#prompt("Tag [Winnr]? ", '??')
   if line == ""
     return
   endif
