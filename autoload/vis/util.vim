@@ -1,3 +1,7 @@
+func vis#util#abs_filepath(filepath)
+  return fnamemodify(resolve(expand(a:filepath)), ':p')
+endfunc
+
 func vis#util#VisExpand(url)
   let url = a:url
   if (url == "")
@@ -90,44 +94,84 @@ func vis#util#line_number_toggle()
   set invlist
 endfunc
 
+func vis#util#list_path(path)
+  let lst = []
+  for i in split(a:path, ',')
+    let lst += ["  " . i]
+  endfor
+  return lst
+endfunc
+
+func vis#util#preview(buf_name, lines)
+  exec "silent below pedit" a:buf_name
+  wincmd P
+
+  setlocal buftype=nofile
+  setlocal nobuflisted
+  setlocal noswapfile
+  setlocal nonumber
+  setf txt
+
+  call setbufline(a:buf_name, 1, a:lines)
+endfunc
+
+func vis#util#output(title, lines)
+  if vis#popup_win#has()
+    call vis#popup_win#open(a:title, a:lines)
+  else
+    call vis#util#preview(a:title, a:lines)
+  endif
+endfunc
+
+"------------------------------------------------------
 func vis#util#check_env()
-  echom "version: ".v:version
-  echom "unix: ".has("unix")
-  echom "win32unix: ".has("win32unix")
-  echom "win32: ".has("win32")
-  echom "win64: ".has("win64")
-  echom "python: ".has("python")
-  if has("python")
-    py print(sys.version)
-  endif
-  echom "python3: ".has("python3")
-  if has("python3")
-    py3 print(sys.version)
-  endif
-  echom "gui_running: ".has("gui_running")
-  echom "term: ".&term
-  echom "shell: ".&shell
-  echom "path: ".&path
-  echom "runtimepath: ".&runtimepath
-  echom "pwd:"
-  pwd
+  let text  = []
+  let text += ["version     : " . v:version]
+  let text += ["unix        : " . has("unix")]
+  let text += ["win32unix   : " . has("win32unix")]
+  let text += ["win32       : " . has("win32")]
+  let text += ["win64       : " . has("win64")]
+  let text += ["python      : " . has("python")]
+  let text += ["python3     : " . has("python3")]
+  let text += ["gui_running : " . has("gui_running")]
+  let text += ["term        : " . &term]
+  let text += ["shell       : " . &shell]
+
+  let text += ["path:"]
+  let text += vis#util#list_path(&path)
+
+  let text += ["runtimepath:"]
+  let text += vis#util#list_path(&runtimepath)
+
+  call vis#util#output("VisCheckEnv", text)
+
+  " echom "pwd:"
+  " verbose pwd
+  "
+  " if has("python")
+  "   echom "python version:"
+  "   py print(sys.version)
+  " endif
+  "
+  " if has("python3")
+  "   echom "python3 version:"
+  "   py3 print(sys.version)
+  " endif
 endfunc
 
 func vis#util#win_info()
-  echom "columns               : &columns      : ".&columns
-  echom "lines                 : &lines        : ".&lines
-  echom "current win's width   : winwidth(0)   : ".winwidth(0)
-  echom "current win's height  : winheight(0)  : ".winheight(0)
-  echom "current win's winnr   : winnr()       : ".winnr()
-  echom "last win's winnr      : winnr('$')    : ".winnr('$')
-  echom "current win's bufnr   : winbufnr(0)   : ".winbufnr(0)
-  echom "current buf's bufnr   : bufnr('%')    : ".bufnr('%')
-  echom "current buf's bufname : bufname('%')  : ".bufname('%')
-  echom "current buf's winnr   : bufwinnr('%') : ".bufwinnr('%')
-  echom "current buf's winid   : bufwinid('%') : ".bufwinid('%')
-endfunc
-
-func vis#util#abs_filepath(filepath)
-  return fnamemodify(resolve(expand(a:filepath)), ':p')
+  let text  = []
+  let text += ["columns               : &columns      : " . &columns]
+  let text += ["lines                 : &lines        : " . &lines]
+  let text += ["current win's width   : winwidth(0)   : " . winwidth(0)]
+  let text += ["current win's height  : winheight(0)  : " . winheight(0)]
+  let text += ["current win's winnr   : winnr()       : " . winnr()]
+  let text += ["last win's winnr      : winnr('$')    : " . winnr('$')]
+  let text += ["current win's bufnr   : winbufnr(0)   : " . winbufnr(0)]
+  let text += ["current buf's bufnr   : bufnr('%')    : " . bufnr('%')]
+  let text += ["current buf's bufname : bufname('%')  : " . bufname('%')]
+  let text += ["current buf's winnr   : bufwinnr('%') : " . bufwinnr('%')]
+  let text += ["current buf's winid   : bufwinid('%') : " . bufwinid('%')]
+  call vis#util#output("VisWinInfo", text)
 endfunc
 
