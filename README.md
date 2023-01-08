@@ -21,11 +21,11 @@ let g:fern#renderer = 'nerdfont'
 ~~~
 
 Install
-[popup-menu.nvim](https://github.com/kamykn/popup-menu.nvim)
+[vim-popup-menu](https://github.com/Ajnasz/vim-popup-menu)
 to support a popup menu in neovim.
 ~~~
 if has('nvim')
-  Plug 'kamykn/popup-menu.nvim'
+  Plug 'Ajnasz/vim-popup-menu'
 endif
 ~~~
 
