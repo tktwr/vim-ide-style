@@ -81,13 +81,13 @@ endfunc
 func vis#window#close_prev_win()
   let curr_winnr = winnr()
   wincmd p
-  if exists("*wbl#WblCopy")
-    call wbl#WblCopy()
+  if exists("*wbl#copy")
+    call wbl#copy()
   endif
   close
   exec curr_winnr."wincmd w"
-  if exists("*wbl#WblPaste")
-    call wbl#WblPaste()
+  if exists("*wbl#paste")
+    call wbl#paste()
   endif
 endfunc
 
