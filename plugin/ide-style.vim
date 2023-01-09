@@ -1,3 +1,10 @@
+if exists("g:loaded_vis")
+  finish
+endif
+let g:loaded_vis = 1
+
+call vis#init()
+
 "------------------------------------------------------
 " command for ide
 "------------------------------------------------------
@@ -230,4 +237,3 @@ augroup ag_ide_style
   autocmd FileType        git             call vis#external#gv#map()
 augroup END
 
-call vis#init()
