@@ -231,8 +231,6 @@ augroup ag_ide_style
   autocmd FileType        fern            call glyph_palette#apply()
   autocmd FileType        fern            call vis#statusline#setup_side_bar()
   autocmd FileType        fern            call vis#external#fern#map()
-  autocmd User            FernSyntax      call vis#external#fern#syntax()
-  autocmd User            FernHighlight   call vis#external#fern#highlight()
   autocmd FileType        fugitive        call vis#external#fugitive#map()
   autocmd FileType        git             call vis#external#gv#map()
 augroup END
