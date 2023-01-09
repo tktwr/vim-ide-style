@@ -64,7 +64,7 @@ endfunc
 
 func vis#external#fern#lcd_here()
   let selected = s:VisFernSelected()
-  let dir = bmk#util#BmkGetDirName(selected)
+  let dir = bmk#util#GetDirName(selected)
   exec "lcd" dir
 endfunc
 
@@ -74,7 +74,7 @@ func s:VisFernEditItem(winnr)
     return
   endif
 
-  call bmk#BmkEdit(selected, a:winnr)
+  call bmk#Edit(selected, a:winnr)
 endfunc
 
 func s:VisFernPreviewItem(winnr)
@@ -83,7 +83,7 @@ func s:VisFernPreviewItem(winnr)
     exec "normal \<Plug>(fern-action-expand)"
   elseif selected != ""
     let prev_winnr = winnr()
-    call bmk#BmkEdit(selected, a:winnr)
+    call bmk#Edit(selected, a:winnr)
     exec prev_winnr."wincmd w"
   endif
 endfunc
@@ -91,18 +91,18 @@ endfunc
 "------------------------------------------------------
 func vis#external#fern#VisFernOpenItem()
   let selected = s:VisFernSelected()
-  call bmk#BmkOpen(selected, 0)
+  call bmk#Open(selected, 0)
 endfunc
 
 func vis#external#fern#VisFernViewItem()
   let selected = s:VisFernSelected()
-  call bmk#BmkView(selected, 0)
+  call bmk#View(selected, 0)
 endfunc
 
 "------------------------------------------------------
-func vis#external#fern#VisFernBmkItem()
+func vis#external#fern#VisFernSaveItem()
   let selected = s:VisFernSelected()
-  call cpm#CpmSaveURL(selected)
+  call cpm#io#SaveURL(selected)
 endfunc
 
 "------------------------------------------------------

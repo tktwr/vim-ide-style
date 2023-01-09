@@ -68,7 +68,7 @@ vimapi-edit-file() {
   local file=$(pathconv.sh unix "$1")
   local winnr="${2:--1}"
   if [ -n "$file" ]; then
-    vimapi_exec "call BmkEditFile('$file', $winnr)"
+    vimapi_exec "call bmk#EditFile('$file', $winnr)"
   fi
 }
 
@@ -77,7 +77,7 @@ vimapi-edit-dir() {
   local dir=$(pathconv.sh unix "$dir")
   local winnr=${2:-1}
   if [ -n "$dir" ]; then
-    vimapi_exec "call BmkEditDir('$dir/', $winnr)"
+    vimapi_exec "call bmk#EditDir('$dir/', $winnr)"
   fi
 }
 

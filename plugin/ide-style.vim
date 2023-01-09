@@ -137,8 +137,8 @@ func VisFernViewItem()
   call vis#external#fern#VisFernViewItem()
 endfunc
 
-func VisFernBmkItem()
-  call vis#external#fern#VisFernBmkItem()
+func VisFernSaveItem()
+  call vis#external#fern#VisFernSaveItem()
 endfunc
 
 "------------------------------------------------------

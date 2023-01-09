@@ -12,7 +12,7 @@ endfunc
 
 func vis#util#VisExpandDir(url)
   let url = vis#util#VisExpand(a:url)
-  let dir = bmk#BmkGetDirName(url)
+  let dir = bmk#GetDirName(url)
 
   if (dir == "")
     let dir = expand("%:p:h")

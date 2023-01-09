@@ -5,12 +5,12 @@
 func vis#send#cmd_e2t(cmd)
   let cmd = a:cmd
   if (cmd == "")
-    let cmd = bmk#util#BmkRemoveBeginEndSpaces(getline('.'))
+    let cmd = bmk#util#RemoveBeginEndSpaces(getline('.'))
     let cmd = "> ".cmd."<CR>"
   endif
   wincmd j
   let winnr = winnr()
-  call bmk#BmkExecTermCommand(cmd, winnr)
+  call bmk#ExecTermCommand(cmd, winnr)
 endfunc
 
 " send 'cd dir' to a terminal
@@ -18,7 +18,7 @@ func vis#send#cd_e2t()
   let dir = expand('%:p:h')
   wincmd j
   let winnr = winnr()
-  call bmk#BmkEditDir(dir, winnr)
+  call bmk#EditDir(dir, winnr)
 endfunc
 
 "------------------------------------------------------
@@ -27,7 +27,7 @@ endfunc
 " send 'cd dir' to a terminal
 func vis#send#cd_t2t(dir, winnr)
   let dir = vis#util#VisExpandDir(a:dir)
-  call bmk#BmkEditDir(dir, a:winnr)
+  call bmk#EditDir(dir, a:winnr)
 endfunc
 
 "------------------------------------------------------
