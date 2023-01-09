@@ -16,17 +16,14 @@ func vis#init()
 
   let g:vis#vis_unexpand_env_list = []
 
+  if exists("g:vis_unexpand_env_list")
+    let g:vis#vis_unexpand_env_list = g:vis_unexpand_env_list
+  endif
+
   set laststatus=2
   call vis#statusline#setup()
   call vis#tabline#setup()
   call vis#highlight#setup()
-  call vis#settings()
-endfunc
-
-func vis#settings()
-  if exists("g:vis_unexpand_env_list")
-    let g:vis#vis_unexpand_env_list = g:vis_unexpand_env_list
-  endif
 endfunc
 
 "------------------------------------------------------
