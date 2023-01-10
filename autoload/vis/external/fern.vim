@@ -1,12 +1,65 @@
 "======================================================
 " fern
 "======================================================
+func s:VisFernRoot()
+  let helper = fern#helper#new()
+  let node = helper.sync.get_root_node()
+  return node._path
+endfunc
 
+func s:VisFernSelected()
+  let helper = fern#helper#new()
+  let node = helper.sync.get_cursor_node()
+  return node._path
+endfunc
+
+"------------------------------------------------------
+func s:VisFernEditItem(winnr)
+  let selected = s:VisFernSelected()
+  if (selected == "")
+    return
+  endif
+
+  call bmk#Edit(selected, a:winnr)
+endfunc
+
+func s:VisFernPreviewItem(winnr)
+  let selected = s:VisFernSelected()
+  if (isdirectory(selected))
+    exec "normal \<Plug>(fern-action-expand)"
+  elseif selected != ""
+    let prev_winnr = winnr()
+    call bmk#Edit(selected, a:winnr)
+    exec prev_winnr."wincmd w"
+  endif
+endfunc
+
+"------------------------------------------------------
+func s:VisFernPrintItem()
+  let key = s:VisFernSelected()
+  if (len(key) > g:fern#drawer_width / 2)
+    echo key
+  else
+    echo ""
+  endif
+endfunc
+
+func s:VisFernPrevItem()
+  normal -
+  call s:VisFernPrintItem()
+endfunc
+
+func s:VisFernNextItem()
+  normal +
+  call s:VisFernPrintItem()
+endfunc
+
+"------------------------------------------------------
 func vis#external#fern#find_drawer()
   call vis#window#goto(1)
 
-  if exists('w:my_fern_init_buf') && &filetype != 'fern'
-    exec w:my_fern_init_buf.'b'
+  if exists('w:vis_fern_init_buf') && &filetype != 'fern'
+    exec w:vis_fern_init_buf.'b'
   endif
 endfunc
 
@@ -36,8 +89,8 @@ func vis#external#fern#open(dir, drawer='', toggle='')
   exec cmd
   exec "lcd" dir
 
-  if !exists('w:my_fern_init_buf')
-    let w:my_fern_init_buf = bufnr('%')
+  if !exists('w:vis_fern_init_buf')
+    let w:vis_fern_init_buf = bufnr('%')
   endif
 endfunc
 
@@ -49,43 +102,10 @@ func vis#external#fern#open_drawer(dir)
   call vis#external#fern#open(a:dir, '-drawer', '')
 endfunc
 
-"------------------------------------------------------
-func s:VisFernRoot()
-  let helper = fern#helper#new()
-  let node = helper.sync.get_root_node()
-  return node._path
-endfunc
-
-func s:VisFernSelected()
-  let helper = fern#helper#new()
-  let node = helper.sync.get_cursor_node()
-  return node._path
-endfunc
-
 func vis#external#fern#lcd_here()
   let selected = s:VisFernSelected()
   let dir = bmk#util#GetDirName(selected)
   exec "lcd" dir
-endfunc
-
-func s:VisFernEditItem(winnr)
-  let selected = s:VisFernSelected()
-  if (selected == "")
-    return
-  endif
-
-  call bmk#Edit(selected, a:winnr)
-endfunc
-
-func s:VisFernPreviewItem(winnr)
-  let selected = s:VisFernSelected()
-  if (isdirectory(selected))
-    exec "normal \<Plug>(fern-action-expand)"
-  elseif selected != ""
-    let prev_winnr = winnr()
-    call bmk#Edit(selected, a:winnr)
-    exec prev_winnr."wincmd w"
-  endif
 endfunc
 
 "------------------------------------------------------
@@ -103,26 +123,6 @@ endfunc
 func vis#external#fern#VisFernSaveItem()
   let selected = s:VisFernSelected()
   call cpm#io#SaveURL(selected)
-endfunc
-
-"------------------------------------------------------
-func s:VisFernPrintItem()
-  let key = s:VisFernSelected()
-  if (len(key) > g:fern#drawer_width / 2)
-    echo key
-  else
-    echo ""
-  endif
-endfunc
-
-func s:VisFernPrevItem()
-  normal -
-  call s:VisFernPrintItem()
-endfunc
-
-func s:VisFernNextItem()
-  normal +
-  call s:VisFernPrintItem()
 endfunc
 
 "------------------------------------------------------
