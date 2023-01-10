@@ -13,7 +13,7 @@ func vis#external#fugitive#toggle()
     normal q
   else
     above Git
-    exec "resize" g:vis#vis_gstatus_winheight
+    exec "resize" g:vis_gstatus_winheight
   endif
 endfunc
 

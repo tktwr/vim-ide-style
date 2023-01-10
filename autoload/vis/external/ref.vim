@@ -4,7 +4,7 @@ func vis#external#ref#open_prompt(cmd, word)
     return
   endif
 
-  exec "vertical resize" g:vis#vis_help_winwidth
+  exec "vertical resize" g:vis_help_winwidth
   if &filetype =~ "ref-*"
     exec "above Ref" a:cmd word
   else

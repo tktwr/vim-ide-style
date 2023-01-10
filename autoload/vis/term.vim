@@ -6,10 +6,10 @@
 "------------------------------------------------------
 func vis#term#open(loc="below")
   if has('nvim')
-    exec printf("%s %dnew", a:loc, g:vis#vis_term_winheight)
+    exec printf("%s %dnew", a:loc, g:vis_term_winheight)
     term
   else
-    exec printf("%s term ++rows=%d", a:loc, g:vis#vis_term_winheight)
+    exec printf("%s term ++rows=%d", a:loc, g:vis_term_winheight)
   endif
   set winfixheight
 endfunc

@@ -3,21 +3,19 @@
 "======================================================
 func vis#init()
   " height
-  let g:vis#vis_term_winheight = 10
-  let g:vis#vis_gstatus_winheight = 10
-  let g:vis#vis_fern_2nd_winheight = 18
+  let g:vis_term_winheight = 10
+  let g:vis_gstatus_winheight = 10
+  let g:vis_fern_2nd_winheight = 18
 
   " width
-  let g:vis#vis_help_winwidth = 82
-  let g:vis#vis_left_winwidth = 30
+  let g:vis_help_winwidth = 82
+  let g:vis_left_winwidth = 30
 
-  let g:vis#vis_tab_labels = {}
-  let g:vis#vis_tab_info = ""
+  let g:vis_tab_labels = {}
+  let g:vis_tab_info = ""
 
-  let g:vis#vis_unexpand_env_list = []
-
-  if exists("g:vis_unexpand_env_list")
-    let g:vis#vis_unexpand_env_list = g:vis_unexpand_env_list
+  if !exists('g:vis_unexpand_env_list')
+    let g:vis_unexpand_env_list = []
   endif
 
   set laststatus=2
@@ -68,16 +66,16 @@ endfunc
 "------------------------------------------------------
 func s:resize_for_each()
   if &buftype == 'terminal'
-    exec "resize" g:vis#vis_term_winheight
+    exec "resize" g:vis_term_winheight
   elseif winnr() == 2 && &filetype == 'fern'
-    exec "resize" g:vis#vis_fern_2nd_winheight
+    exec "resize" g:vis_fern_2nd_winheight
   endif
 endfunc
 
 func s:init_size()
   1wincmd w
   exec "normal \<C-W>="
-  exec "vertical resize" g:vis#vis_left_winwidth
+  exec "vertical resize" g:vis_left_winwidth
   2,$windo call s:resize_for_each()
 endfunc
 

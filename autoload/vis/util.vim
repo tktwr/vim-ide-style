@@ -26,7 +26,7 @@ func vis#util#VisUnexpand(dir)
 
   if !exists('s:unexpand_env_dict')
     let s:unexpand_env_dict = {}
-    for i in g:vis#vis_unexpand_env_list
+    for i in g:vis_unexpand_env_list
       if exists(i)
         let s:unexpand_env_dict[resolve(expand(i))] = i
       endif

@@ -39,10 +39,10 @@ endfunc
 " label
 "------------------------------------------------------
 func vis#tabline#get_label(nr)
-  let tab_labels = keys(g:vis#vis_tab_labels)
+  let tab_labels = keys(g:vis_tab_labels)
   let r = match(tab_labels, a:nr-1)
   if r != -1
-    let label = g:vis#vis_tab_labels[a:nr-1]
+    let label = g:vis_tab_labels[a:nr-1]
   else
     let label = getcwd(-1, a:nr)
     let label = vis#util#VisUnexpand(label)
@@ -53,7 +53,7 @@ endfunc
 
 func vis#tabline#set_label(label)
   let nr = tabpagenr()
-  let g:vis#vis_tab_labels[nr-1] = a:label
+  let g:vis_tab_labels[nr-1] = a:label
   call vis#tabline#setup()
 endfunc
 
@@ -61,11 +61,11 @@ endfunc
 " info
 "------------------------------------------------------
 func vis#tabline#get_info()
-  return g:vis#vis_tab_info
+  return g:vis_tab_info
 endfunc
 
 func vis#tabline#set_info(label)
-  let g:vis#vis_tab_info = a:label
+  let g:vis_tab_info = a:label
   call vis#tabline#setup()
 endfunc
 

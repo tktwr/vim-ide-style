@@ -5,8 +5,8 @@ func vis#internal#help#open(...)
     let start_from_help_win=0
   endif
 
-  if winwidth(0) < g:vis#vis_help_winwidth
-    exec "vertical resize" g:vis#vis_help_winwidth
+  if winwidth(0) < g:vis_help_winwidth
+    exec "vertical resize" g:vis_help_winwidth
   endif
 
   if a:0 == 0
