@@ -128,7 +128,9 @@ func vis#statusline#_setup_side_bar()
 endfunc
 
 func vis#statusline#setup_side_bar()
-  setl statusline=%!vis#statusline#_setup_side_bar()
+  if vis#sidebar#inside() == 1
+    setl statusline=%!vis#statusline#_setup_side_bar()
+  endif
 endfunc
 
 "------------------------------------------------------
@@ -155,6 +157,8 @@ func vis#statusline#_setup_term()
 endfunc
 
 func vis#statusline#setup_term()
-  setl statusline=%!vis#statusline#_setup_term()
+  if &buftype == 'terminal'
+    setl statusline=%!vis#statusline#_setup_term()
+  endif
 endfunc
 

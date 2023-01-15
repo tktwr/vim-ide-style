@@ -11,6 +11,11 @@ call vis#init()
 command                         VisIDE            call vis#ide()
 command                         VisRedraw         call vis#redraw()
 
+command                         VisFzfFiles       call vis#external#fzf#files()
+command                         VisFzfBmk         call vis#external#fzf#bmk()
+command                         VisFzfBmkLinks    call vis#external#fzf#bmk_links()
+command                         VisFzfBmkPapers   call vis#external#fzf#bmk_papers()
+
 "------------------------------------------------------
 " command for buffer
 "------------------------------------------------------
@@ -223,15 +228,20 @@ augroup ag_ide_style
     autocmd TerminalOpen  *               call vis#statusline#setup_term()
   endif
 
-  autocmd QuickFixCmdPost *grep*          below cwindow
-  autocmd QuickFixCmdPost *make*          below cwindow
-  autocmd WinEnter        *               call vis#map#setup()
-  autocmd BufEnter        *               call vis#buffer#lcd_here()
+  " statusline
   autocmd FileType        bmk             call vis#statusline#setup_side_bar()
-  autocmd FileType        fern            call glyph_palette#apply()
   autocmd FileType        fern            call vis#statusline#setup_side_bar()
+
+  " map
+  autocmd WinEnter        *               call vis#map#setup()
   autocmd FileType        fern            call vis#external#fern#map()
   autocmd FileType        fugitive        call vis#external#fugitive#map()
   autocmd FileType        git             call vis#external#gv#map()
+
+  autocmd QuickFixCmdPost *grep*          below cwindow
+  autocmd QuickFixCmdPost *make*          below cwindow
+
+  autocmd BufEnter        *               call vis#buffer#lcd_here()
+  autocmd FileType        fern            call glyph_palette#apply()
 augroup END
 

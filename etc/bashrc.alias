@@ -38,3 +38,5 @@ fi
 alias vim='vim.sh'
 alias vimdiff='vimdiff.sh'
 alias vimdirdiff='vimdirdiff.sh'
+alias vim-which='vim-which.sh'
+alias vim-where='vim-which.sh'
