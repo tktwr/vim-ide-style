@@ -2,9 +2,9 @@
 " editor to terminal
 "------------------------------------------------------
 " send a cmd to a terminal
-func vis#send#cmd_e2t(cmd)
+func vis#send#cmd_e2t(cmd='')
   let cmd = a:cmd
-  if (cmd == "")
+  if (cmd == '')
     let cmd = bmk#util#RemoveBeginEndSpaces(getline('.'))
     let cmd = "> ".cmd."<CR>"
   endif

@@ -30,8 +30,9 @@ func vis#ide()
     tcd
     call s:create_ide()
   else
-    call s:init_size()
+    call s:resize_all()
   endif
+  call s:store_size_all()
 endfunc
 
 func vis#redraw()
@@ -62,9 +63,9 @@ func s:create_ide()
 endfunc
 
 "------------------------------------------------------
-" init size
+" resize
 "------------------------------------------------------
-func s:resize_for_each()
+func s:resize_each()
   if &buftype == 'terminal'
     exec "resize" g:vis_term_winheight
   elseif winnr() == 2 && &filetype == 'fern'
@@ -72,10 +73,22 @@ func s:resize_for_each()
   endif
 endfunc
 
-func s:init_size()
+func s:resize_all()
   1wincmd w
   exec "normal \<C-W>="
   exec "vertical resize" g:vis_left_winwidth
-  2,$windo call s:resize_for_each()
+  2,$windo call s:resize_each()
+endfunc
+
+"------------------------------------------------------
+" store size
+"------------------------------------------------------
+func s:store_size_each()
+  let w:orig_width = winwidth(0)
+  let w:orig_height = winheight(0)
+endfunc
+
+func s:store_size_all()
+  1,$windo call s:store_size_each()
 endfunc
 
