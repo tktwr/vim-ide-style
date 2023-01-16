@@ -1,10 +1,22 @@
-
-func vis#external#fzf#files2()
-  if FugitiveStatusline() != ''
-    FzfGFiles
+"======================================================
+" fzf
+"======================================================
+func vis#external#fzf#dirs()
+  if FugitiveIsGitDir()
+    let opt = {
+      \ 'source'  : 'git-ls-dirs.sh',
+      \ 'sink'    : 'BmkEditDir',
+      \ 'options' : "--prompt 'Git dirs > '",
+      \ 'dir'     : systemlist('git rev-parse --show-toplevel')[0],
+      \ }
   else
-    FzfFiles
+    let opt = {
+      \ 'source'  : 'fdfind --type d --strip-cwd-prefix',
+      \ 'sink'    : 'BmkEditDir',
+      \ 'options' : "--prompt 'Fd dirs > '",
+      \ }
   endif
+  call fzf#run(fzf#wrap(opt))
 endfunc
 
 func vis#external#fzf#files()
@@ -23,6 +35,14 @@ func vis#external#fzf#files()
       \ }
   endif
   call fzf#run(fzf#wrap(opt))
+endfunc
+
+func vis#external#fzf#files2()
+  if FugitiveIsGitDir()
+    FzfGFiles
+  else
+    FzfFiles
+  endif
 endfunc
 
 func vis#external#fzf#bmk()

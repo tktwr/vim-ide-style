@@ -101,6 +101,7 @@ endfunc
 command                         VisIDE              call vis#ide()
 command                         VisRedraw           call vis#redraw()
 
+command                         VisFzfDirs          call vis#external#fzf#dirs()
 command                         VisFzfFiles         call vis#external#fzf#files()
 command                         VisFzfBmk           call vis#external#fzf#bmk()
 command                         VisFzfBmkLinks      call vis#external#fzf#bmk_links()
