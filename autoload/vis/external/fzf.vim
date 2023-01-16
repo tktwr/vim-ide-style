@@ -8,7 +8,7 @@ func vis#external#fzf#files2()
 endfunc
 
 func vis#external#fzf#files()
-  if FugitiveStatusline() != ''
+  if FugitiveIsGitDir()
     let opt = {
       \ 'source'  : 'git ls-files',
       \ 'sink'    : 'edit',
