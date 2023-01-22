@@ -47,39 +47,27 @@ endfunc
 
 func vis#external#fzf#bmk()
   if vis#sidebar#inside()
+    " Fern menu
     let opt = {
-      \ 'source'  : 'fzf_bmk.sh --src bmk_dir.txt',
-      \ 'options' : "--prompt 'Bmk dirs > '",
+      \ 'source'  : 'fzf_bmk.sh --src bmk_dir.txt fern.txt',
+      \ 'options' : "--prompt 'Bmk > '",
       \ 'sink'    : 'BmkEditItem',
       \ }
   elseif &buftype == 'terminal'
+    " Terminal menu
     let opt = {
-      \ 'source'  : 'fzf_bmk.sh --src bmk_dir.txt',
-      \ 'options' : "--prompt 'Bmk dirs > '",
+      \ 'source'  : 'fzf_bmk.sh --src bmk_dir.txt tcmd.txt tcmd_git.txt tcmd_sys.txt',
+      \ 'options' : "--prompt 'Bmk > '",
       \ 'sink'    : 'BmkEditItem',
       \ }
   else
+    " Editor menu
     let opt = {
-      \ 'source'  : 'fzf_bmk.sh --src bmk_file.txt',
-      \ 'options' : "--prompt 'Bmk files > ' --preview 'preview_bmk.sh {}'",
+      \ 'source'  : 'fzf_bmk.sh --src bmk_file.txt fzf.txt vcmd.txt coc.txt ref.txt links.txt papers.txt',
+      \ 'options' : "--prompt 'Bmk > ' --preview 'preview_bmk.sh {}'",
       \ 'sink'    : 'BmkEditItem',
       \ }
   endif
   call fzf#run(fzf#wrap(opt))
 endfunc
 
-func vis#external#fzf#bmk_links()
-  let opt = {
-    \ 'source'  : 'fzf_bmk.sh --src links.txt',
-    \ 'sink'    : 'BmkViewItem',
-    \ }
-  call fzf#run(fzf#wrap(opt))
-endfunc
-
-func vis#external#fzf#bmk_papers()
-  let opt = {
-    \ 'source'  : 'fzf_bmk.sh --src papers.txt',
-    \ 'sink'    : 'BmkViewItem',
-    \ }
-  call fzf#run(fzf#wrap(opt))
-endfunc

@@ -104,8 +104,6 @@ command                         VisRedraw           call vis#redraw()
 command                         VisFzfDirs          call vis#external#fzf#dirs()
 command                         VisFzfFiles         call vis#external#fzf#files()
 command                         VisFzfBmk           call vis#external#fzf#bmk()
-command                         VisFzfBmkLinks      call vis#external#fzf#bmk_links()
-command                         VisFzfBmkPapers     call vis#external#fzf#bmk_papers()
 
 command                         VisBufDelete        call vis#buffer#delete()
 command -nargs=1                Wx                  call vis#buffer#exchange(<f-args>)
