@@ -178,6 +178,7 @@ augroup ag_ide_style
   " statusline
   autocmd FileType        bmk             call vis#statusline#setup_side_bar()
   autocmd FileType        fern            call vis#statusline#setup_side_bar()
+	autocmd User            CocStatusChange redrawstatus
 
   " map
   autocmd WinEnter        *               call vis#map#setup()

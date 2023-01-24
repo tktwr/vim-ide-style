@@ -67,6 +67,14 @@ func vis#statusline#indicator()
   return "%m%r%w%q"
 endfunc
 
+func vis#statusline#coc_info()
+  if $MY_PROMPT_TYPE >= 3
+    return "[coc:%{coc#status()}]"
+  else
+    return ""
+  endif
+endfunc
+
 func vis#statusline#line_info()
   return "[%c%V,%l/%L,%p%%]"
 endfunc
@@ -104,6 +112,7 @@ func vis#statusline#_setup()
   let stat.= vis#statusline#file_type()
   let stat.= vis#statusline#file_encoding()
   let stat.= vis#statusline#indicator()
+  let stat.= vis#statusline#coc_info()
   let stat.= vis#statusline#separator()
   let stat.= vis#statusline#line_info()
   if $MY_PROMPT_TYPE >= 3

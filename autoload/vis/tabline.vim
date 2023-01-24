@@ -1,6 +1,37 @@
 "======================================================
 " tabline
 "======================================================
+func vis#tabline#str2icon(str)
+  let str2icon = {
+        \ 'clangd'   : ' ',
+        \ 'json'     : ' ',
+        \ 'pyright'  : ' ',
+        \ 'tsserver' : ' ',
+        \ 'vimlsp'   : ' ',
+        \ }
+  let icon = get(str2icon, a:str, '')
+  if icon == ''
+    return a:str
+  else
+    return icon
+  endif
+endfunc
+
+func vis#tabline#coc_services()
+  if !g:coc_service_initialized
+    return '[LSP: not ready]'
+  endif
+
+  let services = CocAction('services')
+  let str = ''
+  for srv in services
+    if srv['state'] == 'running'
+      let str ..= printf('%s', vis#tabline#str2icon(srv['id']))
+    endif
+  endfor
+  return printf('[LSP: %s]', str)
+endfunc
+
 func vis#tabline#_setup()
   let tabline_all = ''
 
@@ -23,7 +54,7 @@ func vis#tabline#_setup()
   let tabline_all .= '%T%='
 
   if $MY_PROMPT_TYPE >= 3
-    let tabline_all .= ' [coc:%{coc#status()}]'
+    let tabline_all .= ' %{vis#tabline#coc_services()}'
   endif
   let tabline_all .= ' %#VisCWD#%{vis#util#VisCWD()}%#TabLineFill#'
   let tabline_all .= ' %#VisInfo#%{vis#tabline#get_info()}%#TabLineFill#'
