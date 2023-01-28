@@ -23,9 +23,9 @@ func vis#highlight#setup()
   hi link VisWinNr         VisGreen
   hi link VisFname         VisGreenRevBold
   hi link VisFname2        VisOrangeRevBold
-  hi link VisGitStatus     TabLine
-  hi link VisCWD           TabLine
-  hi link VisInfo          TabLine
+  hi link VisGitStatus     VisGreenRevBold
+  hi link VisCWD           VisGreenRevBold
+  hi link VisInfo          VisGreenRevBold
 
   let g:terminal_ansi_colors = [
   \ '#000000',

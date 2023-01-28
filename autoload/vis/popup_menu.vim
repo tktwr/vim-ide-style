@@ -9,7 +9,7 @@ func vis#popup_menu#callback(id, result)
 endfunc
 
 func vis#popup_menu#open_vim(title, list, callback, filter)
-  let title = printf(" %s ", a:title)
+  let title = printf("%s", a:title)
 
   let opt = {
     \ 'title'       : title,

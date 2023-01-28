@@ -63,7 +63,7 @@ func vis#external#fzf#bmk()
   else
     " Editor menu
     let opt = {
-      \ 'source'  : 'fzf_bmk.sh --src bmk_file.txt fzf.txt vcmd.txt coc.txt ref.txt links.txt papers.txt',
+      \ 'source'  : 'fzf_bmk.sh --src bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt',
       \ 'options' : "--prompt 'Bmk > ' --preview 'preview_bmk.sh {}'",
       \ 'sink'    : 'BmkEditItem',
       \ }
