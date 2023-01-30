@@ -19,7 +19,13 @@ func vis#external#coc#services()
     return '[LS: not ready]'
   endif
 
-  let services = CocAction('services')
+  try
+    let services = CocAction('services')
+  catch /.*/
+    echom 'vis#external#coc#services(): ' . v:exception
+    let services = []
+  endtry
+
   let str = ''
   for srv in services
     if srv['state'] == 'running'
