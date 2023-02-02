@@ -61,7 +61,7 @@ func vis#util#VisCWD()
     let cwd = getcwd(-1)
   endif
   let cwd = vis#util#VisUnexpand(cwd)
-  return printf("[%s:%s]", type, cwd)
+  return printf("[%s: %s]", type, cwd)
 endfunc
 
 " prompt:

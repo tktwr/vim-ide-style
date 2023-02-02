@@ -36,15 +36,22 @@ func vis#statusline#_file_encoding()
 endfunc
 
 func vis#statusline#_coc_info()
-  let s = coc#status()
-  if s != ''
-    let s = printf('[coc: %s]', s)
+  let stat = ''
+  if exists('*coc#status')
+    let stat = coc#status()
   endif
-  return s
+  if stat != ''
+    let stat = printf('[coc: %s]', stat)
+  endif
+  return stat
 endfunc
 
 func vis#statusline#_git_status()
-  return substitute(FugitiveStatusline(), 'Git', ' ', '')
+  let stat = ''
+  if exists('*FugitiveStatusline')
+    let stat = substitute(FugitiveStatusline(), 'Git', ' ', '')
+  endif
+  return stat
 endfunc
 
 "------------------------------------------------------
