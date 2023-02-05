@@ -5,14 +5,14 @@ func vis#external#fzf#dirs()
   if FugitiveIsGitDir()
     let opt = {
       \ 'source'  : 'git-ls-dirs.sh',
-      \ 'options' : "--prompt 'Git dirs > '",
+      \ 'options' : "--prompt '    '",
       \ 'sink'    : 'BmkEditDir',
       \ 'dir'     : systemlist('git rev-parse --show-toplevel')[0],
       \ }
   else
     let opt = {
       \ 'source'  : 'fdfind --type d --strip-cwd-prefix',
-      \ 'options' : "--prompt 'Fd dirs > '",
+      \ 'options' : "--prompt '   '",
       \ 'sink'    : 'BmkEditDir',
       \ }
   endif
@@ -23,14 +23,14 @@ func vis#external#fzf#files()
   if FugitiveIsGitDir()
     let opt = {
       \ 'source'  : 'git ls-files',
-      \ 'options' : "--prompt 'Git files > ' --preview 'preview.sh {}'",
+      \ 'options' : "--prompt '    ' --preview 'preview.sh {}'",
       \ 'sink'    : 'edit',
       \ 'dir'     : systemlist('git rev-parse --show-toplevel')[0],
       \ }
   else
     let opt = {
       \ 'source'  : 'fdfind --type f --strip-cwd-prefix',
-      \ 'options' : "--prompt 'Fd files > ' --preview 'preview.sh {}'",
+      \ 'options' : "--prompt '   ' --preview 'preview.sh {}'",
       \ 'sink'    : 'edit',
       \ }
   endif
@@ -50,21 +50,21 @@ func vis#external#fzf#bmk()
     " Fern menu
     let opt = {
       \ 'source'  : 'fzf_bmk.sh --src bmk_dir.txt fern.txt',
-      \ 'options' : "--prompt 'Bmk > '",
+      \ 'options' : "--prompt '     '",
       \ 'sink'    : 'BmkEditItem',
       \ }
   elseif &buftype == 'terminal'
     " Terminal menu
     let opt = {
       \ 'source'  : 'fzf_bmk.sh --src bmk_dir.txt tcmd.txt tcmd_git.txt tcmd_sys.txt',
-      \ 'options' : "--prompt 'Bmk > '",
+      \ 'options' : "--prompt '     '",
       \ 'sink'    : 'BmkEditItem',
       \ }
   else
     " Editor menu
     let opt = {
       \ 'source'  : 'fzf_bmk.sh --src bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt',
-      \ 'options' : "--prompt 'Bmk > ' --preview 'preview_bmk.sh {}'",
+      \ 'options' : "--prompt '      ' --preview 'preview_bmk.sh {}'",
       \ 'sink'    : 'BmkEditItem',
       \ }
   endif
