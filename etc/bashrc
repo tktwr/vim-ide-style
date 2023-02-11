@@ -16,6 +16,29 @@ export VIM_IDE_PIPE=~/.vim_ide_style_pipe
 #------------------------------------------------------
 # vimapi
 #------------------------------------------------------
+vimapi_exec() {
+  printf '\e]51;["call","Tapi_Exec","%s"]\x07' "$*" 1>&2
+}
+
+vimapi_exec_prev() {
+  printf '\e]51;["call","Tapi_ExecInPrevWin","%s"]\x07' "$*" 1>&2
+}
+
+vimapi_exec_above() {
+  printf '\e]51;["call","Tapi_ExecInAboveWin","%s"]\x07' "$*" 1>&2
+}
+
+vimapi_exec_tab() {
+  printf '\e]51;["call","Tapi_ExecInNewTab","%s"]\x07' "$*" 1>&2
+}
+
+vimapi_exec_echo() {
+  printf '\e]51;["call","Tapi_ExecEcho","%s"]\x07' "$*" 1>&2
+}
+
+#------------------------------------------------------
+# cwd
+#------------------------------------------------------
 vimapi_make_pipe() {
   pipe_file=$1
   if [ ! -e $pipe_file ]; then
@@ -23,29 +46,6 @@ vimapi_make_pipe() {
   fi
 }
 
-vimapi_exec() {
-  printf '\e]51;["call","Tapi_Exec","%s"]\x07' "$*" 1>&2
-}
-
-vimapi_exec_echo() {
-  printf '\e]51;["call","Tapi_ExecEcho","%s"]\x07' "$*" 1>&2
-}
-
-vimapi_exec_in_prev_win() {
-  printf '\e]51;["call","Tapi_ExecInPrevWin","%s"]\x07' "$*" 1>&2
-}
-
-vimapi_exec_in_above_win() {
-  printf '\e]51;["call","Tapi_ExecInAboveWin","%s"]\x07' "$*" 1>&2
-}
-
-vimapi_exec_in_new_tab() {
-  printf '\e]51;["call","Tapi_ExecInNewTab","%s"]\x07' "$*" 1>&2
-}
-
-#------------------------------------------------------
-# cwd
-#------------------------------------------------------
 vimapi-get-cwd() {
   winnr=${1:-0}
   pipe_file=$VIM_IDE_PIPE
@@ -106,33 +106,8 @@ vimapi-popd() {
 }
 
 #------------------------------------------------------
-# cd-term
-#------------------------------------------------------
-vimapi-cd-term() {
-  local winnr="$1"
-  if [ -n "$winnr" ]; then
-    vimapi_exec VisSendCdT2T "$PWD" $winnr
-  fi
-}
-
-#------------------------------------------------------
-# resize
-#------------------------------------------------------
-vimapi-resize() {
-  local rows=${1:-10}
-  vimapi_exec VisWinResize $rows
-}
-
-#------------------------------------------------------
 # label
 #------------------------------------------------------
-vimapi-term-set-label() {
-  label=$(prompt.sh 'label' '' "$*")
-  if [ -n "$label" ]; then
-    vimapi_exec VisStatuslineForTermSetLabel "$label"
-  fi
-}
-
 vimapi-tabline-set-label() {
   label=$(prompt.sh 'label' '' "$*")
   if [ -n "$label" ]; then
@@ -144,13 +119,20 @@ vimapi-tabline-set-info() {
   vimapi_exec VisTabLineSetInfo "$*"
 }
 
+vimapi-term-set-label() {
+  label=$(prompt.sh 'label' '' "$*")
+  if [ -n "$label" ]; then
+    vimapi_exec VisStatuslineForTermSetLabel "$label"
+  fi
+}
+
 #------------------------------------------------------
 # export
 #------------------------------------------------------
 export -f vimapi_exec
+export -f vimapi_exec_prev
+export -f vimapi_exec_above
+export -f vimapi_exec_tab
 export -f vimapi_exec_echo
-export -f vimapi_exec_in_prev_win
-export -f vimapi_exec_in_above_win
-export -f vimapi_exec_in_new_tab
 export -f vimapi-edit-file
 

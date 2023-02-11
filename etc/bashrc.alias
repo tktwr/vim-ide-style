@@ -9,30 +9,31 @@ if [ "$VIM_TERMINAL" ]; then
   alias pushd='vimapi-pushd'
   alias popd='vimapi-popd'
 
-  alias cd.term='vimapi-cd-term'
-
   alias pwd.alt='vimapi-get-cwd-alt-term'
   alias cd.alt='vimapi-cd $(vimapi-get-cwd-alt-term)'
   cp.alt() { cp "$@" $(vimapi-get-cwd-alt-term); }
   mv.alt() { mv "$@" $(vimapi-get-cwd-alt-term); }
 
-  alias GV='vimapi_exec_in_new_tab VisGV'
-  alias GS='vimapi_exec_in_new_tab VisGstatusToggle'
-  alias I='vimapi_exec_in_new_tab VisIDE'
+  alias I='vimapi_exec VisIDE'
   alias N='vimapi_exec new'
-  alias T='vimapi_exec VisTerm above'
+  alias T='vimapi_exec VisTerm'
   alias TV='vimapi_exec VisTermV'
 
-  alias ,tabe='vimapi_exec tabedit'
-  alias ,resize='vimapi-resize'
+  alias GS='vimapi_exec_tab VisGS'
+  alias GV='vimapi_exec_tab VisGV'
+  alias ,I='vimapi_exec_tab VisIDE'
+  alias ,N='vimapi_exec tabedit'
+  alias ,T='vimapi_exec tab VisTerm'
+  alias ,resize='vimapi_exec VisWinResize'
+  alias ,vresize='vimapi_exec VisWinVResize'
 else
+  alias GS='vim -c "VisGS"'
   alias GV='vim -c "VisGV"'
-  alias GS='vim -c "VisGstatusToggle"'
   alias I='vim -c "VisIDE"'
-  alias T='vim -c "VisTerm"'
+  alias T='vim -c "below VisTerm"'
 
   alias nI='nvim -c "VisIDE"'
-  alias nT='nvim -c "VisTerm"'
+  alias nT='nvim -c "below VisTerm"'
 fi
 
 alias vim='vim.sh'

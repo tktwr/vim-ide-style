@@ -56,10 +56,10 @@ func s:create_ide()
   wincmd w
   if vis#window#is_fullscreen()
     vsp
-    VisTerm
+    below VisTerm
     wincmd w
   endif
-  VisTerm
+  below VisTerm
 endfunc
 
 "------------------------------------------------------

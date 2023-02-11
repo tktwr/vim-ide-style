@@ -58,12 +58,12 @@ endfunc
 "------------------------------------------------------
 " resize window
 "------------------------------------------------------
-func vis#window#resize(height)
+func vis#window#resize(height=10)
   exec "resize" a:height
   let w:orig_height = a:height
 endfunc
 
-func vis#window#vresize(width)
+func vis#window#vresize(width=82)
   exec "vertical resize" a:width
   let w:orig_width = a:width
 endfunc
