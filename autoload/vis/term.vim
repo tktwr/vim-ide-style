@@ -5,17 +5,25 @@
 " open terminal
 "------------------------------------------------------
 func vis#term#open(mods)
-  let h = g:vis_term_winheight
-
-  if has('nvim')
-    exec printf("%s %dnew", a:mods, h)
-    term
+  if exists('t:ide') && a:mods != 'tab'
+    let h = g:vis_term_winheight
   else
-    exec printf("%s term ++rows=%d", a:mods, h)
+    let h = 0
   endif
 
-  if winnr('$') == 1
-    resize
+  if has('nvim')
+    if h > 0
+      exec printf("%s %dnew", a:mods, h)
+    else
+      exec printf("%s new", a:mods)
+    endif
+    term
+  else
+    if h > 0
+      exec printf("%s term ++rows=%d", a:mods, h)
+    else
+      exec printf("%s term", a:mods)
+    endif
   endif
 
   set winfixheight

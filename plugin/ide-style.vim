@@ -126,7 +126,7 @@ command -nargs=1                VisSetTabstop       call vis#util#set_tabstop(<f
 command                         VisLineNumberToggle call vis#util#line_number_toggle()
 
 command                         VisCheckEnv         call vis#util#check_env()
-command -nargs=0                VisWinInfo          call vis#util#win_info()
+command                         VisWinInfo          call vis#util#win_info()
 "------------------------------------------------------
 command                         VisFzfDirs          call vis#external#fzf#dirs()
 command                         VisFzfFiles         call vis#external#fzf#files()

@@ -52,6 +52,7 @@ endfunc
 " create
 "------------------------------------------------------
 func s:create_ide()
+  let t:ide = 1
   call vis#sidebar#create()
   wincmd w
   if vis#window#is_fullscreen()

@@ -6,6 +6,7 @@ func vis#buffer#lcd_here()
   if filereadable(file)
     let dir = fnamemodify(file, ':h')
     exec "lcd" dir
+    set modifiable
   endif
 endfunc
 
