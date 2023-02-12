@@ -2,72 +2,56 @@
 " fzf
 "======================================================
 func vis#external#fzf#dirs()
+  let prompt = '   '
+  let dir = '.'
   if FugitiveIsGitDir()
-    let opt = {
-      \ 'source'  : 'git-ls-dirs.sh',
-      \ 'options' : "--prompt '    '",
-      \ 'sink'    : 'BmkEditDir',
-      \ 'dir'     : systemlist('git rev-parse --show-toplevel')[0],
-      \ }
-  else
-    let opt = {
-      \ 'source'  : 'fdfind --type d --strip-cwd-prefix',
-      \ 'options' : "--prompt '   '",
-      \ 'sink'    : 'BmkEditDir',
-      \ }
+    let prompt = ' ' . prompt
+    let dir = systemlist('git rev-parse --show-toplevel')[0]
   endif
+  let opt = {
+    \ 'source'  : 'fzf_fd.sh --src --type=d',
+    \ 'options' : printf("--prompt '%s' --preview 'preview.sh {}'", prompt),
+    \ 'sink'    : 'BmkEditDir',
+    \ 'dir'     : dir,
+    \ }
   call fzf#run(fzf#wrap(opt))
 endfunc
 
 func vis#external#fzf#files()
+  let prompt = '   '
+  let dir = '.'
   if FugitiveIsGitDir()
-    let opt = {
-      \ 'source'  : 'git ls-files',
-      \ 'options' : "--prompt '    ' --preview 'preview.sh {}'",
-      \ 'sink'    : 'edit',
-      \ 'dir'     : systemlist('git rev-parse --show-toplevel')[0],
-      \ }
-  else
-    let opt = {
-      \ 'source'  : 'fdfind --type f --strip-cwd-prefix',
-      \ 'options' : "--prompt '   ' --preview 'preview.sh {}'",
-      \ 'sink'    : 'edit',
-      \ }
+    let prompt = ' ' . prompt
+    let dir = systemlist('git rev-parse --show-toplevel')[0]
   endif
+  let opt = {
+    \ 'source'  : 'fzf_fd.sh --src --type=f',
+    \ 'options' : printf("--prompt '%s' --preview 'preview.sh {}'", prompt),
+    \ 'sink'    : 'BmkEditFile',
+    \ 'dir'     : dir,
+    \ }
   call fzf#run(fzf#wrap(opt))
-endfunc
-
-func vis#external#fzf#files2()
-  if FugitiveIsGitDir()
-    FzfGFiles
-  else
-    FzfFiles
-  endif
 endfunc
 
 func vis#external#fzf#bmk()
   if vis#sidebar#inside()
     " Fern menu
-    let opt = {
-      \ 'source'  : 'fzf_bmk.sh --src bmk_dir.txt fern.txt',
-      \ 'options' : "--prompt '     '",
-      \ 'sink'    : 'BmkEditItem',
-      \ }
+    let source = 'bmk_dir.txt fern.txt'
+    let prompt = '     '
   elseif &buftype == 'terminal'
     " Terminal menu
-    let opt = {
-      \ 'source'  : 'fzf_bmk.sh --src bmk_dir.txt tcmd.txt tcmd_git.txt tcmd_sys.txt',
-      \ 'options' : "--prompt '     '",
-      \ 'sink'    : 'BmkEditItem',
-      \ }
+    let source = 'bmk_dir.txt tcmd.txt tcmd_git.txt tcmd_sys.txt'
+    let prompt = '     '
   else
     " Editor menu
-    let opt = {
-      \ 'source'  : 'fzf_bmk.sh --src bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt',
-      \ 'options' : "--prompt '      ' --preview 'preview_bmk.sh {}'",
-      \ 'sink'    : 'BmkEditItem',
-      \ }
+    let source = 'bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt'
+    let prompt = '      '
   endif
+  let opt = {
+    \ 'source'  : printf("fzf_bmk.sh --src %s", source),
+    \ 'options' : printf("--prompt '%s' --preview 'preview_bmk.sh {}'", prompt),
+    \ 'sink'    : 'BmkEditItem',
+    \ }
   call fzf#run(fzf#wrap(opt))
 endfunc
 
