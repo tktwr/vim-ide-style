@@ -33,6 +33,20 @@ func vis#external#fzf#files()
   call fzf#run(fzf#wrap(opt))
 endfunc
 
+func vis#external#fzf#rg()
+  let prompt = '   '
+  let dir = '.'
+  if FugitiveIsGitDir()
+    let prompt = ' ' . prompt
+    let dir = systemlist('git rev-parse --show-toplevel')[0]
+  endif
+  let opt = fzf#vim#with_preview()
+  let opt['dir'] = dir
+  let opt['options'] += ['--prompt', prompt]
+  let cmd = 'rg --column --line-number --no-heading --color=always --smart-case -- ""'
+  call fzf#vim#grep(cmd, 1, opt, 0)
+endfunc
+
 func vis#external#fzf#bmk()
   if vis#sidebar#inside()
     " Fern menu

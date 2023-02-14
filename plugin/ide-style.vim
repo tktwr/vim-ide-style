@@ -130,6 +130,7 @@ command                         VisWinInfo          call vis#util#win_info()
 "------------------------------------------------------
 command                         VisFzfDirs          call vis#external#fzf#dirs()
 command                         VisFzfFiles         call vis#external#fzf#files()
+command                         VisFzfRg            call vis#external#fzf#rg()
 command                         VisFzfBmk           call vis#external#fzf#bmk()
 
 command                         VisFernDrawerToggle call vis#external#fern#open_drawer_toggle()
