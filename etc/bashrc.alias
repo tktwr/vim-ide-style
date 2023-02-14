@@ -17,7 +17,7 @@ if [ "$VIM_TERMINAL" ]; then
   alias I='vimapi_exec VisIDE'
   alias N='vimapi_exec new'
   alias T='vimapi_exec VisTerm'
-  alias TV='vimapi_exec VisTermV'
+  alias V='vimapi_exec VisTermV'
 
   alias GS='vimapi_exec_tab VisGS'
   alias GV='vimapi_exec_tab VisGV'
@@ -30,10 +30,14 @@ else
   alias GS='vim -c "VisGS"'
   alias GV='vim -c "VisGV"'
   alias I='vim -c "VisIDE"'
-  alias T='vim -c "below VisTerm"'
+  alias T='vim -c "VisTerm" -c "only"'
+  alias T2='vim -c "VisTerm" -c "only" -c "VisTerm"'
+  alias V2='vim -c "VisTerm" -c "only" -c "vert VisTerm"'
 
   alias nI='nvim -c "VisIDE"'
-  alias nT='nvim -c "below VisTerm"'
+  alias nT='nvim -c "VisTerm" -c "only"'
+  alias nT2='nvim -c "VisTerm" -c "only" -c "VisTerm"'
+  alias nV2='nvim -c "VisTerm" -c "only" -c "vert VisTerm"'
 fi
 
 alias vim='vim.sh'
