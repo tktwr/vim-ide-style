@@ -40,10 +40,8 @@ func vis#external#fzf#rg()
     let prompt = ' ' . prompt
     let dir = systemlist('git rev-parse --show-toplevel')[0]
   endif
-  let opt = fzf#vim#with_preview()
-  let opt['dir'] = dir
-  let opt['options'] += ['--prompt', prompt]
   let cmd = 'rg --column --line-number --no-heading --color=always --smart-case -- ""'
+  let opt = fzf#vim#with_preview({'options': ['--prompt', prompt], 'dir': dir})
   call fzf#vim#grep(cmd, 1, opt, 0)
 endfunc
 
