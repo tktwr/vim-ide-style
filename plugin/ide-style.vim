@@ -128,8 +128,8 @@ command                         VisLineNumberToggle call vis#util#line_number_to
 command                         VisCheckEnv         call vis#util#check_env()
 command                         VisWinInfo          call vis#util#win_info()
 "------------------------------------------------------
-command                         VisFzfDirs          call vis#external#fzf#dirs()
-command                         VisFzfFiles         call vis#external#fzf#files()
+command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')
+command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
 command                         VisFzfRg            call vis#external#fzf#rg()
 command                         VisFzfBmk           call vis#external#fzf#bmk()
 
