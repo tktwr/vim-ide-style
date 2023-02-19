@@ -76,6 +76,14 @@ func vis#window#place(place)
 endfunc
 
 "------------------------------------------------------
+" quickfix window
+"------------------------------------------------------
+func vis#window#qf()
+  cclose
+  below cwindow 10
+endfunc
+
+"------------------------------------------------------
 " close window
 "------------------------------------------------------
 func vis#window#close_prev_win()

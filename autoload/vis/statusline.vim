@@ -2,9 +2,13 @@
 " statusline
 "======================================================
 func vis#statusline#_is_same_dir()
-  let cwd = getcwd(0, 0)
-  let dir = expand("%:p:h")
-  if (cwd != dir)
+  let cwd = getcwd(winnr(), 0)
+  let dir = fnamemodify(bufname(bufnr()), ":p:h")
+  return cwd == dir
+endfunc
+
+func vis#statusline#_is_same_dir_mark()
+  if !vis#statusline#_is_same_dir()
     return "*"
   else
     return ""
@@ -67,8 +71,8 @@ endfunc
 
 func vis#statusline#file_name()
   let stat   = "%#VisFname#"
-  let stat ..= "%{vis#statusline#_is_same_dir()}"
-  let stat ..= "%t"
+  let stat ..= "%{vis#statusline#_is_same_dir_mark()}"
+  let stat ..= "%f"
   let stat ..= "%#StatusLineNC#"
   let stat ..= " "
   return stat

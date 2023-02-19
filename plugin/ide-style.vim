@@ -118,6 +118,7 @@ command -nargs=1                Wc                  call vis#buffer#copy(<f-args
 
 command -nargs=?                VisWinResize        call vis#window#resize(<f-args>)
 command -nargs=?                VisWinVResize       call vis#window#vresize(<f-args>)
+command                         VisQuickFix         call vis#window#qf()
 
 command                         VisSendCdE2T        call vis#send#cd_e2t()
 command                         VisSendCmdE2T       call vis#send#cmd_e2t()
@@ -188,6 +189,7 @@ augroup ag_ide_style
 
   autocmd QuickFixCmdPost *grep*          below cwindow
   autocmd QuickFixCmdPost *make*          below cwindow
+  autocmd QuickFixCmdPost *Quickfix*      below cwindow
 
   autocmd BufEnter        *               call vis#buffer#lcd_here()
   autocmd FileType        fern            call glyph_palette#apply()

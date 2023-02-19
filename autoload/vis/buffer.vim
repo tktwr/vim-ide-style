@@ -6,6 +6,12 @@ func vis#buffer#lcd_here()
   if filereadable(file)
     let dir = fnamemodify(file, ':h')
     exec "lcd" dir
+
+    if FugitiveIsGitDir()
+      let dir = systemlist('git rev-parse --show-toplevel')[0]
+      exec "lcd" dir
+    endif
+
     set modifiable
   endif
 endfunc

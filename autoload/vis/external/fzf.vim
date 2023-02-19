@@ -65,10 +65,16 @@ func vis#external#fzf#rg()
     let dir = systemlist('git rev-parse --show-toplevel')[0]
   endif
 
+  exec "tcd" dir
+
   let cmd = 'rg --column --line-number --no-heading --color=always --smart-case -- ""'
 
+  let options  = ['--prompt', prompt]
+  let options += ['--header', '[<TAB>:select, C-T:all, C-Q:quickfix]']
+  let options += ['--bind', 'ctrl-t:toggle-all']
+
   let opt = fzf#vim#with_preview({
-    \ 'options': ['--prompt', prompt],
+    \ 'options': options,
     \ 'dir': dir,
     \ })
 
