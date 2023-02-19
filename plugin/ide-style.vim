@@ -63,12 +63,10 @@ func VisTabGV()
 endfunc
 
 func VisTabDiff(file1, file2)
-  tabedit
   call vis#internal#diff#open(a:file1, a:file2)
 endfunc
 
 func VisTabDirDiff(dir1, dir2)
-  tabedit
   call vis#external#dirdiff#open(a:dir1, a:dir2)
 endfunc
 
