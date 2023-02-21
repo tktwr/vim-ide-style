@@ -7,12 +7,29 @@ func vis#statusline#_is_same_dir()
   return cwd == dir
 endfunc
 
-func vis#statusline#_is_same_dir_mark()
-  if !vis#statusline#_is_same_dir()
-    return "*"
+func vis#statusline#_file_name()
+  let file = fnamemodify(bufname(bufnr()), ":p")
+  let file = vis#util#VisUnexpand(file)
+  return file
+endfunc
+
+func vis#statusline#_dir_name()
+  let dir = fnamemodify(bufname(bufnr()), ":p:h")
+
+  if (match(dir, '^/mnt/') == 0)
+    let fs = ' '
   else
-    return ""
+    let fs = ' '
   endif
+
+  if !vis#statusline#_is_same_dir()
+    let is_same_dir = "[*]"
+  else
+    let is_same_dir = ""
+  endif
+
+  let dir = vis#util#VisUnexpand(dir)
+  return printf("[ %s][%s]%s", dir, fs, is_same_dir)
 endfunc
 
 func vis#statusline#_file_type()
@@ -71,8 +88,15 @@ endfunc
 
 func vis#statusline#file_name()
   let stat   = "%#VisFname#"
-  let stat ..= "%{vis#statusline#_is_same_dir_mark()}"
-  let stat ..= "%f"
+  let stat ..= "%t"
+  let stat ..= "%#StatusLineNC#"
+  let stat ..= " "
+  return stat
+endfunc
+
+func vis#statusline#dir_name()
+  let stat   = "%#VisYellowRevBold#"
+  let stat ..= "%{vis#statusline#_dir_name()}"
   let stat ..= "%#StatusLineNC#"
   let stat ..= " "
   return stat
@@ -95,7 +119,7 @@ func vis#statusline#line_info()
 endfunc
 
 func vis#statusline#separator()
-  return "%<%="
+  return " %<%="
 endfunc
 
 func vis#statusline#coc_info()
@@ -140,6 +164,7 @@ func vis#statusline#_setup()
   let stat ..= vis#statusline#indicator()
   let stat ..= vis#statusline#coc_info()
   let stat ..= vis#statusline#separator()
+  let stat ..= vis#statusline#dir_name()
   let stat ..= vis#statusline#line_info()
   let stat ..= vis#statusline#git_status()
   return stat
