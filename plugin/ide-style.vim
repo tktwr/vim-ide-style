@@ -127,10 +127,11 @@ command                         VisLineNumberToggle call vis#util#line_number_to
 command                         VisCheckEnv         call vis#util#check_env()
 command                         VisWinInfo          call vis#util#win_info()
 "------------------------------------------------------
+command                         VisFzfBmk           call vis#external#fzf#bmk()
 command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')
 command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
-command                         VisFzfRg            call vis#external#fzf#rg()
-command                         VisFzfBmk           call vis#external#fzf#bmk()
+command                         VisFzfRg            call vis#external#fzf#rg('<cfile>')
+command                         VisFzfTags          call vis#external#fzf#tags('<cfile>')
 
 command                         VisFernDrawerToggle call vis#external#fern#open_drawer_toggle()
 command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#open_drawer(<f-args>)
