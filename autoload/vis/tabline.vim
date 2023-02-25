@@ -22,6 +22,7 @@ func vis#tabline#_setup()
   " reset tab page nr
   let tabline_all .= '%T%='
 
+  let tabline_all .= ' [%{vis#util#date()}]'
   if $MY_PROMPT_TYPE >= 3
     let tabline_all .= ' %{vis#external#coc#services()}'
   endif

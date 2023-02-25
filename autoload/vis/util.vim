@@ -2,6 +2,10 @@ func vis#util#abs_filepath(filepath)
   return fnamemodify(resolve(expand(a:filepath)), ':p')
 endfunc
 
+func vis#util#date()
+  return systemlist("env LC_TIME=C date '+%Y/%m/%d (%a) %H:%M:%S'")[0]
+endfunc
+
 func vis#util#VisExpand(url)
   let url = a:url
   if (url == "")
