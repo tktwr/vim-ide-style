@@ -115,7 +115,7 @@ func vis#statusline#indicator()
 endfunc
 
 func vis#statusline#line_info()
-  return "[Col %c%V,Ln %l/%L %p%%]"
+  return "[C:%c%V,L:%l/%L %p%%]"
 endfunc
 
 func vis#statusline#separator()

@@ -137,6 +137,13 @@ command                         VisFernDrawerToggle call vis#external#fern#open_
 command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#open_drawer(<f-args>)
 command -nargs=1 -complete=dir  VisFern             call vis#external#fern#open(<f-args>)
 
+command                         VisPopLazygit       call vis#popup_term#open('Lazygit', ['lazygit.sh'])
+command                         VisPopApt           call vis#popup_term#open('Apt', ['fzf_apt.sh'])
+command                         VisTabLazygit       tab term ++close lazygit.sh
+command                         VisTabApt           tab term ++close fzf_apt.sh
+command                         VisLazygit          term ++curwin ++close lazygit.sh
+command                         VisApt              term ++curwin ++close fzf_apt.sh
+
 command                         VisGS               call vis#external#fugitive#toggle()
 command                         VisGV               call vis#external#gv#open()
 
