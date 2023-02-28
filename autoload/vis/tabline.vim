@@ -40,21 +40,11 @@ endfunc
 " label
 "------------------------------------------------------
 func vis#tabline#get_label(nr)
-  let tab_labels = keys(g:vis_tab_labels)
-  let r = match(tab_labels, a:nr-1)
-  if r != -1
-    let label = g:vis_tab_labels[a:nr-1]
-  else
-    let label = getcwd(-1, a:nr)
-    let label = vis#util#VisUnexpand(label)
-  endif
-
-  return "[".a:nr."] ".label
+  return "[".a:nr."] ".gettabvar(a:nr, 'label', '--')
 endfunc
 
 func vis#tabline#set_label(label)
-  let nr = tabpagenr()
-  let g:vis_tab_labels[nr-1] = a:label
+  let t:label = a:label
   call vis#tabline#setup()
 endfunc
 

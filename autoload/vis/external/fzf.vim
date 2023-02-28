@@ -35,7 +35,7 @@ func vis#external#fzf#fd(type, sink)
 
   if FugitiveIsGitDir()
     let prompt_icons = ' ' . prompt_icons
-    let base_dir = systemlist('git rev-parse --show-toplevel')[0]
+    let base_dir = vis#util#git_root_dir()
   endif
 
   let source = printf('fzf_fd.sh --src --type=%s', a:type)
@@ -77,7 +77,7 @@ func vis#external#fzf#rg(query='', dirs=[])
 
   if FugitiveIsGitDir()
     let prompt_icons = ' ' . prompt_icons
-    let base_dir = systemlist('git rev-parse --show-toplevel')[0]
+    let base_dir = vis#util#git_root_dir()
   endif
 
   exec "tcd" base_dir

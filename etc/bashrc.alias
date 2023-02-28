@@ -29,8 +29,8 @@ if [ "$VIM_TERMINAL" ]; then
   alias lg='vimapi_exec_tab VisLazygit'
   alias apt?='vimapi_exec_tab VisApt'
 
-  alias GS='vimapi_exec_tab VisGS'
-  alias GV='vimapi_exec_tab VisGV'
+  alias GS='vimapi_exec VisGS'
+  alias GV='vimapi_exec VisGV'
 else
   alias I='vim -c "VisIDE"'
   alias T='vim -c "VisTerm" -c "only"'

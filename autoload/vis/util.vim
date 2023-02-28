@@ -1,3 +1,11 @@
+func vis#util#git_root_dir()
+  return systemlist('git rev-parse --show-toplevel')[0]
+endfunc
+
+func vis#util#git_repo_name()
+  return fnamemodify(vis#util#git_root_dir(), ':p:h:t')
+endfunc
+
 func vis#util#abs_filepath(filepath)
   return fnamemodify(resolve(expand(a:filepath)), ':p')
 endfunc
