@@ -15,12 +15,7 @@ endfunc
 
 func vis#statusline#_dir_name()
   let dir = fnamemodify(bufname(bufnr()), ":p:h")
-
-  if (match(dir, '^/mnt/') == 0)
-    let fs = ' '
-  else
-    let fs = ' '
-  endif
+  let fs = vis#util#file_system(dir)
 
   if !vis#statusline#_is_same_dir()
     let is_same_dir = "[*]"

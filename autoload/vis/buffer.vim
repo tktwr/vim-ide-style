@@ -8,7 +8,7 @@ func vis#buffer#lcd_here()
     exec "lcd" dir
 
     if FugitiveIsGitDir()
-      let dir = systemlist('git rev-parse --show-toplevel')[0]
+      let dir = vis#util#git_root_dir()
       exec "lcd" dir
     endif
 

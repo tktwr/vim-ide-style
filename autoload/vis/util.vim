@@ -14,6 +14,15 @@ func vis#util#date()
   return systemlist("env LC_TIME=C date '+%Y/%m/%d (%a) %H:%M:%S'")[0]
 endfunc
 
+func vis#util#file_system(dir)
+  if (match(a:dir, '^/mnt/') == 0)
+    let fs = ' '
+  else
+    let fs = ' '
+  endif
+  return fs
+endfunc
+
 func vis#util#VisExpand(url)
   let url = a:url
   if (url == "")
@@ -72,8 +81,9 @@ func vis#util#VisCWD()
     let type = "global"
     let cwd = getcwd(-1)
   endif
+  let fs = vis#util#file_system(cwd)
   let cwd = vis#util#VisUnexpand(cwd)
-  return printf("[%s: %s]", type, cwd)
+  return printf("[%s: %s][%s]", type, cwd, fs)
 endfunc
 
 " prompt:
