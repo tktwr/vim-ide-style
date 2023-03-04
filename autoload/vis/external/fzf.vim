@@ -86,8 +86,7 @@ func vis#external#fzf#rg(query='', dirs=[])
   let prompt = printf('Rg(%s)> ', prompt_icons)
 
   let options  = ['--prompt', prompt]
-  let options += ['--header', '[<TAB>:select, C-T:all, C-Q:quickfix]']
-  let options += ['--bind', 'ctrl-t:toggle-all']
+  let options += ['--header', '[A-A:select all, A-D:deselect all, <TAB>:select, <multi:CR>:quickfix]']
   let options += ['--query', query]
 
   let opt = fzf#vim#with_preview({
