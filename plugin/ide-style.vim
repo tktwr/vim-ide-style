@@ -127,22 +127,21 @@ command                         VisLineNumberToggle call vis#util#line_number_to
 command                         VisCheckEnv         call vis#util#check_env()
 command                         VisWinInfo          call vis#util#win_info()
 "------------------------------------------------------
+command                         VisFernDrawerToggle call vis#external#fern#open_drawer_toggle()
+command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#open_drawer(<f-args>)
+command -nargs=1 -complete=dir  VisFern             call vis#external#fern#open(<f-args>)
+
 command                         VisFzfBmk           call vis#external#fzf#bmk()
 command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')
 command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
 command                         VisFzfRg            call vis#external#fzf#rg('<cfile>')
 command                         VisFzfTags          call vis#external#fzf#tags('<cfile>')
 
-command                         VisFernDrawerToggle call vis#external#fern#open_drawer_toggle()
-command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#open_drawer(<f-args>)
-command -nargs=1 -complete=dir  VisFern             call vis#external#fern#open(<f-args>)
-
-command                         VisPopLazygit       call vis#popup_term#open('Lazygit', ['lazygit.sh'])
-command                         VisPopApt           call vis#popup_term#open('Apt', ['fzf_apt.sh'])
-command                         VisTabLazygit       tab term ++close lazygit.sh
-command                         VisTabApt           tab term ++close fzf_apt.sh
-command                         VisLazygit          term ++curwin ++close lazygit.sh
-command                         VisApt              term ++curwin ++close fzf_apt.sh
+command -nargs=?                VisLazygit          call vis#shell#open('Lazygit', ['lazygit.sh'],  <f-args>)
+command -nargs=?                VisFzfMan           call vis#shell#open('Man',     ['fzf_man.sh'],  <f-args>)
+command -nargs=?                VisFzfApt           call vis#shell#open('Apt',     ['fzf_apt.sh'],  <f-args>)
+command -nargs=?                VisFzfPip           call vis#shell#open('Pip',     ['fzf_pip.sh'],  <f-args>)
+command -nargs=?                VisFzfDpkg          call vis#shell#open('Dpkg',    ['fzf_dpkg.sh'], <f-args>)
 
 command                         VisGS               call vis#external#fugitive#toggle()
 command                         VisGV               call vis#external#gv#open()

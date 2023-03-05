@@ -14,6 +14,9 @@ if [ "$VIM_TERMINAL" ]; then
   cp.alt() { cp "$@" $(vimapi-get-cwd-alt-term); }
   mv.alt() { mv "$@" $(vimapi-get-cwd-alt-term); }
 
+  alias ,resize='vimapi_exec VisWinResize'
+  alias ,vresize='vimapi_exec VisWinVResize'
+
   alias I='vimapi_exec VisIDE'
   alias N='vimapi_exec new'
   alias T='vimapi_exec VisTerm'
@@ -23,11 +26,11 @@ if [ "$VIM_TERMINAL" ]; then
   alias ,N='vimapi_exec tabedit'
   alias ,T='vimapi_exec tab VisTerm'
 
-  alias ,resize='vimapi_exec VisWinResize'
-  alias ,vresize='vimapi_exec VisWinVResize'
-
-  alias lg='vimapi_exec_tab VisLazygit'
-  alias apt?='vimapi_exec_tab VisApt'
+  alias ,lg='vimapi_exec VisLazygit tab'
+  alias ,man='vimapi_exec VisFzfMan tab'
+  alias ,apt='vimapi_exec VisFzfApt tab'
+  alias ,pip='vimapi_exec VisFzfPip tab'
+  alias ,dpkg='vimapi_exec VisFzfDpkg tab'
 
   alias GS='vimapi_exec VisGS'
   alias GV='vimapi_exec VisGV'
