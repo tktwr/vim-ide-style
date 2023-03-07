@@ -11,9 +11,12 @@ func vis#buffer#lcd_here()
       let dir = vis#util#git_root_dir()
       exec "lcd" dir
     endif
-
-    set modifiable
   endif
+endfunc
+
+func vis#buffer#modifiable()
+  set modifiable
+  set noreadonly
 endfunc
 
 "------------------------------------------------------

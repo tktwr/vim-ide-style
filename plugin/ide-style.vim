@@ -102,6 +102,7 @@ endfunc
 command                         VisCdHere           exec "cd"  expand("%:p:h")
 command                         VisTcdHere          exec "tcd" expand("%:p:h")
 command                         VisLcdHere          exec "lcd" expand("%:p:h")
+command                         VisModifiable       call vis#buffer#modifiable()
 "------------------------------------------------------
 command                         VisIDE              call vis#ide()
 command                         VisRedraw           call vis#redraw()
