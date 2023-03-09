@@ -5,7 +5,7 @@ func vis#init()
   " height
   let g:vis_term_winheight = 10
   let g:vis_gstatus_winheight = 10
-  let g:vis_fern_2nd_winheight = 18
+  let g:vis_fern_2nd_winheight = 20
 
   " width
   let g:vis_help_winwidth = 82
