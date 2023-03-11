@@ -15,10 +15,9 @@ func vis#external#fzf#bmk()
   let prompt = printf('Bmk(%s)> ', prompt_icons)
 
   let options  = ['--prompt', prompt]
-  let options += ['--preview', 'preview_bmk.sh {}']
-  let options += ['--header', '[C-R:open, C-T:preview]']
+  let options += ['--header', '[C-R:open, A-T:preview, A-N:p-next, A-P:p-prev]']
   let options += ['--bind', 'ctrl-r:execute(fzf_bmk.sh --eval-open {})']
-  let options += ['--bind', 'ctrl-t:toggle-preview']
+  let options += ['--preview', 'preview_bmk.sh {}']
 
   let opt = {
     \ 'source'  : printf("fzf_bmk.sh --src %s", source),
@@ -42,14 +41,13 @@ func vis#external#fzf#fd(type, sink)
   let prompt = printf('Fd(%s)> ', prompt_icons)
 
   let options  = ['--prompt', prompt]
-  let options += ['--preview', 'preview.sh {}']
-  let options += ['--header', '[C-D:dir, C-F:file, C-T:preview, A-X:explorer, A-C:chrome, A-V:vscode]']
+  let options += ['--header', '[C-D:dir, C-F:file, A-X:explorer, A-C:chrome, A-V:vscode, A-T:preview, A-N:p-next, A-P:p-prev]']
   let options += ['--bind', 'ctrl-d:reload(fzf_fd.sh --src --type=d)']
   let options += ['--bind', 'ctrl-f:reload(fzf_fd.sh --src --type=f)']
-  let options += ['--bind', 'ctrl-t:toggle-preview']
   let options += ['--bind', 'alt-x:execute(te.sh {})']
   let options += ['--bind', 'alt-c:execute(chrome.sh {})']
   let options += ['--bind', 'alt-v:execute(vscode.sh {})']
+  let options += ['--preview', 'preview.sh {}']
 
   let opt = {
     \ 'source'  : source,
