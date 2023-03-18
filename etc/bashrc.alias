@@ -2,25 +2,27 @@
 # alias
 #------------------------------------------------------
 if [ "$VIM_TERMINAL" ]; then
-  alias F='vimapi-edit-dir'
-  alias F2='vimapi-edit-dir-2'
-
-  alias cd='vimapi-cd'
-  alias pushd='vimapi-pushd'
-  alias popd='vimapi-popd'
-
   alias pwd.alt='vimapi-get-cwd-alt-term'
   alias cd.alt='vimapi-cd $(vimapi-get-cwd-alt-term)'
   cp.alt() { cp "$@" $(vimapi-get-cwd-alt-term); }
   mv.alt() { mv "$@" $(vimapi-get-cwd-alt-term); }
 
+  alias cd='vimapi-cd'
+  alias pushd='vimapi-pushd'
+  alias popd='vimapi-popd'
+
   alias ,resize='vimapi_exec VisWinResize'
   alias ,vresize='vimapi_exec VisWinVResize'
+
+  alias F='vimapi-edit-dir'
+  alias F2='vimapi-edit-dir-2'
 
   alias I='vimapi_exec VisIDE'
   alias N='vimapi_exec new'
   alias T='vimapi_exec VisTerm'
-  alias V='vimapi_exec VisTermV'
+
+  alias vN='vimapi_exec vnew'
+  alias vT='vimapi_exec VisTermV'
 
   alias ,I='vimapi_exec_tab VisIDE'
   alias ,N='vimapi_exec tabedit'

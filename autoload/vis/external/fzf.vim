@@ -4,14 +4,15 @@
 func vis#external#fzf#bmk()
   if vis#sidebar#inside()
     " Fern menu
-    let source = 'bmk_dir.txt fern.txt'
+    let bmk_files = 'bmk_dir.txt fern.txt'
     let prompt_icons = '  '
   else
     " Editor menu
-    let source = 'bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt'
+    let bmk_files = 'bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt'
     let prompt_icons = '   '
   endif
 
+  let source = printf('fzf_bmk.sh --src %s', bmk_files)
   let prompt = printf('Bmk(%s)> ', prompt_icons)
 
   let options  = ['--prompt', prompt]
@@ -20,7 +21,7 @@ func vis#external#fzf#bmk()
   let options += ['--preview', 'preview_bmk.sh {}']
 
   let opt = {
-    \ 'source'  : printf("fzf_bmk.sh --src %s", source),
+    \ 'source'  : source,
     \ 'options' : options,
     \ 'sink'    : 'BmkEditItem',
     \ }
