@@ -65,7 +65,7 @@ endfunc
 func vis#external#fzf#rg(query='', dirs=[])
   let query = a:query
   if (match(query, '<cfile>') == 0)
-    let query = printf('\b%s\b', expand(query))
+    let query = printf('%s -w', expand(query))
   endif
 
   let dirs = ""
@@ -83,13 +83,13 @@ func vis#external#fzf#rg(query='', dirs=[])
 
   exec "tcd" base_dir
 
-  let rg_prefix = "rg --column --line-number --no-heading --color=always --smart-case --"
-  let source = printf("%s '%s' %s", rg_prefix, query, dirs)
+  let rg_prefix = "rg.sh"
+  let source = printf("%s %s %s", rg_prefix, query, dirs)
   let source_change = printf('change:reload:sleep 0.1; %s {q} %s || true', rg_prefix, dirs)
   let prompt = printf('Rg(%s)> ', prompt_icons)
 
   let options  = ['--prompt', prompt]
-  let options += ['--header', '[A-A:select all, A-D:deselect all, <TAB>:select, <multi:CR>:quickfix]']
+  let options += ['--header', '[-w:word, -s:case sensitive, A-A:select all, A-D:deselect all, <TAB>:select, <multi:CR>:quickfix]']
   let options += ['--disabled']
   let options += ['--bind', source_change]
   let options += ['--query', query]
