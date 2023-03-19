@@ -38,14 +38,15 @@ func vis#external#fzf#fd(type, sink)
     let base_dir = vis#util#git_root_dir()
   endif
 
-  let source = printf('fzf_fd.sh --src --type=%s', a:type)
+  let fd_prefix = 'fdfind --strip-cwd-prefix'
+  let source = printf('%s --type=%s', fd_prefix, a:type)
   let prompt = printf('Fd(%s)> ', prompt_icons)
 
   let options  = ['--prompt', prompt]
   let options += ['--header', '[A-A:all, A-D:dir, A-F:file, A-X:explorer, A-C:chrome, A-V:vscode, A-T:preview, A-N:p-next, A-P:p-prev]']
-  let options += ['--bind', 'alt-a:reload(fzf_fd.sh --src)']
-  let options += ['--bind', 'alt-d:reload(fzf_fd.sh --src --type=d)']
-  let options += ['--bind', 'alt-f:reload(fzf_fd.sh --src --type=f)']
+  let options += ['--bind', printf('alt-a:reload(%s)', fd_prefix)]
+  let options += ['--bind', printf('alt-d:reload(%s --type=d)', fd_prefix)]
+  let options += ['--bind', printf('alt-f:reload(%s --type=f)', fd_prefix)]
   let options += ['--bind', 'alt-x:execute(te.sh {})']
   let options += ['--bind', 'alt-c:execute(chrome.sh {})']
   let options += ['--bind', 'alt-v:execute(vscode.sh {})']
@@ -64,7 +65,7 @@ endfunc
 func vis#external#fzf#rg(query='', dirs=[])
   let query = a:query
   if (match(query, '<cfile>') == 0)
-    let query = expand(query)
+    let query = printf('\b%s\b', expand(query))
   endif
 
   let dirs = ""
@@ -82,11 +83,15 @@ func vis#external#fzf#rg(query='', dirs=[])
 
   exec "tcd" base_dir
 
-  let cmd = "rg --column --line-number --no-heading --color=always --smart-case -- ''" .. dirs
+  let rg_prefix = "rg --column --line-number --no-heading --color=always --smart-case --"
+  let source = printf("%s '%s' %s", rg_prefix, query, dirs)
+  let source_change = printf('change:reload:sleep 0.1; %s {q} %s || true', rg_prefix, dirs)
   let prompt = printf('Rg(%s)> ', prompt_icons)
 
   let options  = ['--prompt', prompt]
   let options += ['--header', '[A-A:select all, A-D:deselect all, <TAB>:select, <multi:CR>:quickfix]']
+  let options += ['--disabled']
+  let options += ['--bind', source_change]
   let options += ['--query', query]
 
   let opt = fzf#vim#with_preview({
@@ -94,7 +99,7 @@ func vis#external#fzf#rg(query='', dirs=[])
     \ 'dir': base_dir,
     \ })
 
-  call fzf#vim#grep(cmd, 1, opt, 0)
+  call fzf#vim#grep(source, 1, opt, 0)
 endfunc
 
 func vis#external#fzf#tags(query='')
