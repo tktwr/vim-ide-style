@@ -65,7 +65,7 @@ endfunc
 func vis#external#fzf#rg(query='', dirs=[])
   let query = a:query
   if (match(query, '<cfile>') == 0)
-    let query = printf('%s -w', expand(query))
+    let query = printf('-w %s', expand(query))
   endif
 
   let dirs = ""
