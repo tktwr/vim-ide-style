@@ -137,6 +137,7 @@ command                         VisFzfDirs          call vis#external#fzf#fd('d'
 command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
 command                         VisFzfRg            call vis#external#fzf#rg('<cfile>')
 command                         VisFzfTags          call vis#external#fzf#tags('<cfile>')
+command                         VisFzfMemo          call vis#external#fzf#tags('memo: | sample: ')
 
 command -nargs=?                VisLazygit          call vis#shell#open('Lazygit', ['lazygit.sh'],  <f-args>)
 command -nargs=?                VisFzfMan           call vis#shell#open('Man',     ['fzf_man.sh'],  <f-args>)
