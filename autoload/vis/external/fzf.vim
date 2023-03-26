@@ -12,12 +12,12 @@ func vis#external#fzf#bmk()
     let prompt_icons = '   '
   endif
 
-  let source = printf('fzf_bmk.sh --src %s', bmk_files)
+  let source = printf('bmk.sh %s', bmk_files)
   let prompt = printf('Bmk(%s)> ', prompt_icons)
 
   let options  = ['--prompt', prompt]
   let options += ['--header', '[A-O:open, A-T:preview, A-N:p-next, A-P:p-prev]']
-  let options += ['--bind', 'alt-o:execute(fzf_bmk.sh --eval-open {})']
+  let options += ['--bind', 'alt-o:execute(open_bmk.sh {})']
   let options += ['--preview', 'preview_bmk.sh {}']
 
   let opt = {
@@ -38,7 +38,7 @@ func vis#external#fzf#fd(type, sink)
     let base_dir = vis#util#git_root_dir()
   endif
 
-  let fd_prefix = 'fdfind --strip-cwd-prefix'
+  let fd_prefix = 'fdfind'
   let source = printf('%s --type=%s', fd_prefix, a:type)
   let prompt = printf('Fd(%s)> ', prompt_icons)
 
