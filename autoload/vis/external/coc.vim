@@ -15,6 +15,10 @@ func vis#external#coc#str2icon(str)
 endfunc
 
 func vis#external#coc#services()
+  if !exists('*coc#status')
+    return '[LS: not loaded]'
+  endif
+
   if !g:coc_service_initialized
     return '[LS: not ready]'
   endif
