@@ -3,9 +3,9 @@
 #------------------------------------------------------
 if [ "$VIM_TERMINAL" ]; then
   alias pwd.alt='vimapi-get-cwd-alt-term'
-  alias cd.alt='vimapi-cd $(vimapi-get-cwd-alt-term)'
-  cp.alt() { cp "$@" $(vimapi-get-cwd-alt-term); }
-  mv.alt() { mv "$@" $(vimapi-get-cwd-alt-term); }
+  alias cd.alt='vimapi-cd "$(vimapi-get-cwd-alt-term)"'
+  cp.alt() { cp "$@" "$(vimapi-get-cwd-alt-term)"; }
+  mv.alt() { mv "$@" "$(vimapi-get-cwd-alt-term)"; }
 
   alias cd='vimapi-cd'
   alias pushd='vimapi-pushd'
