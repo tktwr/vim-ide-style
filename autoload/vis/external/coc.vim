@@ -23,6 +23,8 @@ func vis#external#coc#services()
     return '[LS: not ready]'
   endif
 
+  return ''
+
   try
     let services = CocAction('services')
   catch /.*/
