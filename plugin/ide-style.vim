@@ -119,6 +119,14 @@ command -nargs=?                VisWinResize        call vis#window#resize(<f-ar
 command -nargs=?                VisWinVResize       call vis#window#vresize(<f-args>)
 command                         VisQuickFix         call vis#window#qf()
 
+command VisWinMaximizeXToggle       call VisWinMaximizeXToggle(g:my_winwidth_max)
+command VisWinMaximizeXYToggle      call VisWinMaximizeXYToggle(g:my_winwidth_max, "")
+command VisWinMaximizeYToggle       call VisWinMaximizeYToggle("")
+
+command VisWinMaximizeXToggleTerm   call VisWinMaximizeXToggle(g:my_winwidth_max)
+command VisWinMaximizeXYToggleTerm  call VisWinMaximizeXYToggle(g:my_winwidth_max, g:my_term_winheight_max)
+command VisWinMaximizeYToggleTerm   call VisWinMaximizeYToggle(g:my_term_winheight_max)
+
 command                         VisSendCdE2T        call vis#send#cd_e2t()
 command                         VisSendCmdE2T       call vis#send#cmd_e2t()
 "------------------------------------------------------
