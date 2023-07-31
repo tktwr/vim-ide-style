@@ -4,12 +4,12 @@
 "------------------------------------------------------
 " query
 "------------------------------------------------------
+func vis#window#is_vertical()
+  return &columns < 82 ? 1 : 0
+endfunc
+
 func vis#window#is_fullscreen()
-  if &columns > 150
-    return 1
-  else
-    return 0
-  endif
+  return &columns > 150 ? 1 : 0
 endfunc
 
 "------------------------------------------------------

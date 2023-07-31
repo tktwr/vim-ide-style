@@ -52,6 +52,23 @@ endfunc
 " create
 "------------------------------------------------------
 func s:create_ide()
+  if vis#window#is_vertical()
+    call s:create_ide_v()
+  else
+    call s:create_ide_h()
+  endif
+endfunc
+
+func s:create_ide_v()
+  let t:ide = 1
+  sp
+  Fern .
+  resize 6
+  wincmd w
+  below VisTerm
+endfunc
+
+func s:create_ide_h()
   let t:ide = 1
   call vis#sidebar#create()
   wincmd w
