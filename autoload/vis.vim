@@ -1,15 +1,37 @@
 "======================================================
 " VisIDE
 "======================================================
-func vis#init()
-  " height
-  let g:vis_term_winheight = 10
-  let g:vis_gstatus_winheight = 10
-  let g:vis_fern_2nd_winheight = 20
+func vis#set_default_val(var, val)
+  exec printf("let %s = exists('%s') ? %s : %d", a:var, a:var, a:var, a:val)
+endfunc
 
-  " width
-  let g:vis_help_winwidth = 82
-  let g:vis_left_winwidth = 30
+func vis#default_term_height()
+  let l = float2nr(0.1 * &lines)
+  return l < 4 ? 4 : l
+endfunc
+
+func vis#default_side_width()
+  return &columns >= (82 * 2 + 30) ? 30 : 20
+endfunc
+
+func vis#default_winwidth_max()
+  return float2nr(3.0 / 4.0 * (&columns - g:vis_left_winwidth))
+endfunc
+
+"------------------------------------------------------
+func vis#init()
+  " term                                              ,
+  call vis#set_default_val('g:vis_term_winheight'     , vis#default_term_height())
+  call vis#set_default_val('g:vis_term_winheight_max' , g:vis_term_winheight * 2)
+  " sidebar                                           ,
+  call vis#set_default_val('g:vis_left_winwidth'      , vis#default_side_width())
+  call vis#set_default_val('g:vis_fern_2nd_winheight' , g:vis_term_winheight * 2)
+  " gstatus                                           ,
+  call vis#set_default_val('g:vis_gstatus_winheight'  , g:vis_term_winheight)
+  " help                                              ,
+  call vis#set_default_val('g:vis_help_winwidth'      , 82)
+  " width                                             ,
+  call vis#set_default_val('g:vis_winwidth_max'       , vis#default_winwidth_max())
 
   let g:vis_tab_labels = {}
   let g:vis_tab_info = ""

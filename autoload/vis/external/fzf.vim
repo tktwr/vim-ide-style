@@ -17,7 +17,8 @@ func vis#external#fzf#bmk()
 
   let options  = ['--prompt', prompt]
   let options += ['--ansi']
-  let options += ['--header', '[A-O:open, A-T:preview, A-N:p-next, A-P:p-prev]']
+  let options += ['--info', 'inline-right']
+  let options += ['--header', '[A-O:open|A-T:preview|A-N:p-next|A-P:p-prev]']
   let options += ['--bind', 'alt-o:execute(open_bmk.sh {})']
   let options += ['--preview', 'preview_bmk.sh {}']
 
@@ -40,12 +41,17 @@ func vis#external#fzf#fd(type, sink)
   endif
 
   let fd_prefix = 'fdfind --color=always'
-  let source = printf('%s --type=%s', fd_prefix, a:type)
+  if a:type == ''
+    let source = fd_prefix
+  else
+    let source = printf('%s --type=%s', fd_prefix, a:type)
+  endif
   let prompt = printf('Fd(%s)> ', prompt_icons)
 
   let options  = ['--prompt', prompt]
   let options += ['--ansi']
-  let options += ['--header', '[A-A:all, A-D:dir, A-F:file, A-X:explorer, A-C:chrome, A-V:vscode, A-T:preview, A-N:p-next, A-P:p-prev]']
+  let options += ['--info', 'inline-right']
+  let options += ['--header', '[A-A:all|A-D:dir|A-F:file|A-X:explorer|A-C:chrome|A-V:vscode|A-T:preview|A-N:p-next|A-P:p-prev]']
   let options += ['--bind', printf('alt-a:reload(%s)', fd_prefix)]
   let options += ['--bind', printf('alt-d:reload(%s --type=d)', fd_prefix)]
   let options += ['--bind', printf('alt-f:reload(%s --type=f)', fd_prefix)]
@@ -92,7 +98,8 @@ func vis#external#fzf#rg(query='', dirs=[])
 
   let options  = ['--prompt', prompt]
   let options += ['--ansi']
-  let options += ['--header', '[-w:word, -s:case sensitive, A-A:select all, A-D:deselect all, <TAB>:select, <multi:CR>:quickfix]']
+  let options += ['--info', 'inline-right']
+  let options += ['--header', '[-w:word|-s:case sensitive|A-A:select all|A-D:deselect all|<TAB>:select|<multi:CR>:quickfix]']
   let options += ['--disabled']
   let options += ['--bind', source_change]
   let options += ['--query', query]

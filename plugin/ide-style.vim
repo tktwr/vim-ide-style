@@ -119,13 +119,13 @@ command -nargs=?                VisWinResize        call vis#window#resize(<f-ar
 command -nargs=?                VisWinVResize       call vis#window#vresize(<f-args>)
 command                         VisQuickFix         call vis#window#qf()
 
-command VisWinMaximizeXToggle       call VisWinMaximizeXToggle(g:my_winwidth_max)
-command VisWinMaximizeXYToggle      call VisWinMaximizeXYToggle(g:my_winwidth_max, "")
+command VisWinMaximizeXToggle       call VisWinMaximizeXToggle(g:vis_winwidth_max)
+command VisWinMaximizeXYToggle      call VisWinMaximizeXYToggle(g:vis_winwidth_max, "")
 command VisWinMaximizeYToggle       call VisWinMaximizeYToggle("")
 
-command VisWinMaximizeXToggleTerm   call VisWinMaximizeXToggle(g:my_winwidth_max)
-command VisWinMaximizeXYToggleTerm  call VisWinMaximizeXYToggle(g:my_winwidth_max, g:my_term_winheight_max)
-command VisWinMaximizeYToggleTerm   call VisWinMaximizeYToggle(g:my_term_winheight_max)
+command VisWinMaximizeXToggleTerm   call VisWinMaximizeXToggle(g:vis_winwidth_max)
+command VisWinMaximizeXYToggleTerm  call VisWinMaximizeXYToggle(g:vis_winwidth_max, g:vis_term_winheight_max)
+command VisWinMaximizeYToggleTerm   call VisWinMaximizeYToggle(g:vis_term_winheight_max)
 
 command                         VisSendCdE2T        call vis#send#cd_e2t()
 command                         VisSendCmdE2T       call vis#send#cmd_e2t()
@@ -141,6 +141,7 @@ command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#open_
 command -nargs=1 -complete=dir  VisFern             call vis#external#fern#open(<f-args>)
 
 command                         VisFzfBmk           call vis#external#fzf#bmk()
+command                         VisFzfAll           call vis#external#fzf#fd('',  'BmkEditDir')
 command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')
 command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
 command                         VisFzfRg            call vis#external#fzf#rg('<cfile>')
