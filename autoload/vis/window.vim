@@ -80,7 +80,7 @@ endfunc
 "------------------------------------------------------
 func vis#window#qf()
   cclose
-  below cwindow 10
+  exec printf("below cwindow %d", g:vis_term_winheight)
 endfunc
 
 "------------------------------------------------------
