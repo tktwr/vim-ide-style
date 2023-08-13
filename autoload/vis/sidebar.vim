@@ -5,6 +5,7 @@ func vis#sidebar#create()
   call vis#external#fern#open_drawer_toggle()
   below split
   exec "resize" g:vis_fern_2nd_winheight
+  set winfixheight
 endfunc
 
 func vis#sidebar#toggle()
