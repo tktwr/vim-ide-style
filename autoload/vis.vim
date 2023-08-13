@@ -6,8 +6,8 @@ func vis#let_default_val(var, val)
 endfunc
 
 func vis#default_term_height()
-  let l = float2nr(0.1 * &lines)
-  return l < 4 ? 4 : l
+  let l = float2nr(0.2 * &lines)
+  return l < 5 ? 5 : l > 10 ? 10 : l
 endfunc
 
 func vis#default_side_width()
@@ -25,7 +25,7 @@ func vis#init()
   call vis#let_default_val('g:vis_term_winheight_max' , g:vis_term_winheight * 2)
   " sidebar                                           ,
   call vis#let_default_val('g:vis_left_winwidth'      , vis#default_side_width())
-  call vis#let_default_val('g:vis_fern_2nd_winheight' , g:vis_term_winheight * 2)
+  call vis#let_default_val('g:vis_fern_2nd_winheight' , g:vis_term_winheight)
   " gstatus                                           ,
   call vis#let_default_val('g:vis_gstatus_winheight'  , g:vis_term_winheight)
   " help                                              ,
@@ -108,7 +108,7 @@ endfunc
 func s:resize_each()
   if &buftype == 'terminal'
     exec "resize" g:vis_term_winheight
-  elseif winnr() == 2 && &filetype == 'fern'
+  elseif vis#sidebar#is_2nd()
     exec "resize" g:vis_fern_2nd_winheight
   endif
 endfunc

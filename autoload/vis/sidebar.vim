@@ -18,8 +18,15 @@ func vis#sidebar#toggle()
 endfunc
 
 func vis#sidebar#inside()
-  let winnr = winnr()
-  if (winnr <= 2 && winwidth(0) <= g:vis_left_winwidth)
+  if (winnr() <= 2 && winwidth(0) <= g:vis_left_winwidth)
+    return 1
+  else
+    return 0
+  endif
+endfunc
+
+func vis#sidebar#is_2nd()
+  if (winnr() == 2 && winwidth(0) <= g:vis_left_winwidth)
     return 1
   else
     return 0
