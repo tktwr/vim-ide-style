@@ -12,7 +12,10 @@ if [ "$VIM_TERMINAL" ]; then
   alias popd='vimapi-popd'
 
   alias ,resize='vimapi_exec VisWinResize'
-  alias ,vresize='vimapi_exec VisWinVResize'
+  alias ,resize_v='vimapi_exec VisWinVResize'
+
+  alias ,toggle='vimapi_exec VisWinMaximizeYToggleTerm'
+  alias ,toggle_v='vimapi_exec VisWinMaximizeXToggleTerm'
 
   alias F='vimapi-edit-dir'
   alias F2='vimapi-edit-dir-2'
@@ -21,8 +24,8 @@ if [ "$VIM_TERMINAL" ]; then
   alias N='vimapi_exec new'
   alias T='vimapi_exec VisTerm'
 
-  alias vN='vimapi_exec vnew'
-  alias vT='vimapi_exec VisTermV'
+  alias Nv='vimapi_exec vnew'
+  alias Tv='vimapi_exec VisTermV'
 
   alias ,I='vimapi_exec_tab VisIDE'
   alias ,N='vimapi_exec tabedit'

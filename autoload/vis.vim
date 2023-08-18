@@ -25,7 +25,7 @@ func vis#init()
   call vis#let_default_val('g:vis_term_winheight_max' , g:vis_term_winheight * 2)
   " sidebar                                           ,
   call vis#let_default_val('g:vis_left_winwidth'      , vis#default_side_width())
-  call vis#let_default_val('g:vis_fern_2nd_winheight' , g:vis_term_winheight)
+  call vis#let_default_val('g:vis_fern_2nd_winheight' , g:vis_term_winheight * 2)
   " gstatus                                           ,
   call vis#let_default_val('g:vis_gstatus_winheight'  , g:vis_term_winheight)
   " help                                              ,
