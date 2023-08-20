@@ -61,6 +61,7 @@ endfunc
 func vis#window#resize(height=10)
   exec "resize" a:height
   let w:orig_height = a:height
+  set winfixheight
 endfunc
 
 func vis#window#vresize(width=82)
