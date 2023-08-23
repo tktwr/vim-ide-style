@@ -11,25 +11,24 @@ if [ "$VIM_TERMINAL" ]; then
   alias pushd='vimapi-pushd'
   alias popd='vimapi-popd'
 
-  alias ,resize='vimapi_exec VisWinResize'
-  alias ,resize_x='vimapi_exec VisWinVResize'
-
-  alias ,toggle='vimapi_exec VisWinMaximizeYToggleTerm'
-  alias ,toggle_x='vimapi_exec VisWinMaximizeXToggleTerm'
-
   alias F='vimapi-edit-dir'
   alias F2='vimapi-edit-dir-2'
 
   alias I='vimapi_exec VisIDE'
+  alias It='vimapi_exec_tab VisIDE'
+
   alias N='vimapi_exec new'
-  alias T='vimapi_exec VisTerm'
-
   alias Nv='vimapi_exec vnew'
-  alias Tv='vimapi_exec VisTermV'
+  alias Nt='vimapi_exec tabedit'
 
-  alias ,I='vimapi_exec_tab VisIDE'
-  alias ,N='vimapi_exec tabedit'
-  alias ,T='vimapi_exec tab VisTerm'
+  alias T='vimapi_exec VisTerm'
+  alias Tv='vimapi_exec VisTermV'
+  alias Tt='vimapi_exec tab VisTerm'
+
+  alias ,resize='vimapi_exec VisWinResize'
+  alias ,resize_x='vimapi_exec VisWinVResize'
+  alias ,toggle='vimapi_exec VisWinMaximizeYToggleTerm'
+  alias ,toggle_x='vimapi_exec VisWinMaximizeXToggleTerm'
 
   alias ,lg='vimapi_exec VisLazygit tab'
   alias ,man='vimapi_exec VisFzfMan tab'
@@ -43,12 +42,12 @@ else
   alias I='vim -c "VisIDE"'
   alias T='vim -c "VisTerm" -c "only"'
   alias T2='vim -c "VisTerm" -c "only" -c "VisTerm"'
-  alias V2='vim -c "VisTerm" -c "only" -c "vert VisTerm"'
+  alias T2v='vim -c "VisTerm" -c "only" -c "vert VisTerm"'
 
   alias nI='nvim -c "VisIDE"'
   alias nT='nvim -c "VisTerm" -c "only"'
   alias nT2='nvim -c "VisTerm" -c "only" -c "VisTerm"'
-  alias nV2='nvim -c "VisTerm" -c "only" -c "vert VisTerm"'
+  alias nT2v='nvim -c "VisTerm" -c "only" -c "vert VisTerm"'
 
   alias GS='vim -c "VisGS"'
   alias GV='vim -c "VisGV"'
