@@ -14,6 +14,7 @@ func vis#external#fzf#bmk()
 
   let source = printf('bmk.sh %s', bmk_files)
   let prompt = printf('Bmk(%s)> ', prompt_icons)
+  let prompt = printf('Bmk> ')
 
   let options  = ['--prompt', prompt]
   let options += ['--ansi']
@@ -21,6 +22,9 @@ func vis#external#fzf#bmk()
   let options += ['--header', '[A-O:open|A-T:preview|A-N:p-next|A-P:p-prev]']
   let options += ['--bind', 'alt-o:execute(open_bmk.sh {})']
   let options += ['--preview', 'preview_bmk.sh {}']
+  if has('win32unix')
+    let options += ['--preview-window', 'hidden']
+  endif
 
   let opt = {
     \ 'source'  : source,
