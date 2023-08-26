@@ -2,10 +2,25 @@
 " fzf
 "======================================================
 func vis#external#fzf#bmk()
+  let query = ''
+  let prompt_icons = ''
+
   if vis#sidebar#inside()
     " Fern menu
     let bmk_files = 'bmk_dir.txt fern.txt'
     let prompt_icons = '  '
+  elseif (&filetype == 'fugitive')
+    let bmk_files = 'vcmd.txt'
+    let query = 'fugitive: '
+  elseif (&filetype == 'git')
+    let bmk_files = 'vcmd.txt'
+    let query = 'gv.git: '
+  elseif (&filetype == 'dirdiff')
+    let bmk_files = 'vcmd.txt'
+    let query = 'dirdiff: '
+  elseif &diff == 1
+    let bmk_files = 'vcmd.txt'
+    let query = 'diff: '
   else
     " Editor menu
     let bmk_files = 'bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt'
@@ -21,6 +36,7 @@ func vis#external#fzf#bmk()
   let options += ['--header', '[A-O:open|A-T:preview|A-N:p-next|A-P:p-prev]']
   let options += ['--bind', 'alt-o:execute(open_bmk.sh {})']
   let options += ['--preview', 'preview_bmk.sh {}']
+  let options += ['--query', query]
 
   let opt = {
     \ 'source'  : source,
