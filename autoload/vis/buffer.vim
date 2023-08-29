@@ -4,13 +4,14 @@
 func vis#buffer#lcd_here()
   let file = expand('%:p')
   if filereadable(file)
-    let dir = fnamemodify(file, ':h')
-    exec "lcd" dir
+    exec "lcd" fnamemodify(file, ':h')
+  endif
+endfunc
 
-    if FugitiveIsGitDir()
-      let dir = vis#util#git_root_dir()
-      exec "lcd" dir
-    endif
+func vis#buffer#lcd_git_root()
+  call vis#buffer#lcd_here()
+  if FugitiveIsGitDir()
+    exec "lcd" vis#util#git_root_dir()
   endif
 endfunc
 

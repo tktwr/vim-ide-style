@@ -207,6 +207,6 @@ augroup ag_ide_style
   autocmd QuickFixCmdPost *make*          below cwindow
   autocmd QuickFixCmdPost *Quickfix*      below cwindow
 
-  "autocmd BufEnter        *               call vis#buffer#lcd_here()
+  autocmd BufEnter        *               call vis#buffer#lcd_here()
   autocmd FileType        fern            call glyph_palette#apply()
 augroup END
