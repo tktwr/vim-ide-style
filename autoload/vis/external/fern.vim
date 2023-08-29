@@ -104,7 +104,7 @@ endfunc
 
 func vis#external#fern#lcd_here()
   let selected = s:VisFernSelected()
-  let dir = bmk#util#GetDirName(selected)
+  let dir = bmk#util#dirname(selected)
   exec "lcd" dir
 endfunc
 
