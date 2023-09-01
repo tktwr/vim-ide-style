@@ -141,9 +141,9 @@ command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#open_
 command -nargs=1 -complete=dir  VisFern             call vis#external#fern#open(<f-args>)
 
 command                         VisFzfBmk           call vis#external#fzf#bmk()
-command                         VisFzfAll           call vis#external#fzf#fd('',  'BmkEditDir')
-command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')
+command                         VisFzfAll           call vis#external#fzf#fd('',  'BmkEditFile')
 command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
+command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')
 command                         VisFzfRg            call vis#external#fzf#rg('<cfile>')
 command                         VisFzfTags          call vis#external#fzf#tags('<cfile>')
 command                         VisFzfMemo          call vis#external#fzf#tags('memo: | sample: | bmk: ')
@@ -207,6 +207,8 @@ augroup ag_ide_style
   autocmd QuickFixCmdPost *make*          below cwindow
   autocmd QuickFixCmdPost *Quickfix*      below cwindow
 
-  autocmd BufEnter        *               call vis#buffer#lcd_here()
   autocmd FileType        fern            call glyph_palette#apply()
+
+  " not lcd in quickfix
+  "autocmd BufEnter        *               call vis#buffer#lcd_here()
 augroup END

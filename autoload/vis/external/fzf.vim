@@ -48,22 +48,35 @@ func vis#external#fzf#bmk()
 endfunc
 
 func vis#external#fzf#fd(type, sink)
-  let prompt_icons = '  '
-  let base_dir = '.'
+  let is_git_dir = FugitiveIsGitDir() ? 1 : 0
 
-  if FugitiveIsGitDir()
-    let prompt_icons = ' ' . prompt_icons
-    let base_dir = vis#util#git_root_dir()
+  " --- source ---
+  let fd_prefix = 'fdfind --color=always'
+  let source = fd_prefix
+  if a:type != ''
+    let source = printf('%s --type=%s', fd_prefix, a:type)
   endif
 
-  let fd_prefix = 'fdfind --color=always'
-  if a:type == ''
-    let source = fd_prefix
-  else
-    let source = printf('%s --type=%s', fd_prefix, a:type)
+  " --- prompt ---
+  let prompt_icons = '  '
+  if is_git_dir
+    let prompt_icons = ' ' . prompt_icons
   endif
   let prompt = printf('Fd(%s)> ', prompt_icons)
 
+  " --- sink ---
+  let sink = a:sink
+  if vis#sidebar#inside() && (&filetype == 'fern')
+    let sink = 'BmkEditDir'
+  endif
+
+  " --- base_dir ---
+  let base_dir = '.'
+  if is_git_dir
+    let base_dir = vis#util#git_root_dir()
+  endif
+
+  " --- options ---
   let options  = ['--prompt', prompt]
   let options += ['--ansi']
   let options += ['--info', 'inline-right']
@@ -79,7 +92,7 @@ func vis#external#fzf#fd(type, sink)
   let opt = {
     \ 'source'  : source,
     \ 'options' : options,
-    \ 'sink'    : a:sink,
+    \ 'sink'    : sink,
     \ 'dir'     : base_dir,
     \ }
 
