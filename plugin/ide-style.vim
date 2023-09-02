@@ -209,6 +209,5 @@ augroup ag_ide_style
 
   autocmd FileType        fern            call glyph_palette#apply()
 
-  " not lcd in quickfix
-  "autocmd BufEnter        *               call vis#buffer#lcd_here()
+  autocmd BufEnter        *               call vis#buffer#lcd_here()
 augroup END
