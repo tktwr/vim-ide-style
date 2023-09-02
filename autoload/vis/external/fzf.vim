@@ -1,14 +1,17 @@
 "======================================================
 " fzf
 "======================================================
+"------------------------------------------------------
+" fzf#bmk
+"------------------------------------------------------
 func vis#external#fzf#bmk()
-  let query = ''
-  let prompt_icons = ''
+  let is_git_dir = FugitiveIsGitDir() ? 1 : 0
 
+  " --- source ---
+  let query = ''
   if vis#sidebar#inside()
     " Fern menu
     let bmk_files = 'bmk_dir.txt fern.txt'
-    let prompt_icons = '  '
   elseif (&filetype == 'fugitive')
     let bmk_files = 'vcmd.txt'
     let query = 'fugitive: '
@@ -24,12 +27,14 @@ func vis#external#fzf#bmk()
   else
     " Editor menu
     let bmk_files = 'bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt'
-    let prompt_icons = '   '
   endif
 
   let source = printf('bmk.sh %s', bmk_files)
-  let prompt = printf('Bmk(%s)> ', prompt_icons)
 
+  " --- prompt ---
+  let prompt = is_git_dir ? 'Bmk( )> ' : 'Bmk> '
+
+  " --- options ---
   let options  = ['--prompt', prompt]
   let options += ['--ansi']
   let options += ['--info', 'inline-right']
@@ -47,6 +52,9 @@ func vis#external#fzf#bmk()
   call fzf#run(fzf#wrap(opt))
 endfunc
 
+"------------------------------------------------------
+" fzf#fd
+"------------------------------------------------------
 func vis#external#fzf#fd(type, sink)
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
 
@@ -58,11 +66,7 @@ func vis#external#fzf#fd(type, sink)
   endif
 
   " --- prompt ---
-  let prompt_icons = '  '
-  if is_git_dir
-    let prompt_icons = ' ' . prompt_icons
-  endif
-  let prompt = printf('Fd(%s)> ', prompt_icons)
+  let prompt = is_git_dir ? 'Fd( )> ' : 'Fd> '
 
   " --- sink ---
   let sink = a:sink
@@ -71,10 +75,7 @@ func vis#external#fzf#fd(type, sink)
   endif
 
   " --- base_dir ---
-  let base_dir = '.'
-  if is_git_dir
-    let base_dir = vis#util#git_root_dir()
-  endif
+  let base_dir = is_git_dir ? vis#util#git_root_dir() : '.'
 
   " --- options ---
   let options  = ['--prompt', prompt]
@@ -99,7 +100,13 @@ func vis#external#fzf#fd(type, sink)
   call fzf#run(fzf#wrap(opt))
 endfunc
 
+"------------------------------------------------------
+" fzf#rg
+"------------------------------------------------------
 func vis#external#fzf#rg(query='', dirs=[])
+  let is_git_dir = FugitiveIsGitDir() ? 1 : 0
+
+  " --- source ---
   let query = a:query
   if (match(query, '<cfile>') == 0)
     let query = printf('-w %s', expand(query))
@@ -110,21 +117,19 @@ func vis#external#fzf#rg(query='', dirs=[])
     let dirs ..= printf(" '%s'", expand(i))
   endfor
 
-  let prompt_icons = ' '
-  let base_dir = '.'
-
-  if FugitiveIsGitDir()
-    let prompt_icons = ' ' . prompt_icons
-    let base_dir = vis#util#git_root_dir()
-  endif
-
-  exec "tcd" base_dir
-
   let rg_prefix = "rg.sh"
   let source = printf("%s %s %s", rg_prefix, query, dirs)
   let source_change = printf('change:reload:sleep 0.1; %s {q} %s || true', rg_prefix, dirs)
-  let prompt = printf('Rg(%s)> ', prompt_icons)
 
+  " --- prompt ---
+  let prompt = is_git_dir ? 'Rg( )> ' : 'Rg> '
+
+  " --- base_dir ---
+  let base_dir = is_git_dir ? vis#util#git_root_dir() : '.'
+
+  exec "tcd" base_dir
+
+  " --- options ---
   let options  = ['--prompt', prompt]
   let options += ['--ansi']
   let options += ['--info', 'inline-right']
@@ -141,6 +146,9 @@ func vis#external#fzf#rg(query='', dirs=[])
   call fzf#vim#grep(source, 1, opt, 0)
 endfunc
 
+"------------------------------------------------------
+" fzf#tags
+"------------------------------------------------------
 func vis#external#fzf#tags(query='')
   let query = a:query
   if (match(query, '<cfile>') == 0)
