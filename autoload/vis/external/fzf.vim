@@ -11,22 +11,22 @@ func vis#external#fzf#bmk()
   let query = ''
   if vis#sidebar#inside()
     " Fern menu
-    let bmk_files = 'bmk_dir.txt fern.txt'
+    let bmk_files = 'bmk_dir.txt fern.txt bmk_dir_opt.txt'
   elseif (&filetype == 'fugitive')
-    let bmk_files = 'vcmd.txt'
+    let bmk_files = 'vcmd_context.txt'
     let query = 'fugitive: '
   elseif (&filetype == 'git')
-    let bmk_files = 'vcmd.txt'
+    let bmk_files = 'vcmd_context.txt'
     let query = 'gv.git: '
   elseif (&filetype == 'dirdiff')
-    let bmk_files = 'vcmd.txt'
-    let query = 'dirdiff: '
+    let bmk_files = 'vcmd_context.txt'
+    let query = 'Dirdiff: '
   elseif &diff == 1
-    let bmk_files = 'vcmd.txt'
-    let query = 'diff: '
+    let bmk_files = 'vcmd_context.txt'
+    let query = 'Diff: '
   else
     " Editor menu
-    let bmk_files = 'bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt'
+    let bmk_files = 'bmk_file.txt vcmd.txt fzf.txt coc.txt bmk_file_opt.txt ref.txt links.txt papers.txt'
   endif
 
   let source = printf('bmk.sh %s', bmk_files)
