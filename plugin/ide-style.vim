@@ -145,6 +145,8 @@ command                         VisFzfAll           call vis#external#fzf#fd('',
 command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
 command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')
 command                         VisFzfRg            call vis#external#fzf#rg('<cfile>')
+command                         VisFzfRgAll         call vis#external#fzf#rg('<cfile>', g:my_rg_dirs)
+command                         VisFzfRgCur         call vis#external#fzf#rg('<cfile>', ['%'])
 command                         VisFzfTags          call vis#external#fzf#tags('<cfile>')
 command                         VisFzfMemo          call vis#external#fzf#tags('memo: | sample: | bmk: ')
 
