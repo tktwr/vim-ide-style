@@ -149,6 +149,8 @@ command                         VisFzfRgAll         call vis#external#fzf#rg('<c
 command                         VisFzfRgCur         call vis#external#fzf#rg('<cfile>', ['%'])
 command                         VisFzfTags          call vis#external#fzf#tags('<cfile>')
 command                         VisFzfMemo          call vis#external#fzf#tags('memo: | sample: | bmk: ')
+command                         VisFzfGitStatus     call vis#external#fzf#gitstatus()
+command                         VisFzfGitLog        let b:fzf_winview = winsaveview() | call vis#external#fzf#gitlog()
 
 command -nargs=?                VisLazygit          call vis#shell#open('Lazygit', ['lazygit.sh'],  <f-args>)
 command -nargs=?                VisFzfMan           call vis#shell#open('Man',     ['fzf_man.sh'],  <f-args>)

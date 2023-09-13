@@ -161,3 +161,27 @@ func vis#external#fzf#tags(query='')
   call fzf#vim#tags(query, opt, 0)
 endfunc
 
+"------------------------------------------------------
+" fzf#gitstatus
+"------------------------------------------------------
+func vis#external#fzf#gitstatus()
+  let options = ['--preview-window', 'down,80%']
+  let opt = fzf#vim#with_preview({
+    \ 'placeholder': '',
+    \ 'options': options,
+    \ })
+  call fzf#vim#gitfiles('?', opt, 0)
+endfunc
+
+"------------------------------------------------------
+" fzf#gitlog
+"------------------------------------------------------
+func vis#external#fzf#gitlog()
+  let options = ['--preview-window', 'down,80%']
+  let opt = fzf#vim#with_preview({
+    \ 'placeholder': '',
+    \ 'options': options,
+    \ })
+  1,$call fzf#vim#commits('', opt, 0)
+endfunc
+
