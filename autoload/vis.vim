@@ -47,10 +47,10 @@ func vis#init()
 endfunc
 
 "------------------------------------------------------
-func vis#ide()
+func vis#ide(type=1)
   if winnr('$') == 1
     tcd
-    call s:create_ide()
+    call s:create_ide(a:type)
   else
     call s:resize_all()
   endif
@@ -73,23 +73,37 @@ endfunc
 "------------------------------------------------------
 " create
 "------------------------------------------------------
-func s:create_ide()
+func s:create_ide(type)
   if vis#window#is_vertical()
     call s:create_ide_v()
   else
-    call s:create_ide_h()
+    if a:type == 2
+      call s:create_ide_h_2()
+    else
+      call s:create_ide_h()
+    endif
   endif
 endfunc
 
+" +-----+
+" +-----+
+" |     |
+" +-----+
+" +-----+
 func s:create_ide_v()
   let t:ide = 1
   sp
   Fern .
-  resize 6
+  VisWinResize 6
   wincmd w
   below VisTerm
 endfunc
 
+" +-+--+--+
+" | |  |  |
+" +-+  |  |
+" | +--+--+
+" +-+--+--+
 func s:create_ide_h()
   let t:ide = 1
   call vis#sidebar#create()
@@ -100,6 +114,26 @@ func s:create_ide_h()
     wincmd w
   endif
   below VisTerm
+endfunc
+
+" +-+--+--+
+" | |  |  |
+" +-+-----+
+" | +-----+
+" +-+-----+
+func s:create_ide_h_2()
+  let t:ide = 1
+  call vis#sidebar#create()
+  wincmd w
+  if vis#window#is_fullscreen()
+    below VisTerm
+    VisWinResize 5
+    wincmd W
+    below new
+    VisWinResize 5
+    wincmd W
+    vsp
+  endif
 endfunc
 
 "------------------------------------------------------

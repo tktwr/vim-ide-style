@@ -104,7 +104,7 @@ command                         VisTcdHere          exec "tcd" expand("%:p:h")
 command                         VisLcdHere          exec "lcd" expand("%:p:h")
 command                         VisModifiable       call vis#buffer#modifiable()
 "------------------------------------------------------
-command                         VisIDE              call vis#ide()
+command -nargs=?                VisIDE              call vis#ide(<f-args>)
 command                         VisRedraw           call vis#redraw()
 command                         VisSideBarToggle    call vis#sidebar#toggle()
 command                         VisTagbarToggle     TagbarToggle
