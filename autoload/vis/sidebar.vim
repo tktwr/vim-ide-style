@@ -1,6 +1,12 @@
 "======================================================
 " side bar
 "======================================================
+func vis#sidebar#create_v()
+  sp
+  Fern .
+  VisWinResize 6
+endfunc
+
 func vis#sidebar#create()
   call vis#external#fern#open_drawer_toggle()
   below split
@@ -19,11 +25,16 @@ func vis#sidebar#toggle()
 endfunc
 
 func vis#sidebar#inside()
-  if (winnr() <= 2 && winwidth(0) <= g:vis_left_winwidth)
-    return 1
+  if vis#window#is_vertical()
+    if (winnr() == 1)
+      return 1
+    endif
   else
-    return 0
+    if (winnr() <= 2 && winwidth(0) <= g:vis_left_winwidth)
+      return 1
+    endif
   endif
+  return 0
 endfunc
 
 func vis#sidebar#is_2nd()

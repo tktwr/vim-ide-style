@@ -92,9 +92,7 @@ endfunc
 " +-----+
 func s:create_ide_v()
   let t:ide = 1
-  sp
-  Fern .
-  VisWinResize 6
+  call vis#sidebar#create_v()
   wincmd w
   below VisTerm
 endfunc

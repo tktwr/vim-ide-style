@@ -8,6 +8,10 @@ func vis#window#is_vertical()
   return &columns < 82 ? 1 : 0
 endfunc
 
+func vis#window#is_horizontal()
+  return &columns >= 82 ? 1 : 0
+endfunc
+
 func vis#window#is_fullscreen()
   return &columns > 150 ? 1 : 0
 endfunc

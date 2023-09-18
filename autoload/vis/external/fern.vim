@@ -77,7 +77,7 @@ func vis#external#fern#open(dir, drawer='', toggle='')
     let reveal = ''
   endif
 
-  if (vis#sidebar#inside() && winnr() == 1)
+  if (vis#window#is_horizontal() && vis#sidebar#inside() && winnr() == 1)
     let drawer = '-drawer'
   endif
 
