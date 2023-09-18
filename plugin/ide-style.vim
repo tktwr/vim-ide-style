@@ -141,9 +141,9 @@ command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#open_
 command -nargs=1 -complete=dir  VisFern             call vis#external#fern#open(<f-args>)
 
 command                         VisFzfBmk           call vis#external#fzf#bmk()
-command                         VisFzfAll           call vis#external#fzf#fd('',  'BmkEditFile')
-command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
+command                         VisFzfAll           call vis#external#fzf#fd('a', 'BmkEditFile')
 command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')
+command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
 command                         VisFzfRg            call vis#external#fzf#rg('<cfile>')
 command                         VisFzfRgAll         call vis#external#fzf#rg('<cfile>', g:my_rg_dirs)
 command                         VisFzfRgCur         call vis#external#fzf#rg('<cfile>', ['%'])

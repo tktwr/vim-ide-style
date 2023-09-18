@@ -59,11 +59,7 @@ func vis#external#fzf#fd(type, sink)
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
 
   " --- source ---
-  let fd_prefix = 'fdfind --color=always'
-  let source = fd_prefix
-  if a:type != ''
-    let source = printf('%s --type=%s', fd_prefix, a:type)
-  endif
+  let source = printf('fd.sh %s', a:type)
 
   " --- prompt ---
   let prompt = is_git_dir ? 'Fd( )> ' : 'Fd> '
@@ -82,9 +78,9 @@ func vis#external#fzf#fd(type, sink)
   let options += ['--ansi']
   let options += ['--info', 'inline-right']
   let options += ['--header', '[A-A:all|A-D:dir|A-F:file|A-X:explorer|A-C:chrome|A-V:vscode|A-T:preview|A-N:p-next|A-P:p-prev]']
-  let options += ['--bind', printf('alt-a:reload(%s)', fd_prefix)]
-  let options += ['--bind', printf('alt-d:reload(%s --type=d)', fd_prefix)]
-  let options += ['--bind', printf('alt-f:reload(%s --type=f)', fd_prefix)]
+  let options += ['--bind', 'alt-a:reload(fd.sh a)']
+  let options += ['--bind', 'alt-d:reload(fd.sh d)']
+  let options += ['--bind', 'alt-f:reload(fd.sh f)']
   let options += ['--bind', 'alt-x:execute(te.sh {})']
   let options += ['--bind', 'alt-c:execute(chrome.sh {})']
   let options += ['--bind', 'alt-v:execute(vscode.sh {})']
