@@ -5,6 +5,8 @@
 " fzf#bmk
 "------------------------------------------------------
 func vis#external#fzf#bmk()
+  call vis#buffer#lcd_here()
+
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
 
   " --- source ---
@@ -56,6 +58,8 @@ endfunc
 " fzf#fd
 "------------------------------------------------------
 func vis#external#fzf#fd(type, sink)
+  call vis#buffer#lcd_here()
+
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
 
   " --- source ---
@@ -100,6 +104,8 @@ endfunc
 " fzf#rg
 "------------------------------------------------------
 func vis#external#fzf#rg(query='', dirs=[])
+  call vis#buffer#lcd_here()
+
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
 
   " --- source ---
@@ -146,6 +152,8 @@ endfunc
 " fzf#tags
 "------------------------------------------------------
 func vis#external#fzf#tags(query='')
+  call vis#buffer#lcd_here()
+
   let query = a:query
   if (match(query, '<cfile>') == 0)
     let query = expand(query)
@@ -161,6 +169,8 @@ endfunc
 " fzf#gitstatus
 "------------------------------------------------------
 func vis#external#fzf#gitstatus()
+  call vis#buffer#lcd_here()
+
   let options = ['--preview-window', 'down,80%']
   let opt = fzf#vim#with_preview({
     \ 'placeholder': '',
@@ -173,6 +183,8 @@ endfunc
 " fzf#gitlog
 "------------------------------------------------------
 func vis#external#fzf#gitlog()
+  call vis#buffer#lcd_here()
+
   let options = ['--preview-window', 'down,80%']
   let opt = fzf#vim#with_preview({
     \ 'placeholder': '',
