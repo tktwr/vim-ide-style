@@ -42,6 +42,8 @@ func vis#external#fzf#bmk()
   let options += ['--info', 'inline-right']
   let options += ['--header', '[A-O:open|A-T:preview|A-N:p-next|A-P:p-prev]']
   let options += ['--bind', 'alt-o:execute(open_bmk.sh {})']
+  let options += ['--bind', 'alt-/:change-preview-window(down,75%|hidden|)']
+  let options += ['--preview-window', 'right,60%']
   let options += ['--preview', 'preview_bmk.sh {}']
   let options += ['--query', query]
 
