@@ -202,7 +202,7 @@ augroup ag_ide_style
 	autocmd User            CocStatusChange redrawstatus
 
   " map
-  autocmd WinEnter        *               call vis#map#setup()
+  "autocmd WinEnter        *               call vis#map#setup()
   autocmd FileType        fern            call vis#external#fern#map()
   autocmd FileType        fugitive        call vis#external#fugitive#map()
   autocmd FileType        git             call vis#external#gv#map()
