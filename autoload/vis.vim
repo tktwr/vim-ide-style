@@ -62,7 +62,6 @@ func vis#redraw()
   set invnumber
   set invlist
   call quickhl#manual#reset()
-  nohlsearch
   let l:dir = getcwd()
   let l:file = expand("%")
   echo printf("%s [%s]", l:file, l:dir)

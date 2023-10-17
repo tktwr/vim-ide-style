@@ -105,7 +105,7 @@ command                         VisLcdHere          exec "lcd" expand("%:p:h")
 command                         VisModifiable       call vis#buffer#modifiable()
 "------------------------------------------------------
 command -nargs=?                VisIDE              call vis#ide(<f-args>)
-command                         VisRedraw           call vis#redraw()
+command                         VisRedraw           nohlsearch | call vis#redraw()
 command                         VisSideBarToggle    call vis#sidebar#toggle()
 command                         VisTagbarToggle     TagbarToggle
 command                         VisTerm             call vis#term#open(<q-mods>)
