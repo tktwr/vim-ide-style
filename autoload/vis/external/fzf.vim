@@ -8,6 +8,7 @@ func vis#external#fzf#bmk()
   call vis#buffer#lcd_here()
 
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
+  let prompt = is_git_dir ? 'Bmk( )> ' : 'Bmk> '
 
   " --- source ---
   let query = ''
@@ -32,9 +33,6 @@ func vis#external#fzf#bmk()
   endif
 
   let source = printf('bmk.sh %s', bmk_files)
-
-  " --- prompt ---
-  let prompt = is_git_dir ? 'Bmk( )> ' : 'Bmk> '
 
   " --- options ---
   let options  = ['--prompt', prompt]
@@ -63,21 +61,17 @@ func vis#external#fzf#fd(type, sink)
   call vis#buffer#lcd_here()
 
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
+  let prompt = is_git_dir ? 'Fd( )> ' : 'Fd> '
+  let base_dir = is_git_dir ? vis#util#git_root_dir() : '.'
 
   " --- source ---
   let source = printf('fd.sh %s', a:type)
-
-  " --- prompt ---
-  let prompt = is_git_dir ? 'Fd( )> ' : 'Fd> '
 
   " --- sink ---
   let sink = a:sink
   if vis#sidebar#inside() && (&filetype == 'fern')
     let sink = 'BmkEditDir'
   endif
-
-  " --- base_dir ---
-  let base_dir = is_git_dir ? vis#util#git_root_dir() : '.'
 
   " --- options ---
   let options  = ['--prompt', prompt]
@@ -110,10 +104,13 @@ func vis#external#fzf#rg(query='', dirs=[])
   call vis#buffer#lcd_here()
 
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
+  let prompt = is_git_dir ? 'Rg( )> ' : 'Rg> '
+  let base_dir = is_git_dir ? vis#util#git_root_dir() : '.'
+  exec "tcd" base_dir
 
   " --- source ---
   let query = a:query
-  if (match(query, '<cfile>') == 0)
+  if query != ''
     let query = printf('-w %s', expand(query))
   endif
 
@@ -125,14 +122,6 @@ func vis#external#fzf#rg(query='', dirs=[])
   let rg_prefix = "rg.sh"
   let source = printf("%s %s %s", rg_prefix, query, dirs)
   let source_change = printf('change:reload:sleep 0.1; %s {q} %s || true', rg_prefix, dirs)
-
-  " --- prompt ---
-  let prompt = is_git_dir ? 'Rg( )> ' : 'Rg> '
-
-  " --- base_dir ---
-  let base_dir = is_git_dir ? vis#util#git_root_dir() : '.'
-
-  exec "tcd" base_dir
 
   " --- options ---
   let options  = ['--prompt', prompt]
@@ -157,10 +146,7 @@ endfunc
 func vis#external#fzf#tags(query='')
   call vis#buffer#lcd_here()
 
-  let query = a:query
-  if (match(query, '<cfile>') == 0)
-    let query = expand(query)
-  endif
+  let query = expand(a:query)
 
   let opt = fzf#vim#with_preview({
     \ "placeholder": "--tag {2}:{-1}:{3..}"
