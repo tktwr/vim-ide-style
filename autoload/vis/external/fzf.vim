@@ -106,6 +106,7 @@ func vis#external#fzf#rg(query='', dirs=[])
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
   let prompt = is_git_dir ? 'Rg( )> ' : 'Rg> '
   let base_dir = is_git_dir ? vis#util#git_root_dir() : '.'
+  let base_dir = fnamemodify(base_dir, ':p')
   exec "tcd" base_dir
 
   " --- source ---
