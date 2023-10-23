@@ -128,7 +128,7 @@ func vis#external#fzf#rg(query='', dirs=[])
   let options  = ['--prompt', prompt]
   let options += ['--ansi']
   let options += ['--info', 'inline-right']
-  let options += ['--header', '[-ws] Word|Case sensitive, [A-ad] Select|Deselect all, [<TAB>] Select, [<multi:CR>] Quickfix']
+  let options += ['--header', '[-ws] Word|Case sensitive, [C-x] split, [A-ad] Select|Deselect all, [<TAB>] Select, [<multi:CR>] Quickfix']
   let options += ['--disabled']
   let options += ['--bind', source_change]
   let options += ['--query', query]
