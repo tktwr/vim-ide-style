@@ -1,6 +1,13 @@
 "======================================================
 " fzf
 "======================================================
+func s:preview_win_opt()
+  let options = []
+  let options += ['--bind', 'alt-/:change-preview-window(down,75%|hidden|)']
+  let options += ['--preview-window', 'right,60%']
+  return options
+endfunc
+
 "------------------------------------------------------
 " fzf#bmk
 "------------------------------------------------------
@@ -36,14 +43,14 @@ func vis#external#fzf#bmk()
 
   " --- options ---
   let options  = ['--prompt', prompt]
+  let options += ['--query', query]
   let options += ['--ansi']
   let options += ['--info', 'inline-right']
-  let options += ['--header', '[A-o] Open, [A-/] Preview']
-  let options += ['--bind', 'alt-o:execute(open_bmk.sh {})']
-  let options += ['--bind', 'alt-/:change-preview-window(down,75%|hidden|)']
-  let options += ['--preview-window', 'right,60%']
+  let options += ['--header', '[A-oi] Open|Web, [A-/] Preview']
+  let options += ['--bind', 'alt-o:execute(open.sh $(bmk_get_value.sh {}))']
+  let options += ['--bind', 'alt-i:execute(open_web.sh $(bmk_get_value.sh {}))']
   let options += ['--preview', 'preview_bmk.sh {}']
-  let options += ['--query', query]
+  let options += s:preview_win_opt()
 
   let opt = {
     \ 'source'  : source,
@@ -77,15 +84,14 @@ func vis#external#fzf#fd(type, sink)
   let options  = ['--prompt', prompt]
   let options += ['--ansi']
   let options += ['--info', 'inline-right']
-  let options += ['--header', '[A-adf] All|Dir|File, [A-xcgv] Explorer|Chrome|Gvim|Vscode, [A-/] Preview']
+  let options += ['--header', '[A-adf] All|Dir|File, [A-oi] Open|Web, [A-/] Preview']
   let options += ['--bind', 'alt-a:reload(fd.sh a)']
   let options += ['--bind', 'alt-d:reload(fd.sh d)']
   let options += ['--bind', 'alt-f:reload(fd.sh f)']
-  let options += ['--bind', 'alt-x:execute(te.sh {})']
-  let options += ['--bind', 'alt-c:execute(chrome.sh {})']
-  let options += ['--bind', 'alt-g:execute(gvim.sh {})']
-  let options += ['--bind', 'alt-v:execute(vscode.sh {})']
+  let options += ['--bind', 'alt-o:execute(open.sh {})']
+  let options += ['--bind', 'alt-i:execute(open_web.sh {})']
   let options += ['--preview', 'preview.sh {}']
+  let options += s:preview_win_opt()
 
   let opt = {
     \ 'source'  : source,
@@ -126,12 +132,13 @@ func vis#external#fzf#rg(query='', dirs=[])
 
   " --- options ---
   let options  = ['--prompt', prompt]
+  let options += ['--query', query]
   let options += ['--ansi']
   let options += ['--info', 'inline-right']
   let options += ['--header', '[-ws] Word|Case sensitive, [C-x] split, [A-ad] Select|Deselect all, [<TAB>] Select, [<multi:CR>] Quickfix']
   let options += ['--disabled']
   let options += ['--bind', source_change]
-  let options += ['--query', query]
+  let options += s:preview_win_opt()
 
   let opt = fzf#vim#with_preview({
     \ 'options': options,
