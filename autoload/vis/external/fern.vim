@@ -69,14 +69,19 @@ endfunc
 func vis#external#fern#open(dir, drawer='', toggle='')
   let dir = expand(a:dir)
   let dir = substitute(dir, ' ', '\\ ', 'g')
-  let reveal = '-reveal='.expand('%')
-  let drawer = a:drawer
-  let toggle = a:toggle
 
-  if &filetype == 'fern'
-    let reveal = ''
+  let file = ''
+  if filereadable(dir)
+    let file = dir
+    let dir = fnamemodify(dir, ':h')
   endif
 
+  let reveal = ''
+  if file != ''
+    let reveal = '-reveal='.file
+  endif
+
+  let drawer = a:drawer
   if (vis#window#is_horizontal() && vis#sidebar#inside() && winnr() == 1)
     let drawer = '-drawer'
   endif
@@ -85,8 +90,9 @@ func vis#external#fern#open(dir, drawer='', toggle='')
     call vis#external#fern#find_drawer()
   endif
 
-  let cmd = printf('Fern %s %s %s %s', dir, reveal, drawer, toggle)
-  exec cmd
+  let toggle = a:toggle
+
+  exec printf('Fern %s %s %s %s', dir, reveal, drawer, toggle)
   exec "lcd" dir
 
   if !exists('w:vis_fern_init_buf')
