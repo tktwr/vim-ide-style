@@ -55,6 +55,7 @@ func vis#ide(type=1)
     call s:resize_all()
   endif
   call s:store_size_all()
+  call s:reload_all()
 endfunc
 
 func vis#redraw()
@@ -161,5 +162,22 @@ endfunc
 
 func s:store_size_all()
   1,$windo call s:store_size_each()
+endfunc
+
+"------------------------------------------------------
+" reload
+"------------------------------------------------------
+func s:reload_each()
+  if &buftype != 'terminal'
+    if &filetype == 'fern'
+      exec "normal \<Plug>(fern-action-reload)"
+    elseif &filetype != ''
+      exec 'edit'
+    endif
+  endif
+endfunc
+
+func s:reload_all()
+  1,$windo call s:reload_each()
 endfunc
 
