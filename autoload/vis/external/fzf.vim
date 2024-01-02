@@ -3,8 +3,13 @@
 "======================================================
 func s:preview_win_opt()
   let options = []
-  let options += ['--bind', 'alt-/:change-preview-window(down,75%|hidden|)']
-  let options += ['--preview-window', 'right,60%']
+  if vis#window#is_vertical()
+    let options += ['--bind', 'alt-/:change-preview-window(hidden|)']
+    let options += ['--preview-window', 'down,75%']
+  else
+    let options += ['--bind', 'alt-/:change-preview-window(down,75%|hidden|)']
+    let options += ['--preview-window', 'right,60%']
+  endif
   return options
 endfunc
 
