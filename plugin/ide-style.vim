@@ -140,7 +140,7 @@ command                         VisFernDrawerToggle call vis#external#fern#open_
 command -nargs=1 -complete=dir  VisFernDrawer       call vis#external#fern#open_drawer(<f-args>)
 command -nargs=1 -complete=dir  VisFern             call vis#external#fern#open(<f-args>)
 
-command                         VisFzfBmk           call vis#external#fzf#bmk()
+command -range                  VisFzfBmk           call vis#external#fzf#bmk()
 command                         VisFzfAll           call vis#external#fzf#fd('a', 'BmkEditFile')
 command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')
 command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
