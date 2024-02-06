@@ -173,8 +173,6 @@ function! vis#external#fern#map() abort
   nmap <buffer> 8     :call <SID>VisFernEditItem(8)<CR>
   nmap <buffer> 9     :call <SID>VisFernEditItem(9)<CR>
 
-  "nmap <silent> <buffer> <Space> :CpmOpen<CR>
-
   nmap <buffer><nowait> < <Plug>(fern-action-leave)
   nmap <buffer><nowait> > <Plug>(fern-action-enter)
 endfunction
