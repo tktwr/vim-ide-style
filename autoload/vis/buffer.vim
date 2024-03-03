@@ -32,32 +32,42 @@ endfunc
 "------------------------------------------------------
 " buffer exchange
 "------------------------------------------------------
-func vis#buffer#exchange(winnr)
-  let winnr = vis#util#prompt("Winnr? ", a:winnr)
-  if winnr == ""
+func vis#buffer#exchange(dst_winnr)
+  let dst_winnr = vis#util#prompt("Winnr? ", a:dst_winnr)
+  if dst_winnr == "" || dst_winnr == winnr()
     return
   endif
 
   let src_bufnr = bufnr('%')
-  exec winnr."wincmd w"
+  exec dst_winnr."wincmd w"
   let dst_bufnr = bufnr('%')
   exec src_bufnr."b"
   wincmd p
   exec dst_bufnr."b"
 endfunc
 
+func vis#buffer#exchange_dir(dir)
+  let nr = vis#window#VisGetWinnr(a:dir)
+  call vis#buffer#exchange(nr)
+endfunc
+
 "------------------------------------------------------
 " buffer copy
 "------------------------------------------------------
-func vis#buffer#copy(winnr)
-  let winnr = vis#util#prompt("Winnr? ", a:winnr)
-  if winnr == ""
+func vis#buffer#copy(dst_winnr)
+  let dst_winnr = vis#util#prompt("Winnr? ", a:dst_winnr)
+  if dst_winnr == "" || dst_winnr == winnr()
     return
   endif
 
   let src_bufnr = bufnr('%')
-  exec winnr."wincmd w"
+  exec dst_winnr."wincmd w"
   exec src_bufnr."b"
   wincmd p
+endfunc
+
+func vis#buffer#copy_dir(dir)
+  let nr = vis#window#VisGetWinnr(a:dir)
+  call vis#buffer#copy(nr)
 endfunc
 

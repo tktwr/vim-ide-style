@@ -114,7 +114,9 @@ command                         VisTermV            call vis#term#vopen(<q-mods>
 "------------------------------------------------------
 command                         VisBufDelete        call vis#buffer#delete()
 command -nargs=1                Wx                  call vis#buffer#exchange(<f-args>)
+command -nargs=1                WxDir               call vis#buffer#exchange_dir(<f-args>)
 command -nargs=1                Wc                  call vis#buffer#copy(<f-args>)
+command -nargs=1                WcDir               call vis#buffer#copy_dir(<f-args>)
 
 command -nargs=?                VisWinResize        call vis#window#resize(<f-args>)
 command -nargs=?                VisWinVResize       call vis#window#vresize(<f-args>)

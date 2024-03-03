@@ -190,3 +190,15 @@ func vis#window#VisFindEditor(winnr)
   return winnr
 endfunc
 
+"------------------------------------------------------
+func vis#window#VisGetWinnr(dir)
+  let cur_winnr = winnr()
+  exec printf("wincmd %s", a:dir)
+  let dst_winnr = winnr()
+
+  if dst_winnr != cur_winnr
+    wincmd p
+  endif
+
+  return dst_winnr
+endfunc
