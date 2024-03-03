@@ -44,6 +44,10 @@ func vis#init()
   call vis#statusline#setup()
   call vis#tabline#setup()
   call vis#highlight#setup()
+
+  if !exists('g:wbl_max')
+    let g:wbl_max = 10
+  endif
 endfunc
 
 "------------------------------------------------------

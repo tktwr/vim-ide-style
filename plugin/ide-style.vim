@@ -4,6 +4,7 @@ endif
 let g:loaded_vis = 1
 
 call vis#init()
+call bmk#init()
 
 "------------------------------------------------------
 " functions
@@ -187,6 +188,15 @@ command -nargs=1                VisTabLineSetLabel           call vis#tabline#se
 command -nargs=1                VisTabLineSetInfo            call vis#tabline#set_info(<f-args>)
 command -nargs=1                VisStatuslineForTermSetLabel call vis#statusline#set_label(<f-args>)
 "------------------------------------------------------
+" command
+"------------------------------------------------------
+command! -nargs=+ BmkEditWinbuf call bmk#item#EditWinbuf(<f-args>)
+command! -nargs=+ BmkEditDir    call bmk#EditDir(<f-args>)
+command! -nargs=+ BmkEditFile   call bmk#EditFile(<f-args>)
+command! -nargs=+ BmkOpenItem   call bmk#item#OpenItem(0, <f-args>)
+command! -nargs=+ BmkViewItem   call bmk#item#ViewItem(0, <f-args>)
+command! -nargs=+ BmkEditItem   call bmk#item#EditItem(0, <f-args>)
+"------------------------------------------------------
 " autocmd
 "------------------------------------------------------
 augroup ag_ide_style
@@ -218,4 +228,7 @@ augroup ag_ide_style
   autocmd FileType        fern            call glyph_palette#apply()
 
   autocmd BufEnter        *               call vis#buffer#lcd_here()
+
+  autocmd BufEnter *   call wbl#push(bufnr('%'))
+  autocmd WinEnter *   call wbl#push(bufnr('%'))
 augroup END
