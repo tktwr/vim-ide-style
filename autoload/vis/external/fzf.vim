@@ -14,6 +14,35 @@ func s:preview_win_opt()
 endfunc
 
 "------------------------------------------------------
+" fzf#winbuf
+"------------------------------------------------------
+func s:winbuf_list()
+  let l = []
+  for i in w:buflist
+    let s = printf("%3d %s ", i, bufname(i))
+    call add(l, s)
+  endfor
+  return l
+endfunc
+
+func vis#external#fzf#winbuf()
+  call vis#buffer#lcd_here()
+
+  let source = s:winbuf_list()
+  let prompt = 'Winbuf> '
+  let options  = ['--prompt', prompt]
+
+  let opt = {
+    \ 'source'  : source,
+    \ 'options' : options,
+    \ 'window'  : {'width': 0.8, 'height': 0.5},
+    \ 'sink'    : 'BmkEditWinbuf',
+    \ }
+
+  call fzf#run(fzf#wrap(opt))
+endfunc
+
+"------------------------------------------------------
 " fzf#bmk
 "------------------------------------------------------
 func vis#external#fzf#bmk()
