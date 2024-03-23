@@ -34,8 +34,10 @@ func wbl#pop()
   endif
 
   if len(w:buflist) > 1
+    let bufnr = w:buflist[0]
     call remove(w:buflist, 0)
     exec w:buflist[0]."b"
+    exec "bdelete" bufnr
   endif
 endfunc
 

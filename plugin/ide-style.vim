@@ -212,25 +212,23 @@ augroup ag_ide_style
     autocmd TerminalOpen  *               call vis#statusline#setup_term()
   endif
 
-  " statusline
-  autocmd FileType        bmk             call vis#statusline#setup_side_bar()
-  autocmd FileType        fern            call vis#statusline#setup_side_bar()
-	autocmd User            CocStatusChange redrawstatus
+  autocmd BufEnter        *               call vis#buffer#lcd_here()
+  autocmd BufEnter        *               call wbl#push(bufnr('%'))
 
-  " map
   "autocmd WinEnter        *               call vis#map#setup()
+  autocmd WinEnter        *               call wbl#push(bufnr('%'))
+
+  autocmd FileType        fern            call glyph_palette#apply()
+  autocmd FileType        fern            call vis#statusline#setup_side_bar()
   autocmd FileType        fern            call vis#external#fern#map()
+
+  autocmd FileType        bmk             call vis#statusline#setup_side_bar()
   autocmd FileType        fugitive        call vis#external#fugitive#map()
   autocmd FileType        git             call vis#external#gv#map()
+
+	autocmd User            CocStatusChange redrawstatus
 
   autocmd QuickFixCmdPost *grep*          below cwindow
   autocmd QuickFixCmdPost *make*          below cwindow
   autocmd QuickFixCmdPost *Quickfix*      below cwindow
-
-  autocmd FileType        fern            call glyph_palette#apply()
-
-  autocmd BufEnter        *               call vis#buffer#lcd_here()
-
-  autocmd BufEnter *   call wbl#push(bufnr('%'))
-  autocmd WinEnter *   call wbl#push(bufnr('%'))
 augroup END

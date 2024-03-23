@@ -21,6 +21,8 @@ func vis#highlight#setup()
 
   hi link VisWinNrRevBold  VisGreenRevBold
   hi link VisWinNr         VisGreen
+  hi link VisSelWinNrRevBold  VisRedRevBold
+  hi link VisSelWinNr         VisRed
   hi link VisFname         VisGreenRevBold
   hi link VisFname2        VisOrangeRevBold
   hi link VisGitStatus     VisGreenRevBold

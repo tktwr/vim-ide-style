@@ -4,11 +4,11 @@
 func s:preview_win_opt()
   let options = []
   if vis#window#is_vertical()
-    let options += ['--bind', 'alt-/:change-preview-window(hidden|)']
     let options += ['--preview-window', 'down,75%']
+    let options += ['--bind', 'alt-/:change-preview-window(hidden|)']
   else
-    let options += ['--bind', 'alt-/:change-preview-window(down,75%|hidden|)']
     let options += ['--preview-window', 'right,60%']
+    let options += ['--bind', 'alt-/:change-preview-window(down,75%|hidden|)']
   endif
   return options
 endfunc
@@ -169,7 +169,7 @@ func vis#external#fzf#rg(query='', dirs=[])
   let options += ['--query', query]
   let options += ['--ansi']
   let options += ['--info', 'inline-right']
-  let options += ['--header', '[-ws] Word|Case sensitive, [C-x] split, [A-ad] Select|Deselect all, [<TAB>] Select, [<multi:CR>] Quickfix']
+  let options += ['--header', '[-ws] Word|Case sensitive, [C-x] split, [A-ad] Select|Deselect all, [<TAB>] Select, [<multi:CR>] Quickfix, [A-/] Preview']
   let options += ['--disabled']
   let options += ['--bind', source_change]
   let options += s:preview_win_opt()
