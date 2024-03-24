@@ -159,11 +159,8 @@ command                         VisFzfMemoAll       call vis#external#fzf#tags('
 command                         VisFzfGitStatus     call vis#external#fzf#gitstatus()
 command                         VisFzfGitLog        call vis#external#fzf#gitlog()
 
-command -nargs=?                VisLazygit          call vis#shell#open('Lazygit', ['lazygit.sh'],  <f-args>)
-command -nargs=?                VisFzfMan           call vis#shell#open('Man',     ['fzf_man.sh'],  <f-args>)
-command -nargs=?                VisFzfApt           call vis#shell#open('Apt',     ['fzf_apt.sh'],  <f-args>)
-command -nargs=?                VisFzfPip           call vis#shell#open('Pip',     ['fzf_pip.sh'],  <f-args>)
-command -nargs=?                VisFzfDpkg          call vis#shell#open('Dpkg',    ['fzf_dpkg.sh'], <f-args>)
+command -nargs=+                VisShellOpen        call vis#shell#open(<f-args>)
+command -nargs=1                VisShellPop         call vis#shell#open(<f-args>, <f-args>, 'pop')
 
 command                         VisGS               call vis#external#fugitive#toggle()
 command                         VisGV               call vis#external#gv#open()
