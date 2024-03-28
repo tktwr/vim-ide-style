@@ -33,6 +33,7 @@ endfunc
 " buffer exchange
 "------------------------------------------------------
 func vis#buffer#exchange(dst_winnr)
+  redraw
   let dst_winnr = vis#util#prompt("Winnr? ", a:dst_winnr)
   if dst_winnr == "" || dst_winnr == winnr()
     return
@@ -55,6 +56,7 @@ endfunc
 " buffer copy
 "------------------------------------------------------
 func vis#buffer#copy(dst_winnr)
+  redraw
   let dst_winnr = vis#util#prompt("Winnr? ", a:dst_winnr)
   if dst_winnr == "" || dst_winnr == winnr()
     return
