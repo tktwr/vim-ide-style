@@ -40,7 +40,8 @@ endfunc
 " label
 "------------------------------------------------------
 func vis#tabline#get_label(nr)
-  return "[".a:nr."] ".gettabvar(a:nr, 'label', '--')
+  let label = gettabvar(a:nr, 'label', '--')
+  return printf('[%d] %s', a:nr, label)
 endfunc
 
 func vis#tabline#set_label(label)
