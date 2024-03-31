@@ -159,8 +159,8 @@ command                         VisFzfMemoAll       call vis#external#fzf#tags('
 command                         VisFzfGitStatus     call vis#external#fzf#gitstatus()
 command                         VisFzfGitLog        call vis#external#fzf#gitlog()
 
-command -nargs=+                VisShellOpen        call vis#shell#open('VisShellOpen', <q-args>)
-command -nargs=+                VisShellPopup       call vis#shell#open('VisShellPopup', <q-args>, 'popup')
+command -nargs=+                VisShellOpen        call vis#shell#open(' ', <q-args>)
+command -nargs=+                VisShellPopup       call vis#shell#open(' ', <q-args>, 'popup')
 
 command                         VisGS               call vis#external#fugitive#toggle()
 command                         VisGV               call vis#external#gv#open()
