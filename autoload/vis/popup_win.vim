@@ -63,7 +63,8 @@ func vis#popup_win#open_nvim(title, list, callback)
 				\ 'height'   : h,
 				\ 'border'   : 'rounded',
 				\ }
-  let winid = popup_menu#open_(a:list, opts, function(a:callback))
+  "let winid = popup_menu#open_(a:list, opts, function(a:callback))
+  let winid = popup_menu#open(a:list, function(a:callback))
   set signcolumn=auto
   return winid
 endfunc

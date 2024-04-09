@@ -135,3 +135,4 @@ export -f vimapi_exec_above
 export -f vimapi_exec_tab
 export -f vimapi_exec_echo
 export -f vimapi-edit-file
+export -f vimapi-cd
