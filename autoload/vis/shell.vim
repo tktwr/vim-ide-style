@@ -1,4 +1,7 @@
 func vis#shell#open(title, cmd_list, mods='')
+  call vis#buffer#lcd_here()
+  exec "lcd" getcwd(0, 0)
+
   if a:mods == 'popup'
     call vis#popup_term#open(a:title, a:cmd_list)
   elseif a:mods == 'tab'

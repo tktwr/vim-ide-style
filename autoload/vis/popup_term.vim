@@ -2,8 +2,6 @@
 " popup term
 "------------------------------------------------------
 func vis#popup_term#open(title, cmd)
-  call vis#buffer#lcd_here()
-
   let term_opts = {
     \ 'hidden'      : 1,
     \ 'term_finish' : 'close',
