@@ -222,6 +222,7 @@ augroup ag_ide_style
   autocmd FileType        bmk             call vis#statusline#setup_side_bar()
   autocmd FileType        fugitive        call vis#external#fugitive#map()
   autocmd FileType        git             call vis#external#gv#map()
+  autocmd FileType        GV              call vis#external#gv#map2()
 
 	autocmd User            CocStatusChange redrawstatus
 

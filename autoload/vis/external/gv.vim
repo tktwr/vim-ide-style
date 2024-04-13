@@ -5,6 +5,10 @@ func vis#external#gv#map()
   nmap <buffer> D       O
 endfunc
 
+func vis#external#gv#map2()
+  nmap <buffer> l  <CR>
+endfunc
+
 "------------------------------------------------------
 func vis#external#gv#open()
   if !FugitiveIsGitDir()
