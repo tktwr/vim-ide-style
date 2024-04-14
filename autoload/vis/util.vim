@@ -194,6 +194,9 @@ func vis#util#win_info()
   let text += ["current buf's bufname : bufname('%')  : " . bufname('%')]
   let text += ["current buf's winnr   : bufwinnr('%') : " . bufwinnr('%')]
   let text += ["current buf's winid   : bufwinid('%') : " . bufwinid('%')]
+  let text += ["cwd local             : getcwd(0, 0)  : " . getcwd(0, 0)]
+  let text += ["cwd tab               : getcwd(-1, 0) : " . getcwd(-1, 0)]
+  let text += ["cwd global            : getcwd(-1)    : " . getcwd(-1)]
   call vis#util#output("VisWinInfo", text)
 endfunc
 
