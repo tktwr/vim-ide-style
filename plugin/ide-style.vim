@@ -145,6 +145,7 @@ command -nargs=1 -complete=dir  VisFern             call vis#external#fern#open(
 
 command                         VisFzfWinbuf        call vis#external#fzf#winbuf()
 command -range                  VisFzfBmk           call vis#external#fzf#bmk()
+command                         VisFzfLink          call vis#external#fzf#bmk('link:')
 command                         VisFzfFd            call vis#external#fzf#fd('a', 'BmkEditFile')
 command                         VisFzfFiles         call vis#external#fzf#fd('f', 'BmkEditFile')
 command                         VisFzfDirs          call vis#external#fzf#fd('d', 'BmkEditDir')

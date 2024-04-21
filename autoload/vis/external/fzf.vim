@@ -45,14 +45,14 @@ endfunc
 "------------------------------------------------------
 " fzf#bmk
 "------------------------------------------------------
-func vis#external#fzf#bmk()
+func vis#external#fzf#bmk(query='')
   call vis#buffer#lcd_here()
 
   let is_git_dir = FugitiveIsGitDir() ? 1 : 0
   let prompt = is_git_dir ? 'Bmk( )> ' : 'Bmk> '
 
   " --- source ---
-  let query = ''
+  let query = a:query
   if vis#sidebar#inside()
     " Fern menu
     let bmk_files = 'bmk_dir.txt fern.txt bmk_dir_opt.txt'
