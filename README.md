@@ -6,14 +6,14 @@ Requirements: Vim >= 8.1 or Neovim >= 0.7.0
 
 ## Install
 
-Install plugins using a plugin manager such as
+Install the plugin using a plugin manager such as
 [vim-plug](https://github.com/junegunn/vim-plug).
 
 ~~~
 Plug 'tktwr/vim-ide-style'
 ~~~
 
-vim-ide-style is used with the following plugins:
+vim-ide-style works with the following plugins:
 - [fern](https://github.com/lambdalisue/fern.vim)
 - [fzf](https://github.com/junegunn/fzf)
 - [fzf.vim](https://github.com/junegunn/fzf.vim)
