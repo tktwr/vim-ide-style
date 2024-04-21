@@ -6,8 +6,8 @@ if [ "$VIM_TERMINAL" ]; then
   alias cd.alt='vimapi-cd "$(vimapi-get-cwd-alt-term)"'
   cp.alt() { cp "$@" "$(vimapi-get-cwd-alt-term)"; }
   mv.alt() { mv "$@" "$(vimapi-get-cwd-alt-term)"; }
-  vimdiff.alt() { vimdiff.sh "$1" "$(vimapi-get-cwd-alt-term)/$1"; }
-  vimdirdiff.alt() { vimdirdiff.sh "$1" "$(vimapi-get-cwd-alt-term)/$1"; }
+  vimdiff.alt() { popup-vimdiff.sh "$1" "$(vimapi-get-cwd-alt-term)/$1"; }
+  vimdirdiff.alt() { popup-vimdirdiff.sh "$1" "$(vimapi-get-cwd-alt-term)/$1"; }
 
   alias cd='vimapi-cd'
   alias pushd='vimapi-pushd'
