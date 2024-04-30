@@ -151,10 +151,10 @@ command -nargs=?                VisFzfRg            call vis#external#fzf#rg(<f-
 command -nargs=?                VisFzfRgAll         call vis#external#fzf#rg(<f-args>, g:my_rg_dirs)
 command -nargs=?                VisFzfRgCur         call vis#external#fzf#rg(<f-args>, ['%'])
 command -nargs=?                VisFzfTags          call vis#external#fzf#tags(<f-args>)
+command -nargs=?                VisFzfTagsAdd       call vis#external#fzf#tags_add(<f-args>)
 command -nargs=? -range         VisFzfBmk           call vis#external#fzf#bmk(<f-args>)
 command                         VisFzfGitStatus     call vis#external#fzf#gitstatus()
 command                         VisFzfGitLog        call vis#external#fzf#gitlog()
-command                         VisFzfTagsAdd       call vis#external#fzf#tags_add()
 
 command -nargs=+                VisShellOpen        call vis#shell#open(' ', <q-args>)
 command -nargs=+                VisShellPopup       call vis#shell#open(' ', <q-args>, 'popup')
