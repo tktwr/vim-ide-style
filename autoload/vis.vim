@@ -40,6 +40,10 @@ func vis#init()
     let g:vis_unexpand_env_list = []
   endif
 
+  if !exists('g:vis_memo_bmk_file')
+    let g:vis_memo_bmk_file = '~/tags.bmk'
+  endif
+
   set laststatus=2
   call vis#statusline#setup()
   call vis#tabline#setup()

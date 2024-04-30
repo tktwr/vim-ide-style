@@ -196,6 +196,15 @@ func vis#external#fzf#tags(query='')
   call fzf#vim#tags(query, opt, 0)
 endfunc
 
+func vis#external#fzf#tags_add()
+  let word = expand('<cfile>')
+  let file = expand('%:p')
+  let line = printf('memo:bmk:%s	%s	/%s/;"	f', word, file, word)
+  echom printf('memo:bmk: [%s] [%s]', word, file)
+  let bmk_file = expand(g:vis_memo_bmk_file)
+  call writefile([line], bmk_file, "a")
+endfunc
+
 "------------------------------------------------------
 " fzf#gitstatus
 "------------------------------------------------------

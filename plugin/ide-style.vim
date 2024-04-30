@@ -154,6 +154,7 @@ command -nargs=?                VisFzfTags          call vis#external#fzf#tags(<
 command -nargs=? -range         VisFzfBmk           call vis#external#fzf#bmk(<f-args>)
 command                         VisFzfGitStatus     call vis#external#fzf#gitstatus()
 command                         VisFzfGitLog        call vis#external#fzf#gitlog()
+command                         VisFzfTagsAdd       call vis#external#fzf#tags_add()
 
 command -nargs=+                VisShellOpen        call vis#shell#open(' ', <q-args>)
 command -nargs=+                VisShellPopup       call vis#shell#open(' ', <q-args>, 'popup')
