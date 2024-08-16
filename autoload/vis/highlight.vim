@@ -19,15 +19,15 @@ func vis#highlight#setup()
   hi VisAquaRevBold   ctermfg=108 guifg=#8ec07c cterm=reverse,bold gui=reverse,bold
   hi VisOrangeRevBold ctermfg=208 guifg=#fe8019 cterm=reverse,bold gui=reverse,bold
 
-  hi link VisWinNrRevBold  VisGreenRevBold
-  hi link VisWinNr         VisGreen
+  hi link VisWinNrRevBold     VisGreenRevBold
+  hi link VisWinNr            VisGreen
   hi link VisSelWinNrRevBold  VisRedRevBold
   hi link VisSelWinNr         VisRed
-  hi link VisFname         VisGreenRevBold
-  hi link VisFname2        VisOrangeRevBold
-  hi link VisGitStatus     VisGreenRevBold
-  hi link VisCWD           VisGreenRevBold
-  hi link VisInfo          VisGreenRevBold
+  hi link VisFname            VisGreenRevBold
+  hi link VisFname2           VisOrangeRevBold
+  hi link VisGitStatus        VisGreenRevBold
+  hi link VisCWD              VisGreenRevBold
+  hi link VisInfo             VisGreenRevBold
 
   let g:terminal_ansi_colors = [
   \ '#000000',

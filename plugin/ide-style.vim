@@ -199,24 +199,25 @@ augroup ag_ide_style
   autocmd!
 
   if has('nvim')
-    autocmd TermOpen      *               call vis#statusline#setup_term()
+    autocmd TermOpen      *               call vis#statusline#setup_local_term()
     autocmd TermOpen      *               startinsert
     autocmd BufWinEnter,WinEnter term://* startinsert
   else
-    autocmd TerminalOpen  *               call vis#statusline#setup_term()
+    autocmd TerminalOpen  *               call vis#statusline#setup_local_term()
   endif
 
   autocmd BufEnter        *               call vis#buffer#lcd_here()
   autocmd BufEnter        *               call wbl#push(bufnr('%'))
 
-  "autocmd WinEnter        *               call vis#map#setup()
+  "autocmd WinEnter       *               call vis#map#setup()
   autocmd WinEnter        *               call wbl#push(bufnr('%'))
 
+  autocmd WinEnter,BufEnter *             call vis#statusline#setup_local()
+  autocmd WinLeave *                      call vis#statusline#setup_local_nc()
+
   autocmd FileType        fern            call glyph_palette#apply()
-  autocmd FileType        fern            call vis#statusline#setup_side_bar()
   autocmd FileType        fern            call vis#external#fern#map()
 
-  autocmd FileType        bmk             call vis#statusline#setup_side_bar()
   autocmd FileType        fugitive        call vis#external#fugitive#map()
   autocmd FileType        git             call vis#external#gv#map()
   autocmd FileType        GV              call vis#external#gv#map2()

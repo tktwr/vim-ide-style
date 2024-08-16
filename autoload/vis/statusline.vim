@@ -71,10 +71,18 @@ func vis#statusline#_git_status()
 endfunc
 
 "------------------------------------------------------
-func vis#statusline#win_nr()
-  let stat   = "%#VisWinNrRevBold#"
+func vis#statusline#win_nr_col_rev(sel=v:false)
+  return a:sel ? "%#VisSelWinNrRevBold#" : "%#VisWinNrRevBold#"
+endfunc
+
+func vis#statusline#win_nr_col(sel=v:false)
+  return a:sel ? "%#VisSelWinNr#" : "%#VisWinNr#"
+endfunc
+
+func vis#statusline#win_nr(sel=v:false)
+  let stat   = vis#statusline#win_nr_col_rev(a:sel)
   let stat ..= " %{printf('%s', winnr())} "
-  let stat ..= "%#VisWinNr#"
+  let stat ..= vis#statusline#win_nr_col(a:sel)
   let stat ..= ""
   let stat ..= "%#StatusLineNC#"
   let stat ..= " "
@@ -151,8 +159,8 @@ endfunc
 "------------------------------------------------------
 " statusline for buffer
 "------------------------------------------------------
-func vis#statusline#_setup()
-  let stat   = vis#statusline#win_nr()
+func vis#statusline#_setup(sel=v:false)
+  let stat   = vis#statusline#win_nr(a:sel)
   let stat ..= vis#statusline#file_name()
   let stat ..= vis#statusline#file_type()
   let stat ..= vis#statusline#file_encoding()
@@ -165,25 +173,15 @@ func vis#statusline#_setup()
   return stat
 endfunc
 
-func vis#statusline#setup()
-  set statusline=%!vis#statusline#_setup()
-endfunc
-
 "------------------------------------------------------
 " statusline for sidebar
 "------------------------------------------------------
-func vis#statusline#_setup_side_bar()
-  let stat   = vis#statusline#win_nr()
+func vis#statusline#_setup_side_bar(sel=v:false)
+  let stat   = vis#statusline#win_nr(a:sel)
   let stat ..= "%t"
   let stat ..= vis#statusline#separator()
   let stat ..= "[%l/%L]"
   return stat
-endfunc
-
-func vis#statusline#setup_side_bar()
-  if vis#sidebar#inside() == 1
-    setl statusline=%!vis#statusline#_setup_side_bar()
-  endif
 endfunc
 
 "------------------------------------------------------
@@ -198,20 +196,48 @@ endfunc
 
 func vis#statusline#set_label(label)
   let w:status_label = a:label
-  call vis#statusline#setup_term()
+  call vis#statusline#setup_local_term()
 endfunc
 
-func vis#statusline#_setup_term()
-  let stat   = vis#statusline#win_nr()
+func vis#statusline#_setup_term(sel=v:false)
+  let stat   = vis#statusline#win_nr(a:sel)
   let stat ..= vis#statusline#term_label()
   let stat ..= vis#statusline#separator()
   let stat ..= vis#statusline#cwd()
   return stat
 endfunc
 
-func vis#statusline#setup_term()
+"------------------------------------------------------
+" setup global
+"------------------------------------------------------
+func vis#statusline#setup()
+  set statusline=%!vis#statusline#_setup()
+endfunc
+
+"------------------------------------------------------
+" setup local
+"------------------------------------------------------
+func vis#statusline#setup_local()
   if &buftype == 'terminal'
-    setl statusline=%!vis#statusline#_setup_term()
+    setl statusline=%!vis#statusline#_setup_term(v:true)
+  elseif vis#sidebar#inside() == 1
+    setl statusline=%!vis#statusline#_setup_side_bar(v:true)
+  else
+    setl statusline=%!vis#statusline#_setup(v:true)
   endif
+endfunc
+
+func vis#statusline#setup_local_nc()
+  if &buftype == 'terminal'
+    setl statusline=%!vis#statusline#_setup_term(v:false)
+  elseif vis#sidebar#inside() == 1
+    setl statusline=%!vis#statusline#_setup_side_bar(v:false)
+  else
+    setl statusline=%!vis#statusline#_setup(v:false)
+  endif
+endfunc
+
+func vis#statusline#setup_local_term()
+  call vis#statusline#setup_local()
 endfunc
 
