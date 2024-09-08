@@ -109,7 +109,7 @@ vimapi-popd() {
 # label
 #------------------------------------------------------
 vimapi-tabline-set-label() {
-  label=$(prompt.sh 'label' '' "$*")
+  label=$(prompt.sh 'label' $(basename $PWD) "$*")
   if [ -n "$label" ]; then
     vimapi_exec VisTabLineSetLabel "$label"
   fi
