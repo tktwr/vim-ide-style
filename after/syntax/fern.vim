@@ -18,6 +18,13 @@ syn match  fernCMakeLists   ".*CMakeLists.txt\ze.*$"
 syn match  fernMakefile     ".*Makefile\ze.*$"
 syn match  fernMakeSH       ".*make.*.sh\ze.*$"
 
+syn match  fernPNG          ".*.png\ze.*$"
+syn match  fernJPG          ".*.jpg\ze.*$"
+syn match  fernBMP          ".*.bmp\ze.*$"
+syn match  fernTIF          ".*.tif\ze.*$"
+syn match  fernHDR          ".*.hdr\ze.*$"
+syn match  fernEXR          ".*.exr\ze.*$"
+
 "------------------------------------------------------
 " highlight link
 "------------------------------------------------------
@@ -33,6 +40,13 @@ hi link fernGLB             VisAqua
 hi link fernCMakeLists      VisOrange
 hi link fernMakefile        VisOrange
 hi link fernMakeSH          VisOrange
+
+hi link fernPNG             VisBlue
+hi link fernJPG             VisBlue
+hi link fernBMP             VisBlue
+hi link fernTIF             VisBlue
+hi link fernHDR             VisBlue
+hi link fernEXR             VisBlue
 
 hi link FernRootSymbol      VisRed
 hi link FernRootText        VisRed
