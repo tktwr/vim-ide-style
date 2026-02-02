@@ -11,13 +11,14 @@ syn match  fernPY           ".*.py\ze.*$"
 syn match  fernSH           ".*.sh\ze.*$"
 syn match  fernVIM          ".*.vim\ze.*$"
 syn match  fernHTML         ".*.html\ze.*$"
-syn match  fernMD           ".*.md.html\ze.*$"
+syn match  fernMDHTML       ".*.md.html\ze.*$"
 syn match  fernMD           ".*.md\ze.*$"
-syn match  fernGLB          ".*.glb\ze.*$"
 syn match  fernCMakeLists   ".*CMakeLists.txt\ze.*$"
 syn match  fernMakefile     ".*Makefile\ze.*$"
 syn match  fernMakeSH       ".*make.*.sh\ze.*$"
 
+syn match  fernGLB          ".*.glb\ze.*$"
+syn match  fernBLEND        ".*.blend\ze.*$"
 syn match  fernPNG          ".*.png\ze.*$"
 syn match  fernJPG          ".*.jpg\ze.*$"
 syn match  fernBMP          ".*.bmp\ze.*$"
@@ -34,19 +35,21 @@ hi link fernH               VisAqua
 hi link fernPY              VisYellow
 hi link fernSH              VisPurple
 "hi link fernVIM             VisGreen
-hi link fernHTML            VisPurple
-hi link fernMD              VisYellow
-hi link fernGLB             VisAqua
+hi link fernHTML            VisBlue
+hi link fernMDHTML          VisBlue
+"hi link fernMD              VisYellow
 hi link fernCMakeLists      VisOrange
 hi link fernMakefile        VisOrange
 hi link fernMakeSH          VisOrange
 
-hi link fernPNG             VisBlue
-hi link fernJPG             VisBlue
-hi link fernBMP             VisBlue
-hi link fernTIF             VisBlue
-hi link fernHDR             VisBlue
-hi link fernEXR             VisBlue
+hi link fernGLB             VisAqua
+hi link fernBLEND           VisAqua
+hi link fernPNG             VisYellow
+hi link fernJPG             VisYellow
+hi link fernBMP             VisYellow
+hi link fernTIF             VisYellow
+hi link fernHDR             VisYellow
+hi link fernEXR             VisYellow
 
 hi link FernRootSymbol      VisRed
 hi link FernRootText        VisRed
