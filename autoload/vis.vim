@@ -85,7 +85,9 @@ func s:create_ide(type)
   if vis#window#is_vertical()
     call s:create_ide_v()
   else
-    if a:type == 2
+    if a:type == 3
+      call s:create_ide_h_3()
+    elseif a:type == 2
       call s:create_ide_h_2()
     else
       call s:create_ide_h()
@@ -142,12 +144,39 @@ func s:create_ide_h_2()
   endif
 endfunc
 
+" +-+--+--+--+
+" |1|3 |5 |7 |
+" | |  |  |  |
+" +-+  |  |  |
+" | +--+--+--+
+" |2|4 |6 |8 |
+" +-+--+--+--+
+func s:create_ide_h_3()
+  let t:ide = 1
+
+  call vis#sidebar#create()
+
+  $wincmd w
+  vsp
+  below VisTerm
+
+  $wincmd w
+  vsp
+  below VisTerm
+
+  $wincmd w
+  VisTerm
+
+  8wincmd w
+  VisWinResize 10
+endfunc
+
 "------------------------------------------------------
 " resize
 "------------------------------------------------------
 func s:resize_each()
   if &buftype == 'terminal'
-    exec "resize" g:vis_term_winheight
+    "exec "resize" g:vis_term_winheight
   elseif vis#sidebar#is_2nd()
     exec "resize" g:vis_fern_2nd_winheight
   endif
