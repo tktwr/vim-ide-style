@@ -193,8 +193,12 @@ endfunc
 " store size
 "------------------------------------------------------
 func s:store_size_each()
-  let w:orig_width = winwidth(0)
-  let w:orig_height = winheight(0)
+  if !exists('w:orig_width')
+    let w:orig_width = winwidth(0)
+  endif
+  if !exists('w:orig_height')
+    let w:orig_height = winheight(0)
+  endif
 endfunc
 
 func s:store_size_all()
