@@ -5,33 +5,17 @@ func vis#let_default_val(var, val)
   exec printf("let %s = exists('%s') ? %s : %d", a:var, a:var, a:var, a:val)
 endfunc
 
-func vis#default_term_height()
-  let l = float2nr(0.2 * &lines)
-  return l < 5 ? 5 : l > 10 ? 10 : l
-endfunc
-
-func vis#default_side_width()
-  return &columns >= (82 * 2 + 30) ? 30 : 20
-endfunc
-
-func vis#default_winwidth_max()
-  return float2nr(3.0 / 4.0 * (&columns - g:vis_left_winwidth))
-endfunc
-
 "------------------------------------------------------
 func vis#init()
   " term                                              ,
-  call vis#let_default_val('g:vis_term_winheight'     , vis#default_term_height())
-  call vis#let_default_val('g:vis_term_winheight_max' , g:vis_term_winheight * 2)
+  call vis#let_default_val('g:vis_term_winheight'     , 10)
   " sidebar                                           ,
-  call vis#let_default_val('g:vis_left_winwidth'      , vis#default_side_width())
-  call vis#let_default_val('g:vis_fern_2nd_winheight' , g:vis_term_winheight * 2)
+  call vis#let_default_val('g:vis_left_winwidth'      , 30)
+  call vis#let_default_val('g:vis_fern_2nd_winheight' , 10 * 2)
   " gstatus                                           ,
-  call vis#let_default_val('g:vis_gstatus_winheight'  , g:vis_term_winheight)
+  call vis#let_default_val('g:vis_gstatus_winheight'  , 10)
   " help                                              ,
   call vis#let_default_val('g:vis_help_winwidth'      , 82)
-  " width                                             ,
-  call vis#let_default_val('g:vis_winwidth_max'       , vis#default_winwidth_max())
 
   let g:vis_tab_labels = {}
   let g:vis_tab_info = ""
