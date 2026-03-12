@@ -87,8 +87,6 @@ func s:create_ide(type)
   else
     if a:type == 3
       call s:create_ide_h_3()
-    elseif a:type == 2
-      call s:create_ide_h_2()
     else
       call s:create_ide_h()
     endif
@@ -102,8 +100,10 @@ endfunc
 " +-----+
 func s:create_ide_v()
   let t:ide = 1
+
   call vis#sidebar#create_v()
-  wincmd w
+
+  $wincmd w
   below VisTerm
 endfunc
 
@@ -114,34 +114,15 @@ endfunc
 " +-+--+--+
 func s:create_ide_h()
   let t:ide = 1
-  call vis#sidebar#create()
-  wincmd w
-  if vis#window#is_fullscreen()
-    vsp
-    below VisTerm
-    wincmd w
-  endif
-  below VisTerm
-endfunc
 
-" +-+--+--+
-" | |  |  |
-" +-+-----+
-" | +-----+
-" +-+-----+
-func s:create_ide_h_2()
-  let t:ide = 1
   call vis#sidebar#create()
-  wincmd w
-  if vis#window#is_fullscreen()
-    below VisTerm
-    VisWinResize 5
-    wincmd W
-    below new
-    VisWinResize 5
-    wincmd W
-    vsp
-  endif
+
+  $wincmd w
+  vsp
+  below VisTerm
+
+  $wincmd w
+  below VisTerm
 endfunc
 
 " +-+--+--+--+
