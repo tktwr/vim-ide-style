@@ -11,7 +11,6 @@ func vis#init()
   call vis#let_default_val('g:vis_term_winheight'     , 10)
   " sidebar                                           ,
   call vis#let_default_val('g:vis_left_winwidth'      , 30)
-  call vis#let_default_val('g:vis_fern_2nd_winheight' , 10 * 2)
   " gstatus                                           ,
   call vis#let_default_val('g:vis_gstatus_winheight'  , 10)
   " help                                              ,
@@ -119,7 +118,7 @@ endfunc
 func s:create_ide_h_3()
   let t:ide = 1
 
-  call vis#sidebar#create()
+  call vis#sidebar#create_3()
 
   $wincmd w
   vsp
@@ -132,26 +131,17 @@ func s:create_ide_h_3()
   $wincmd w
   VisTerm
 
-  8wincmd w
+  $wincmd w
   VisWinResize 10
 endfunc
 
 "------------------------------------------------------
 " resize
 "------------------------------------------------------
-func s:resize_each()
-  if &buftype == 'terminal'
-    "exec "resize" g:vis_term_winheight
-  elseif vis#sidebar#is_2nd()
-    exec "resize" g:vis_fern_2nd_winheight
-  endif
-endfunc
-
 func s:resize_all()
   1wincmd w
   exec "normal \<C-W>="
   exec "vertical resize" g:vis_left_winwidth
-  2,$windo call s:resize_each()
 endfunc
 
 "------------------------------------------------------
