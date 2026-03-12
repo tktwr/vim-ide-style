@@ -29,27 +29,23 @@ endfunc
 " maximize window
 "------------------------------------------------------
 func vis#window#maximize_x_toggle()
-  if !exists('w:max_width')
-    let w:max_width = float2nr(w:orig_width * 1.5)
-  endif
   let w = winwidth(0)
-  if w == w:orig_width
-    let w = w:max_width
+  if w <= 82
+    let w = 122
   else
-    let w = w:orig_width
+    let w = 82
   endif
   exec "vertical resize" w
 endfunc
 
 func vis#window#maximize_y_toggle()
-  if !exists('w:max_height')
-    let w:max_height = w:orig_height * 2
-  endif
   let h = winheight(0)
-  if h == w:orig_height
-    let h = w:max_height
+  if h <= 10
+    let h = 20
+  elseif h <= 20
+    let h = 40
   else
-    let h = w:orig_height
+    let h = 10
   endif
   exec "resize" h
 endfunc
