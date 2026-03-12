@@ -96,6 +96,7 @@ command                         VisModifiable       call vis#buffer#modifiable()
 command -nargs=?                VisIDE              call vis#ide(<f-args>)
 command                         VisRedraw           nohlsearch | call vis#redraw()
 command                         VisSideBarToggle    call vis#sidebar#toggle()
+command                         VisSideBarAdd       call vis#sidebar#add()
 command                         VisTagbarToggle     TagbarToggle
 command                         VisTerm             call vis#term#open(<q-mods>)
 command                         VisTermV            call vis#term#vopen(<q-mods>)

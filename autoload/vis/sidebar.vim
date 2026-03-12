@@ -32,6 +32,13 @@ func vis#sidebar#create_3()
   set winfixheight
 endfunc
 
+func vis#sidebar#add()
+  below split
+  let w:is_sidebar = 1
+  exec "resize" 20
+  set winfixheight
+endfunc
+
 func vis#sidebar#toggle()
   1wincmd w
   if winwidth(0) < 5

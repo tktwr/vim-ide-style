@@ -118,7 +118,7 @@ endfunc
 func s:create_ide_h_3()
   let t:ide = 1
 
-  call vis#sidebar#create_3()
+  call vis#sidebar#create()
 
   $wincmd w
   vsp
