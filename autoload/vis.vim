@@ -7,14 +7,14 @@ endfunc
 
 "------------------------------------------------------
 func vis#init()
-  " term                                              ,
-  call vis#let_default_val('g:vis_term_winheight'     , 10)
-  " sidebar                                           ,
-  call vis#let_default_val('g:vis_left_winwidth'      , 30)
-  " gstatus                                           ,
-  call vis#let_default_val('g:vis_gstatus_winheight'  , 10)
   " help                                              ,
   call vis#let_default_val('g:vis_help_winwidth'      , 82)
+  " sidebar                                           ,
+  call vis#let_default_val('g:vis_left_winwidth'      , 30)
+  " term                                              ,
+  call vis#let_default_val('g:vis_term_winheight'     , 10)
+  " gstatus                                           ,
+  call vis#let_default_val('g:vis_gstatus_winheight'  , 10)
 
   let g:vis_tab_labels = {}
   let g:vis_tab_info = ""
