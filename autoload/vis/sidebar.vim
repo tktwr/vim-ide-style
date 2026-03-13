@@ -13,8 +13,8 @@ func vis#sidebar#create()
 
   below split
   let w:is_sidebar = 1
-  exec "resize" 20
-  set winfixheight
+  exec "resize" 10
+  setl winfixheight
 endfunc
 
 func vis#sidebar#create_3()
@@ -24,25 +24,25 @@ func vis#sidebar#create_3()
   below split
   let w:is_sidebar = 1
   exec "resize" 10
-  set winfixheight
+  setl winfixheight
 
   below split
   let w:is_sidebar = 1
   exec "resize" 10
-  set winfixheight
+  setl winfixheight
 endfunc
 
 func vis#sidebar#add()
   below split
   let w:is_sidebar = 1
-  exec "resize" 20
-  set winfixheight
+  exec "resize" 10
+  setl winfixheight
 endfunc
 
 func vis#sidebar#toggle()
   1wincmd w
   if winwidth(0) < 5
-    exec "vertical resize" g:vis_left_winwidth
+    exec "vert resize" g:vis_left_winwidth
   else
     exec "vert resize 0"
   endif

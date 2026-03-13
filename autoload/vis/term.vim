@@ -26,7 +26,7 @@ func vis#term#open(mods)
     endif
   endif
 
-  set winfixheight
+  setl winfixheight
 endfunc
 
 func vis#term#vopen(mods)
@@ -36,7 +36,7 @@ func vis#term#vopen(mods)
   wincmd p
   close
   exec "resize" h
-  set winfixheight
+  setl winfixheight
 endfunc
 
 "------------------------------------------------------
