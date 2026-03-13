@@ -151,8 +151,7 @@ func vis#statusline#cwd()
 endfunc
 
 func vis#statusline#term_label()
-  let stat   = '%{vis#statusline#get_label()}'
-  let stat ..= ' (bufnr:%n)'
+  let stat = '%{vis#statusline#get_label()}'
   return stat
 endfunc
 
@@ -189,7 +188,7 @@ endfunc
 "------------------------------------------------------
 func vis#statusline#get_label()
   if !exists("w:status_label")
-    let w:status_label = "terminal"
+    let w:status_label = printf("%s:%s", $MY_HOST_NAME, $MY_OS_NAME)
   endif
   return w:status_label
 endfunc
