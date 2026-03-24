@@ -38,7 +38,7 @@ func vis#init()
 endfunc
 
 "------------------------------------------------------
-func vis#ide(type=1)
+func vis#ide(type=0)
   if winnr('$') == 1
     tcd
     call s:create_ide(a:type)
@@ -68,11 +68,22 @@ func s:create_ide(type)
   if vis#window#is_vertical()
     call s:create_ide_1v()
   else
-    if a:type == 3
+    if a:type == 0
+      if &columns > 300
+        let l:type = 3
+      elseif &columns > 200
+        let l:type = 2
+      else
+        let l:type = 1
+      endif
+    else
+        let l:type = a:type
+    endif
+    if l:type == 3
       call s:create_ide_3h()
-    elseif a:type == 2
+    elseif l:type == 2
       call s:create_ide_2h()
-    elseif a:type == 1
+    elseif l:type == 1
       call s:create_ide_1h()
     endif
   endif
