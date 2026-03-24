@@ -66,12 +66,14 @@ endfunc
 "------------------------------------------------------
 func s:create_ide(type)
   if vis#window#is_vertical()
-    call s:create_ide_v()
+    call s:create_ide_1v()
   else
     if a:type == 3
-      call s:create_ide_h_3()
-    else
-      call s:create_ide_h()
+      call s:create_ide_3h()
+    elseif a:type == 2
+      call s:create_ide_2h()
+    elseif a:type == 1
+      call s:create_ide_1h()
     endif
   endif
 endfunc
@@ -81,10 +83,24 @@ endfunc
 " |     |
 " +-----+
 " +-----+
-func s:create_ide_v()
+func s:create_ide_1v()
   let t:ide = 1
 
   call vis#sidebar#create_v()
+
+  $wincmd w
+  below VisTerm
+endfunc
+
+" +-+--+
+" | |  |
+" +-+  |
+" | +--+
+" +-+--+
+func s:create_ide_1h()
+  let t:ide = 1
+
+  call vis#sidebar#create()
 
   $wincmd w
   below VisTerm
@@ -95,7 +111,7 @@ endfunc
 " +-+  |  |
 " | +--+--+
 " +-+--+--+
-func s:create_ide_h()
+func s:create_ide_2h()
   let t:ide = 1
 
   call vis#sidebar#create()
@@ -115,7 +131,7 @@ endfunc
 " | +--+--+--+
 " |2|4 |6 |8 |
 " +-+--+--+--+
-func s:create_ide_h_3()
+func s:create_ide_3h()
   let t:ide = 1
 
   call vis#sidebar#create()
