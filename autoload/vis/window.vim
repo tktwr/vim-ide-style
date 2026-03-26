@@ -30,10 +30,10 @@ endfunc
 "------------------------------------------------------
 func vis#window#maximize_x_toggle()
   let w = winwidth(0)
-  if w <= 82
-    let w = 122
+  if w <= w:orig_width
+    let w = w:orig_width * 1.5
   else
-    let w = 82
+    let w = w:orig_width
   endif
   exec "vertical resize" w
 endfunc
@@ -67,17 +67,7 @@ endfunc
 func vis#window#vresize(width=82)
   exec "vertical resize" a:width
   let w:orig_width = a:width
-endfunc
-
-func vis#window#resize_max(height=10)
-  exec "resize" a:height
-  let w:max_height = a:height
-  setl winfixheight
-endfunc
-
-func vis#window#vresize_max(width=82)
-  exec "vertical resize" a:width
-  let w:max_width = a:width
+  setl winfixwidth
 endfunc
 
 "------------------------------------------------------

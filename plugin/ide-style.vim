@@ -109,8 +109,6 @@ command -nargs=1                WcDir               call vis#buffer#copy_dir(<f-
 
 command -nargs=?                VisWinResize        call vis#window#resize(<f-args>)
 command -nargs=?                VisWinVResize       call vis#window#vresize(<f-args>)
-command -nargs=?                VisWinResizeMax     call vis#window#resize_max(<f-args>)
-command -nargs=?                VisWinVResizeMax    call vis#window#vresize_max(<f-args>)
 command                         VisQuickFix         call vis#window#qf()
 
 command VisWinMaximizeXYToggle      call vis#window#maximize_xy_toggle()

@@ -42,6 +42,7 @@ func vis#ide(type=0)
   if winnr('$') == 1
     tcd
     call s:create_ide(a:type)
+    call s:resize_all()
   else
     call s:resize_all()
   endif
@@ -160,6 +161,7 @@ func s:create_ide_3h()
 
   $wincmd w
   VisWinResize 10
+  VisWinVResize 80
 endfunc
 
 "------------------------------------------------------
