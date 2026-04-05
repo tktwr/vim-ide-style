@@ -50,14 +50,8 @@ func vis#sidebar#toggle()
 endfunc
 
 func vis#sidebar#inside()
-  if vis#window#is_vertical()
-    if (winnr() == 1)
-      return 1
-    endif
-  else
-    if (exists('w:is_sidebar') && w:is_sidebar == 1)
-      return 1
-    endif
+  if (exists('w:is_sidebar') && w:is_sidebar == 1)
+    return 1
   endif
   return 0
 endfunc

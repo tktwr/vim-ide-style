@@ -40,11 +40,26 @@ func vis#buffer#exchange(dst_winnr)
   endif
 
   let src_bufnr = bufnr('%')
+  let src_lcd = getcwd(0, 0)
   exec dst_winnr."wincmd w"
+
+  if vis#sidebar#inside()
+    wincmd p
+    return
+  endif
+
   let dst_bufnr = bufnr('%')
+  let dst_lcd = getcwd(0, 0)
   exec src_bufnr."b"
+  if vis#term#inside()
+    exec "lcd" src_lcd
+  endif
+
   wincmd p
   exec dst_bufnr."b"
+  if vis#term#inside()
+    exec "lcd" dst_lcd
+  endif
 endfunc
 
 func vis#buffer#exchange_dir(dir)
