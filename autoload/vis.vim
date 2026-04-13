@@ -161,7 +161,7 @@ func s:create_ide_3h()
 
   $wincmd w
   VisWinResize 10
-  VisWinVResize 80
+  VisWinVResize 82
 endfunc
 
 "------------------------------------------------------
