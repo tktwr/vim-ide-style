@@ -129,4 +129,26 @@ vimapi-term-set-label() {
 }
 
 #------------------------------------------------------
+# terminal
+#------------------------------------------------------
+if [ "$VIM_TERMINAL" ]; then
+  pwd.alt()        { vimapi-get-cwd-alt-term; }
+  cd.alt()         { vimapi-cd "$(vimapi-get-cwd-alt-term)"; }
+  cp.alt()         { cp "$@" "$(vimapi-get-cwd-alt-term)"; }
+  mv.alt()         { mv "$@" "$(vimapi-get-cwd-alt-term)"; }
+  vimdiff.alt() {
+    local fi=$1
+    if [ -f "$fi" ]; then
+      popup-vimdiff.sh "$fi" "$(vimapi-get-cwd-alt-term)/$fi"
+    else
+      echo "Usage: vimdiff.alt file"
+    fi
+  }
+  vimdirdiff.alt() {
+    local di=${1:-.}
+    popup-vimdirdiff.sh "$di" "$(vimapi-get-cwd-alt-term)/$di"
+  }
+fi
+
+#------------------------------------------------------
 set +a  # stop exporting functions
