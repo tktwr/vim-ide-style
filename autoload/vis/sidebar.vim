@@ -3,6 +3,7 @@
 "======================================================
 func vis#sidebar#create_v()
   sp
+  let w:is_sidebar = 1
   Fern .
   VisWinResize 6
 endfunc
@@ -10,33 +11,12 @@ endfunc
 func vis#sidebar#create()
   call vis#external#fern#open_drawer_toggle()
   let w:is_sidebar = 1
-
-  below split
-  let w:is_sidebar = 1
-  exec "resize" 10
-  setl winfixheight
 endfunc
 
-func vis#sidebar#create_3()
-  call vis#external#fern#open_drawer_toggle()
-  let w:is_sidebar = 1
-
+func vis#sidebar#add(height=10)
   below split
   let w:is_sidebar = 1
-  exec "resize" 10
-  setl winfixheight
-
-  below split
-  let w:is_sidebar = 1
-  exec "resize" 10
-  setl winfixheight
-endfunc
-
-func vis#sidebar#add()
-  below split
-  let w:is_sidebar = 1
-  exec "resize" 10
-  setl winfixheight
+  call vis#window#resize(a:height)
 endfunc
 
 func vis#sidebar#toggle()

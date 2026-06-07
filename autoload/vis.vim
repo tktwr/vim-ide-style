@@ -112,7 +112,8 @@ endfunc
 func s:create_ide_1h()
   let t:ide = 1
 
-  call vis#sidebar#create()
+  VisSideBarCreate
+  VisSideBarAdd
 
   $wincmd w
   below VisTerm
@@ -126,7 +127,8 @@ endfunc
 func s:create_ide_2h()
   let t:ide = 1
 
-  call vis#sidebar#create()
+  VisSideBarCreate
+  VisSideBarAdd
 
   $wincmd w
   vsp
@@ -146,15 +148,18 @@ endfunc
 func s:create_ide_3h()
   let t:ide = 1
 
-  call vis#sidebar#create()
+  VisSideBarCreate
+  VisSideBarAdd 20
 
   $wincmd w
   vsp
   below VisTerm
+  VisWinResize 20
 
   $wincmd w
   vsp
   below VisTerm
+  VisWinResize 20
 
   $wincmd w
   VisTerm

@@ -95,8 +95,6 @@ command                         VisModifiable       call vis#buffer#modifiable()
 "------------------------------------------------------
 command -nargs=?                VisIDE              call vis#ide(<f-args>)
 command                         VisRedraw           nohlsearch | call vis#redraw()
-command                         VisSideBarToggle    call vis#sidebar#toggle()
-command                         VisSideBarAdd       call vis#sidebar#add()
 command                         VisTagbarToggle     TagbarToggle
 command                         VisTerm             call vis#term#open(<q-mods>)
 command                         VisTermV            call vis#term#vopen(<q-mods>)
@@ -110,6 +108,10 @@ command -nargs=1                WcDir               call vis#buffer#copy_dir(<f-
 command -nargs=?                VisWinResize        call vis#window#resize(<f-args>)
 command -nargs=?                VisWinVResize       call vis#window#vresize(<f-args>)
 command                         VisQuickFix         call vis#window#qf()
+"------------------------------------------------------
+command                         VisSideBarCreate    call vis#sidebar#create()
+command -nargs=?                VisSideBarAdd       call vis#sidebar#add(<f-args>)
+command                         VisSideBarToggle    call vis#sidebar#toggle()
 
 command VisWinMaximizeXYToggle      call vis#window#maximize_xy_toggle()
 command VisWinMaximizeXToggle       call vis#window#maximize_x_toggle()
