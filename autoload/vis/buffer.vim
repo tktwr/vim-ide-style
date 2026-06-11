@@ -48,6 +48,11 @@ func vis#buffer#exchange(dst_winnr)
     return
   endif
 
+  if vis#term#inside()
+    wincmd p
+    return
+  endif
+
   let dst_bufnr = bufnr('%')
   let dst_lcd = getcwd(0, 0)
   exec src_bufnr."b"
