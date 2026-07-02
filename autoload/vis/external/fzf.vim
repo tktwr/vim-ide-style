@@ -55,7 +55,7 @@ func vis#external#fzf#bmk(query='')
   let query = a:query
   if vis#sidebar#inside()
     " Fern menu
-    let bmk_files = 'bmk_dir.txt fern.txt bmk_dir_opt.txt'
+    let bmk_files = 'bmk_dir.txt fern.txt'
   elseif (&filetype == 'fugitive')
     let bmk_files = 'vcmd_context.txt'
     let query = 'fugitive: '
@@ -70,7 +70,7 @@ func vis#external#fzf#bmk(query='')
     let query = 'Diff: '
   else
     " Editor menu
-    let bmk_files = 'bmk_file.txt vcmd.txt fzf.txt coc.txt bmk_file_opt.txt ref.txt links.txt papers.txt'
+    let bmk_files = 'bmk_file.txt vcmd.txt fzf.txt coc.txt ref.txt links.txt papers.txt'
   endif
 
   let source = printf('bmk.sh %s', bmk_files)
