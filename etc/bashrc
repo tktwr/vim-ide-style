@@ -136,15 +136,15 @@ if [ "$VIM_TERMINAL" ]; then
   cd.alt()         { vimapi-cd "$(vimapi-get-cwd-alt-term)"; }
   cp.alt()         { cp "$@" "$(vimapi-get-cwd-alt-term)"; }
   mv.alt()         { mv "$@" "$(vimapi-get-cwd-alt-term)"; }
-  vimdiff.alt() {
+  popup_vimdiff_alt() {
     local fi=$1
     if [ -f "$fi" ]; then
       popup-vimdiff.sh "$fi" "$(vimapi-get-cwd-alt-term)/$fi"
     else
-      echo "Usage: vimdiff.alt file"
+      echo "Usage: popup_vimdiff_alt file"
     fi
   }
-  vimdirdiff.alt() {
+  popup_vimdirdiff_alt() {
     local di=${1:-.}
     popup-vimdirdiff.sh "$di" "$(vimapi-get-cwd-alt-term)/$di"
   }
