@@ -65,28 +65,28 @@ endfunc
 "------------------------------------------------------
 " create
 "------------------------------------------------------
-func s:create_ide(type)
-  if vis#window#is_vertical()
-    call s:create_ide_1v()
-  else
-    if a:type == 0
-      if &columns > 300
-        let l:type = 3
-      elseif &columns > 200
-        let l:type = 2
-      else
-        let l:type = 1
-      endif
+func s:create_ide(type=0)
+  let l:type = a:type
+  if a:type == 0
+    if &columns > 300
+      let l:type = 3
+    elseif &columns > 200
+      let l:type = 2
+    elseif &columns > 100
+      let l:type = 1
     else
-        let l:type = a:type
+      let l:type = 0
     endif
-    if l:type == 3
-      call s:create_ide_3h()
-    elseif l:type == 2
-      call s:create_ide_2h()
-    elseif l:type == 1
-      call s:create_ide_1h()
-    endif
+  endif
+
+  if l:type == 3
+    call s:create_ide_3h()
+  elseif l:type == 2
+    call s:create_ide_2h()
+  elseif l:type == 1
+    call s:create_ide_1h()
+  elseif l:type == 0
+    call s:create_ide_1v()
   endif
 endfunc
 
