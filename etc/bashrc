@@ -150,5 +150,9 @@ if [ "$VIM_TERMINAL" ]; then
   }
 fi
 
+vimapi-send-cmd() {
+  vimapi_exec "call vis#send#cmd('$1', $2)"
+}
+
 #------------------------------------------------------
 set +a  # stop exporting functions

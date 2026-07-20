@@ -21,3 +21,7 @@ func vis#send#cmd_e2t(cmd='')
   call bmk#ExecTermCommand(cmd, winnr)
 endfunc
 
+func vis#send#cmd(cmd='', winnr=0)
+  let cmd = a:cmd."<CR>"
+  call bmk#ExecTermCommand(cmd, a:winnr)
+endfunc
